@@ -37,8 +37,11 @@ export function Input({
   const errorId = error ? `${id}-error` : undefined;
 
   const fieldClasses = cn(
-    "w-full rounded-[4px] border-2 bg-white px-4 py-2.5 text-body text-[var(--text-heading)] placeholder:text-[var(--text-muted)]",
+    "w-full min-w-0 max-w-full rounded-[4px] border-2 bg-white px-4 py-2.5 text-body text-[var(--text-heading)] placeholder:text-[var(--text-muted)]",
     "focus:outline-none focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2",
+    // iOS Safari otherwise renders type="date" at its own intrinsic width,
+    // ignoring width:100% — stripping native appearance lets our CSS win.
+    type === "date" && "[appearance:none] [-webkit-appearance:none]",
     error ? "border-[var(--error)]" : "border-ink-900",
     className
   );
