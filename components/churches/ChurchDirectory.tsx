@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { LayoutGrid, List as ListIcon, LocateFixed, X } from "lucide-react";
+import { LayoutGrid, List as ListIcon, LocateFixed, Loader2, X } from "lucide-react";
 import { Card } from "@/components/ui/Card";
 import { Select } from "@/components/ui/Select";
 import { geocodePostcode, geocodePlaceName, looksLikePostcode, milesBetween, KNOWN_PLACE_NAMES, type LatLng } from "@/lib/geo";
@@ -153,23 +153,34 @@ export function ChurchDirectory({ churches, initialQuery = "" }: { churches: Chu
               type="button"
               onClick={handleUseLocation}
               disabled={geoStatus === "loading"}
+              aria-label={geoStatus === "loading" ? "Locating…" : "Use my location"}
               className="flex shrink-0 items-center gap-1.5 rounded-[4px] border border-line-200 px-3 py-2.5 text-sm font-semibold text-forest-600 hover:bg-forest-100 disabled:opacity-60 focus:outline-none focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2"
               style={{ outlineColor: "var(--focus-ring)" }}
             >
-              <LocateFixed size={16} aria-hidden="true" />
+              {geoStatus === "loading" ? (
+                <Loader2 size={16} className="animate-spin" aria-hidden="true" />
+              ) : (
+                <LocateFixed size={16} aria-hidden="true" />
+              )}
               <span className="hidden sm:inline">{geoStatus === "loading" ? "Locating…" : "Use my location"}</span>
             </button>
           </div>
-          {geoStatus === "error" && (
-            <p className="mt-1.5 text-sm text-[var(--error)]">
-              We couldn&apos;t find that postcode or location. Try again, or search by area name.
-            </p>
-          )}
-          {geoStatus === "denied" && (
-            <p className="mt-1.5 text-sm text-[var(--error)]">
-              Location access was denied. You can still search by area or postcode above.
-            </p>
-          )}
+          <div aria-live="polite">
+            {geoStatus === "loading" && (
+              <p className="mt-1.5 text-sm text-[var(--text-muted)] sm:hidden">Locating…</p>
+            )}
+            {geoStatus === "error" && (
+              <p className="mt-1.5 text-sm text-[var(--error)]">
+                We couldn&apos;t find that postcode or location. Try again, or search by area name.
+              </p>
+            )}
+            {geoStatus === "denied" && (
+              <p className="mt-1.5 text-sm text-[var(--error)]">
+                Location access was denied or blocked. You can still search by area or postcode above — or check
+                your browser/device location settings for this site and try again.
+              </p>
+            )}
+          </div>
         </div>
         <Select label="Area" options={areas} value={area} onChange={(e) => setArea(e.target.value)} />
       </div>
