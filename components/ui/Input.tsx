@@ -44,7 +44,7 @@ export function Input({
   );
 
   return (
-    <div>
+    <div className="min-w-0">
       {label && (
         <label htmlFor={id} className="mb-1.5 block text-sm font-bold text-[var(--text-heading)]">
           {label}
