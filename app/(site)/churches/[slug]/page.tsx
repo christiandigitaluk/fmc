@@ -45,7 +45,10 @@ export default async function ChurchDetailPage({ params }: { params: Promise<{ s
   const church = await getChurch(slug);
   if (!church) notFound();
 
-  const mapQuery = encodeURIComponent(`${church.address}, ${church.postcode}`);
+  // Coordinates, not the address text, so the pin always lands on the
+  // verified building rather than whatever Google's text search happens to
+  // match for streets with no house number (e.g. "Winchester Road, E4 9JP").
+  const mapQuery = encodeURIComponent(`${church.lat},${church.lng}`);
   const bbox = [church.lng - 0.01, church.lat - 0.008, church.lng + 0.01, church.lat + 0.008].join("%2C");
 
   const jsonLd = {
