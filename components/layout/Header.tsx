@@ -96,11 +96,25 @@ export function Header({ settings }: { settings: SiteSettings }) {
     document.addEventListener("keydown", onKeyDown);
     const firstLink = drawerRef.current?.querySelector<HTMLElement>("a, button");
     firstLink?.focus();
-    document.body.style.overflow = "hidden";
+
+    // Plain overflow:hidden on body reliably blocks background scroll on
+    // iOS Safari, but touch scrolling can still leak through to the page
+    // behind the drawer on Android Chrome. Pinning body with position:fixed
+    // (restoring the scroll offset on close) blocks it on both.
+    const scrollY = window.scrollY;
+    const { body } = document;
+    body.style.position = "fixed";
+    body.style.top = `-${scrollY}px`;
+    body.style.left = "0";
+    body.style.right = "0";
 
     return () => {
       document.removeEventListener("keydown", onKeyDown);
-      document.body.style.overflow = "";
+      body.style.position = "";
+      body.style.top = "";
+      body.style.left = "";
+      body.style.right = "";
+      window.scrollTo(0, scrollY);
     };
   }, [open]);
 
@@ -214,7 +228,7 @@ export function Header({ settings }: { settings: SiteSettings }) {
       {open && (
         <div className="fixed inset-0 z-50 xl:hidden">
           <div
-            className="absolute inset-0 bg-ink-900/60"
+            className="absolute inset-0 touch-none overscroll-contain bg-ink-900/60"
             onClick={() => {
               setOpen(false);
               triggerRef.current?.focus();
@@ -227,7 +241,7 @@ export function Header({ settings }: { settings: SiteSettings }) {
             role="dialog"
             aria-modal="true"
             aria-label="Mobile navigation"
-            className="drawer-panel absolute right-0 top-0 flex h-full w-[86%] max-w-sm flex-col overflow-hidden rounded-l-[28px] border-l-2 border-ink-900 bg-[var(--surface-page)] p-6 shadow-[var(--shadow-lift)]"
+            className="drawer-panel absolute right-0 top-0 flex h-full w-[86%] max-w-sm flex-col overflow-y-auto overflow-x-hidden overscroll-contain rounded-l-[28px] border-l-2 border-ink-900 bg-[var(--surface-page)] p-6 shadow-[var(--shadow-lift)]"
           >
             <div
               aria-hidden="true"
