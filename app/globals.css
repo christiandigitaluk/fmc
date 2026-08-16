@@ -1,26 +1,334 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Base palette — fresh, vibrant, Barnardo's-influenced: light warm
+     backgrounds carry the page, saturated green + a confident orange are
+     used as accents and blocks rather than a dominant dark surface. Orange
+     (not yellow/gold, not a pastel peach) reads clearly with dark text on
+     top and holds up against both the cream page and the dark green footer. */
+  --ink-900: #1c2b22;
+  --ink-800: #223429;
+  --ink-600: #4a5a4f;
+  --ink-400: #7a897f;
+  --forest-700: #1b7a46;
+  --forest-600: #156638;
+  --forest-100: #def3e4;
+  --orange-500: #f2803d;
+  --orange-100: #fde3cf;
+  --cream-50: #fbf8f1;
+  --cream-100: #f2eddf;
+  --white: #ffffff;
+  --line-200: #e6e0d0;
+  --line-dark: rgba(255, 255, 255, 0.18);
+
+  /* Semantic */
+  --success: #1b7a46;
+  --warning: #b97417;
+  --error: #c1483a;
+
+  /* Aliases */
+  --surface-page: var(--cream-50);
+  --surface-card: var(--white);
+  --surface-inverse: var(--ink-900);
+  --surface-tint: var(--forest-100);
+  --text-heading: var(--ink-800);
+  --text-body: var(--ink-600);
+  --text-muted: var(--ink-400);
+  --text-inverse: var(--cream-50);
+  /* Gold is a fill/accent colour only (buttons, blobs, badges) — never body
+     or label text, so the accent used for eyebrow/kicker text is the
+     primary green instead. */
+  --text-accent: var(--forest-700);
+  --action-primary: var(--forest-700);
+  --action-primary-hover: var(--forest-600);
+  --link: var(--forest-600);
+  --link-hover: var(--forest-700);
+  --border-default: var(--line-200);
+  --focus-ring: var(--orange-500);
+
+  /* Spacing scale */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+  --space-10: 128px;
+  --container-max: 1400px;
+  --section-pad: var(--space-9);
+
+  /* Effects */
+  --radius-sm: 4px;
+  --radius-md: 10px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+  --border-hairline: 1px solid var(--line-200);
+  --shadow-card: 0 1px 2px rgba(20, 33, 26, 0.06), 0 8px 24px rgba(20, 33, 26, 0.07);
+  --shadow-lift: 0 2px 4px rgba(20, 33, 26, 0.08), 0 16px 40px rgba(20, 33, 26, 0.12);
+  --ease-brand: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --overlay-ink: linear-gradient(rgba(16, 25, 15, 0.55), rgba(16, 25, 15, 0.72));
+
+  /* Sticker/block shadow — hard offset, no blur, contemporary chunky feel */
+  --shadow-sticker: 4px 4px 0 var(--ink-900);
+  --shadow-sticker-sm: 3px 3px 0 var(--ink-900);
+  --shadow-sticker-hover: 6px 6px 0 var(--ink-900);
+  --border-chunky: 2px solid var(--ink-900);
+
+  /* Section-edge slant — a single confident diagonal cut instead of a
+     rigid horizontal rule between colour blocks. Kept shallow so it reads
+     as a considered flourish, not a jagged/busy zigzag. */
+  --slant-h: clamp(20px, 3vw, 48px);
+
+  /* Fonts — declared here (not just inside @theme inline) because `@theme
+     inline` only inlines values into generated Tailwind utilities, it does
+     not emit a real `--font-*` custom property on :root. Our own plain CSS
+     below references these directly via var(), so they need to exist here. */
+  --font-display: var(--font-baloo-2), -apple-system, "Segoe UI", sans-serif;
+  --font-sans: var(--font-instrument-sans), -apple-system, "Segoe UI", sans-serif;
+
+  /* Typography scale */
+  --text-hero: clamp(40px, 5.5vw, 72px);
+  --text-h1: 48px;
+  --text-h2: 34px;
+  --text-h3: 22px;
+  --text-lead: 19px;
+  --text-body: 16px;
+  --text-small: 14px;
+  --text-caption: 12.5px;
+  --text-eyebrow: 16px;
+  --leading-display: 1.0;
+  --leading-body: 1.65;
+  --tracking-eyebrow: 0.04em;
+  --tracking-display: -0.02em;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-ink-900: var(--ink-900);
+  --color-ink-800: var(--ink-800);
+  --color-ink-600: var(--ink-600);
+  --color-ink-400: var(--ink-400);
+  --color-forest-700: var(--forest-700);
+  --color-forest-600: var(--forest-600);
+  --color-forest-100: var(--forest-100);
+  --color-orange-500: var(--orange-500);
+  --color-orange-100: var(--orange-100);
+  --color-cream-50: var(--cream-50);
+  --color-cream-100: var(--cream-100);
+  --color-white: var(--white);
+  --color-line-200: var(--line-200);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-error: var(--error);
+  --color-surface-page: var(--surface-page);
+  --color-surface-card: var(--surface-card);
+  --color-surface-inverse: var(--surface-inverse);
+  --color-surface-tint: var(--surface-tint);
+  --color-text-heading: var(--text-heading);
+  --color-text-body: var(--text-body);
+  --color-text-muted: var(--text-muted);
+  --color-text-inverse: var(--text-inverse);
+  --color-text-accent: var(--text-accent);
+  --color-action-primary: var(--action-primary);
+  --color-action-primary-hover: var(--action-primary-hover);
+  --color-link: var(--link);
+  --color-link-hover: var(--link-hover);
+  --color-border-default: var(--border-default);
+  --color-focus-ring: var(--focus-ring);
+
+  --font-display: var(--font-baloo-2), -apple-system, "Segoe UI", sans-serif;
+  --font-sans: var(--font-instrument-sans), -apple-system, "Segoe UI", sans-serif;
+
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-pill: var(--radius-pill);
+
+  --spacing-section: var(--section-pad);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Layered as `base` so Tailwind utility classes (e.g. text-cream-50 on a
+   heading inside a dark block) can still override these defaults — an
+   unlayered rule here would otherwise beat utilities regardless of specificity. */
+@layer base {
+  * {
+    border-color: var(--border-default);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--surface-page);
+    color: var(--text-body);
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: var(--leading-body);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--text-heading);
+    line-height: var(--leading-display);
+    letter-spacing: var(--tracking-display);
+  }
+
+  a {
+    color: var(--link);
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: var(--link-hover);
+    text-decoration: underline;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Diagonal section-edge cuts — apply to a section's top and/or bottom so
+   colour blocks meet at a slant instead of a straight rule. Sections need
+   enough vertical padding that content doesn't sit in the clipped corner. */
+.slant-top {
+  clip-path: polygon(0 var(--slant-h), 100% 0, 100% 100%, 0 100%);
+}
+
+.slant-bottom {
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--slant-h)), 0 100%);
+}
+
+.slant-top.slant-bottom {
+  clip-path: polygon(0 var(--slant-h), 100% 0, 100% calc(100% - var(--slant-h)), 0 100%);
+}
+
+/* Sticker-style hard-shadow block, used for chunky CTAs and accent cards */
+.sticker {
+  border: var(--border-chunky);
+  box-shadow: var(--shadow-sticker);
+  transition: box-shadow 150ms var(--ease-brand), transform 150ms var(--ease-brand);
+}
+
+.sticker:hover {
+  box-shadow: var(--shadow-sticker-hover);
+  transform: translate(-2px, -2px);
+}
+
+.sticker:active {
+  box-shadow: 1px 1px 0 var(--ink-900);
+  transform: translate(3px, 3px);
+}
+
+/* Visible AAA-friendly focus ring on every interactive element */
+:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.eyebrow {
+  font-family: var(--font-display);
+  font-size: var(--text-eyebrow);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-eyebrow);
+  font-weight: 800;
+  color: var(--text-accent);
+}
+
+.container-max {
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--space-5);
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  background: var(--ink-900);
+  color: var(--cream-50);
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-sm);
+}
+
+.skip-link:focus {
+  left: var(--space-4);
+  top: var(--space-4);
+}
+
+@media print {
+  header,
+  footer,
+  .no-print {
+    display: none !important;
+  }
+}
+
+/* Playful mobile-menu entrance — a relaxed spring-like slide rather than a
+   rigid snap, with nav links staggering in just after the panel. */
+@keyframes drawer-in {
+  from {
+    transform: translateX(24px) rotate(1deg);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes link-in {
+  from {
+    transform: translateY(8px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.drawer-panel {
+  animation: drawer-in 320ms var(--ease-brand) both;
+}
+
+.drawer-link {
+  animation: link-in 320ms var(--ease-brand) both;
+}
+
+/* Playful wavy underline for the primary nav — grows in from the left on
+   hover/focus instead of a straight, rigid line. */
+.nav-link {
+  position: relative;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 1px;
+  right: 1px;
+  bottom: -6px;
+  height: 6px;
+  background-color: var(--forest-600);
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 8' preserveAspectRatio='none'%3E%3Cpath d='M0 4 Q 2.5 0 5 4 T 10 4 T 15 4 T 20 4' stroke='black' stroke-width='2.5' fill='none'/%3E%3C/svg%3E");
+  mask-repeat: repeat-x;
+  mask-size: 16px 6px;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 8' preserveAspectRatio='none'%3E%3Cpath d='M0 4 Q 2.5 0 5 4 T 10 4 T 15 4 T 20 4' stroke='black' stroke-width='2.5' fill='none'/%3E%3C/svg%3E");
+  -webkit-mask-repeat: repeat-x;
+  -webkit-mask-size: 16px 6px;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 280ms var(--ease-brand);
+  pointer-events: none;
+}
+
+.nav-link:hover::after,
+.nav-link:focus-visible::after,
+.nav-link[aria-expanded="true"]::after {
+  transform: scaleX(1);
 }

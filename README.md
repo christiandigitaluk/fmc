@@ -1,36 +1,86 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Forest Circuit — Website
 
-## Getting Started
+A new marketing and CMS-driven site for [Forest Methodist Circuit](https://www.forestcircuit.co.uk/), a team ministry
+of ten Methodist churches across Waltham Forest, Wanstead and Loughton. Built to the circuit's new brand identity —
+"Heaven touching earth" — using Next.js 15 (App Router), TypeScript, Tailwind CSS 4, and Sanity Studio as the
+headless CMS.
 
-First, run the development server:
+## Run locally
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev        # http://localhost:3010
+npm run build      # production build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The whole site works immediately with **zero configuration** — every page reads from realistic mock data in
+`lib/mock/` via the fallback layer in `lib/content.ts`. Nothing needs a Sanity account to preview or demo the site.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Pages
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Route | Purpose |
+|---|---|
+| `/` | Home — hero, find-a-church search, quick actions, featured churches and news |
+| `/churches` | Church directory — search, filter by area and facilities, grid/list view |
+| `/churches/[slug]` | Church detail — service times, facilities, hall hire, map, contact |
+| `/preaching-plan` | Searchable, printable circuit preaching plan |
+| `/events` | Events by category, each with an "Add to calendar" (.ics) export |
+| `/news` + `/news/[slug]` | Circuit news and community stories |
+| `/hall-hire` | Hall & premises hire enquiry form (server action) |
+| `/contact` | Circuit and per-church contact details |
+| `/studio` | Embedded Sanity Studio (content admin) |
 
-## Learn More
+## Design system
 
-To learn more about Next.js, take a look at the following resources:
+All tokens in `app/globals.css` are ported 1:1 from the brand handoff (`colors.css`, `typography.css`,
+`spacing.css`, `effects.css`) into a Tailwind v4 `@theme` block — forest green primary actions, gold accents only,
+Instrument Serif display type, Instrument Sans body/UI, pill buttons, 10px card radius. UI primitives in
+`components/ui/` (Button, Card, Badge, Input, Select, Checkbox, Tabs, Alert) match the component contracts supplied
+in the design handoff.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Going live: connecting Sanity CMS
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The site is fully wired for [Sanity.io](https://www.sanity.io) but runs on mock data until you connect a real
+project. To switch to live, editable content:
 
-## Deploy on Vercel
+1. **Create a free Sanity account** at [sanity.io](https://www.sanity.io) and create a new project (any name).
+2. In the Sanity dashboard, note your **Project ID**, and create a dataset named `production` if one doesn't exist.
+3. Copy `.env.local.example` to `.env.local` and fill in:
+   ```
+   NEXT_PUBLIC_SANITY_PROJECT_ID=your-project-id
+   NEXT_PUBLIC_SANITY_DATASET=production
+   ```
+4. Restart `npm run dev`, then visit `http://localhost:3010/studio` — you'll be prompted to add
+   `http://localhost:3010` as a CORS origin in your Sanity project (Studio gives you a one-click button for this).
+5. Log in with your Sanity account and start adding Churches, News posts, Events and Preaching plan entries. Every
+   page on the site will now read live content instead of mock data — no code changes needed.
+6. To let the **hall hire form** write real booking requests into Sanity, create an API token with **Editor**
+   permissions at `manage.sanity.io` → your project → API → Tokens, and add it as `SANITY_API_TOKEN` in
+   `.env.local` (and in your hosting provider's environment variables — never commit this token).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Non-technical volunteers can be invited as Studio members (Settings → Members in the Sanity dashboard) with
+"Editor" access, so they can update news, service times and preaching plans without touching code.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Content structure (Sanity schemas)
+
+Defined in `sanity/schemaTypes/`: `church`, `post` (news), `event`, `preachingPlanEntry`, `bookingRequest` (hall
+hire submissions), and a singleton `siteSettings` (banner, circuit contact details, social links).
+
+## Deployment
+
+1. Push this repository to GitHub.
+2. Import into [Vercel](https://vercel.com) (free tier is fine) — it auto-detects Next.js.
+3. Add the same environment variables from `.env.local` in Vercel's project settings.
+4. Point `forestcircuit.co.uk` DNS at Vercel once you're ready to go live.
+
+## Accessibility
+
+Built to a WCAG 2.1 AAA target: semantic landmarks and skip link, visible gold focus rings on every interactive
+element, labelled form fields with error/hint associations, a focus-trapped and `Escape`-closable mobile nav
+drawer, and a print-friendly preaching plan view. Run a manual keyboard-only pass and an automated audit (e.g.
+axe DevTools) before launch.
+
+## Images
+
+Logo and editorial photography from the brand handoff live in `public/images/`. Replace with final client-approved
+photography before launch — church-specific photos would strengthen each `/churches/[slug]` page.

@@ -1,0 +1,279 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { Menu, X, ChevronDown } from "lucide-react";
+import { NotificationBanner } from "@/components/layout/NotificationBanner";
+import { Button } from "@/components/ui/Button";
+import type { SiteSettings } from "@/lib/types";
+
+type SimpleNavItem = { href: string; label: string };
+type DropdownNavItem = { label: string; items: SimpleNavItem[] };
+type NavItem = SimpleNavItem | DropdownNavItem;
+
+function isDropdown(item: NavItem): item is DropdownNavItem {
+  return "items" in item;
+}
+
+const NAV_LINKS: NavItem[] = [
+  {
+    label: "About",
+    items: [
+      { href: "/about", label: "About us" },
+      { href: "/jobs", label: "Jobs" },
+    ],
+  },
+  { href: "/churches", label: "Find a church" },
+  { href: "/preaching-plan", label: "Preaching plan" },
+  { href: "/events", label: "Events" },
+  { href: "/news", label: "News" },
+  { href: "/hall-hire", label: "Hall hire" },
+  { href: "/contact", label: "Contact" },
+];
+
+const MOBILE_LINKS: SimpleNavItem[] = [
+  { href: "/about", label: "About us" },
+  { href: "/churches", label: "Find a church" },
+  { href: "/preaching-plan", label: "Preaching plan" },
+  { href: "/events", label: "Events" },
+  { href: "/news", label: "News" },
+  { href: "/hall-hire", label: "Hall hire" },
+  { href: "/jobs", label: "Jobs" },
+  { href: "/contact", label: "Contact" },
+];
+
+export function Header({ settings }: { settings: SiteSettings }) {
+  const [open, setOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const drawerRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const navRef = useRef<HTMLElement>(null);
+  const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  function clearCloseTimer() {
+    if (closeTimerRef.current) {
+      clearTimeout(closeTimerRef.current);
+      closeTimerRef.current = null;
+    }
+  }
+
+  function openDropdownNow(label: string) {
+    clearCloseTimer();
+    setOpenDropdown(label);
+  }
+
+  function scheduleDropdownClose() {
+    clearCloseTimer();
+    closeTimerRef.current = setTimeout(() => setOpenDropdown(null), 150);
+  }
+
+  useEffect(() => {
+    if (!open) return;
+
+    function onKeyDown(e: KeyboardEvent) {
+      if (e.key === "Escape") {
+        setOpen(false);
+        triggerRef.current?.focus();
+        return;
+      }
+      if (e.key !== "Tab" || !drawerRef.current) return;
+      const focusables = drawerRef.current.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled])'
+      );
+      if (focusables.length === 0) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+
+    document.addEventListener("keydown", onKeyDown);
+    const firstLink = drawerRef.current?.querySelector<HTMLElement>("a, button");
+    firstLink?.focus();
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
+  useEffect(() => {
+    if (!openDropdown) return;
+
+    function onPointerDown(e: PointerEvent) {
+      if (navRef.current && !navRef.current.contains(e.target as Node)) {
+        setOpenDropdown(null);
+      }
+    }
+    function onKeyDown(e: KeyboardEvent) {
+      if (e.key === "Escape") setOpenDropdown(null);
+    }
+
+    document.addEventListener("pointerdown", onPointerDown);
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("pointerdown", onPointerDown);
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [openDropdown]);
+
+  return (
+    <>
+      <NotificationBanner settings={settings} />
+      <header className="sticky top-0 z-40 border-b-2 border-ink-900 bg-[var(--surface-page)]/95 backdrop-blur">
+        <div className="container-max flex items-center justify-between py-3.5">
+          <Link href="/" className="flex shrink-0 items-center" aria-label="Forest Circuit home">
+            <Image src="/images/logo-ink.png" alt="" width={112} height={112} className="h-20 w-20 xl:h-28 xl:w-28" />
+          </Link>
+
+          <nav aria-label="Primary" className="hidden xl:block" ref={navRef}>
+            <ul className="flex items-center gap-4 2xl:gap-6">
+              {NAV_LINKS.map((item) =>
+                isDropdown(item) ? (
+                  <li
+                    key={item.label}
+                    className="relative"
+                    onMouseEnter={() => openDropdownNow(item.label)}
+                    onMouseLeave={scheduleDropdownClose}
+                  >
+                    <button
+                      type="button"
+                      aria-haspopup="true"
+                      aria-expanded={openDropdown === item.label}
+                      onClick={() => setOpenDropdown((cur) => (cur === item.label ? null : item.label))}
+                      onFocus={() => openDropdownNow(item.label)}
+                      className="nav-link flex items-center gap-1 text-[18px] font-extrabold text-[var(--text-heading)] hover:text-forest-600 focus:outline-none focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2"
+                      style={{ outlineColor: "var(--focus-ring)" }}
+                    >
+                      {item.label}
+                      <ChevronDown
+                        size={16}
+                        aria-hidden="true"
+                        className={openDropdown === item.label ? "rotate-180 transition-transform" : "transition-transform"}
+                      />
+                    </button>
+                    {openDropdown === item.label && (
+                      <ul
+                        className="sticker absolute left-0 top-full z-10 mt-3 min-w-[180px] rounded-[10px] bg-white py-2"
+                        onMouseEnter={() => openDropdownNow(item.label)}
+                        onMouseLeave={scheduleDropdownClose}
+                      >
+                        {item.items.map((sub) => (
+                          <li key={sub.href}>
+                            <Link
+                              href={sub.href}
+                              onClick={() => setOpenDropdown(null)}
+                              className="block px-4 py-2.5 text-base font-semibold text-[var(--text-heading)] no-underline hover:bg-forest-100"
+                            >
+                              {sub.label}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </li>
+                ) : (
+                  <li key={item.href}>
+                    <Link href={item.href} className="nav-link text-[18px] font-extrabold text-[var(--text-heading)] no-underline hover:text-forest-600 hover:no-underline">
+                      {item.label}
+                    </Link>
+                  </li>
+                )
+              )}
+            </ul>
+          </nav>
+
+          <div className="hidden shrink-0 xl:block">
+            <Button href="/churches" variant="primary" size="sm">
+              Find a church near you
+            </Button>
+          </div>
+
+          <button
+            ref={triggerRef}
+            type="button"
+            className="sticker shrink-0 xl:hidden flex h-12 w-12 items-center justify-center rounded-[14px] bg-cream-50 text-ink-900 transition-[transform,background-color] duration-200 ease-[cubic-bezier(.22,.61,.36,1)] hover:-rotate-3 hover:bg-orange-500 focus:outline-none focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2"
+            style={{ outlineColor: "var(--focus-ring)" }}
+            aria-expanded={open}
+            aria-controls="mobile-nav-drawer"
+            aria-label={open ? "Close menu" : "Open menu"}
+            onClick={() => setOpen((o) => !o)}
+          >
+            {open ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
+          </button>
+        </div>
+      </header>
+
+      {open && (
+        <div className="fixed inset-0 z-50 xl:hidden">
+          <div
+            className="absolute inset-0 bg-ink-900/60"
+            onClick={() => {
+              setOpen(false);
+              triggerRef.current?.focus();
+            }}
+            aria-hidden="true"
+          />
+          <div
+            id="mobile-nav-drawer"
+            ref={drawerRef}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Mobile navigation"
+            className="drawer-panel absolute right-0 top-0 flex h-full w-[86%] max-w-sm flex-col overflow-hidden rounded-l-[28px] border-l-2 border-ink-900 bg-[var(--surface-page)] p-6 shadow-[var(--shadow-lift)]"
+          >
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full border-2 border-orange-500/30"
+            />
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute -left-10 bottom-20 h-32 w-32 rounded-full bg-forest-100"
+            />
+
+            <div className="relative mb-8 flex items-center justify-between">
+              <span className="text-lg font-bold text-[var(--text-heading)]" style={{ fontFamily: "var(--font-display)" }}>Menu</span>
+              <button
+                type="button"
+                aria-label="Close menu"
+                onClick={() => {
+                  setOpen(false);
+                  triggerRef.current?.focus();
+                }}
+                className="sticker flex h-10 w-10 items-center justify-center rounded-[12px] bg-cream-50 text-ink-900 transition-[transform,background-color] duration-200 ease-[cubic-bezier(.22,.61,.36,1)] hover:rotate-3 hover:bg-orange-500 focus:outline-none focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2"
+                style={{ outlineColor: "var(--focus-ring)" }}
+              >
+                <X size={20} aria-hidden="true" />
+              </button>
+            </div>
+            <ul className="relative flex flex-col gap-1.5">
+              {MOBILE_LINKS.map((link, i) => (
+                <li key={link.href} className="drawer-link" style={{ animationDelay: `${80 + i * 45}ms` }}>
+                  <Link
+                    href={link.href}
+                    onClick={() => setOpen(false)}
+                    className="block rounded-full px-4 py-3 text-lg font-bold text-[var(--text-heading)] no-underline transition-colors hover:bg-forest-100"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <div className="drawer-link relative mt-8" style={{ animationDelay: `${80 + MOBILE_LINKS.length * 45}ms` }}>
+              <Button href="/churches" variant="primary" size="md" className="w-full" onClick={() => setOpen(false)}>
+                Find a church near you
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
