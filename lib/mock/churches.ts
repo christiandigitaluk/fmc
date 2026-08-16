@@ -17,8 +17,8 @@ export const churches: Church[] = [
     facilities: ["Wheelchair access", "Hall hire", "Toddler group", "Parking"],
     hallHireInfo:
       "Our hall seats up to 80 and is available for community groups, birthday parties and classes. Kitchen and parking included.",
-    lat: 51.5575,
-    lng: 0.0166,
+    lat: 51.5575068,
+    lng: 0.0162585,
   },
   {
     slug: "leyton-trinity",
@@ -58,8 +58,8 @@ export const churches: Church[] = [
     facilities: ["Wheelchair access", "Youth programme", "Hall hire", "Parking"],
     hallHireInfo:
       "Main hall and a smaller meeting room, both available for weekday and weekend hire. Enquire for current availability.",
-    lat: 51.5666,
-    lng: 0.0106,
+    lat: 51.5657106,
+    lng: 0.0106050,
   },
   {
     slug: "lighthouse-walthamstow",
@@ -79,8 +79,8 @@ export const churches: Church[] = [
     ],
     facilities: ["Wheelchair access", "Youth programme", "Toddler group"],
     hallHireInfo: "Community room available for local groups; contact the church office to arrange a visit.",
-    lat: 51.5754,
-    lng: -0.0300,
+    lat: 51.5760404,
+    lng: -0.0300766,
   },
   {
     slug: "loughton",
@@ -97,8 +97,8 @@ export const churches: Church[] = [
     serviceTimes: [{ day: "Sunday", time: "10:30", label: "Morning Worship" }],
     facilities: ["Wheelchair access", "Hall hire", "Parking", "Hearing loop"],
     hallHireInfo: "Large hall with stage, plus two smaller rooms, all fully accessible and available for hire.",
-    lat: 51.6496,
-    lng: 0.0567,
+    lat: 51.6496245,
+    lng: 0.0566101,
   },
   {
     slug: "loughton-trinity",
@@ -136,8 +136,8 @@ export const churches: Church[] = [
     ],
     facilities: ["Wheelchair access", "Hall hire", "Youth programme", "Food bank", "Parking"],
     hallHireInfo: "Multiple spaces available, from the main hall (seats 150) to small meeting rooms. Regular hirers welcome.",
-    lat: 51.5818,
-    lng: -0.0031,
+    lat: 51.5825842,
+    lng: -0.0036702,
   },
   {
     slug: "south-chingford",
@@ -172,8 +172,8 @@ export const churches: Church[] = [
     serviceTimes: [{ day: "Sunday", time: "10:30", label: "Morning Worship" }],
     facilities: ["Wheelchair access", "Hall hire"],
     hallHireInfo: "Ground-floor hall, step-free access, available weekdays and weekends.",
-    lat: 51.6020,
-    lng: -0.0036,
+    lat: 51.6038039,
+    lng: -0.0031947,
   },
   {
     slug: "woodford",
@@ -190,8 +190,8 @@ export const churches: Church[] = [
     serviceTimes: [{ day: "Sunday", time: "10:30", label: "Morning Worship" }],
     facilities: ["Wheelchair access", "Hall hire", "Parking", "Youth programme"],
     hallHireInfo: "Spacious hall with modern kitchen, regularly hired by community and youth organisations.",
-    lat: 51.599547,
-    lng: 0.018131,
+    lat: 51.5994756,
+    lng: 0.0195111,
   },
   {
     slug: "wanstead",
