@@ -13,7 +13,7 @@ export const churches: Church[] = [
     image: "/images/cann-hall.jpg",
     description:
       "A warm, welcoming congregation at the heart of Cann Hall, with a lively toddler group and a well-used hall for the local community.",
-    serviceTimes: [{ day: "Sunday", time: "10:30", label: "Morning Worship" }],
+    serviceTimes: [{ day: "Sunday", time: "09:00", label: "Morning Worship" }],
     facilities: ["Wheelchair access", "Hall hire", "Toddler group", "Parking"],
     hallHireInfo:
       "Our hall seats up to 80 and is available for community groups, birthday parties and classes. Kitchen and parking included.",
@@ -33,7 +33,7 @@ export const churches: Church[] = [
     description:
       "Leyton Trinity has served the High Road community for generations, with a strong food bank ministry and accessible worship space.",
     serviceTimes: [
-      { day: "Sunday", time: "09:30", label: "Holy Communion" },
+      { day: "Sunday", time: "11:00", label: "Holy Communion" },
       { day: "Wednesday", time: "12:00", label: "Midweek Prayer" },
     ],
     facilities: ["Wheelchair access", "Food bank", "Hearing loop", "Hall hire"],
@@ -54,7 +54,7 @@ export const churches: Church[] = [
     image: "/images/leytonstone.jpg",
     description:
       "A family-friendly church on the High Road offering Sunday worship, a youth programme and space for community hire.",
-    serviceTimes: [{ day: "Sunday", time: "10:30", label: "Family Worship" }],
+    serviceTimes: [{ day: "Sunday", time: "11:00", label: "Family Worship" }],
     facilities: ["Wheelchair access", "Youth programme", "Hall hire", "Parking"],
     hallHireInfo:
       "Main hall and a smaller meeting room, both available for weekday and weekend hire. Enquire for current availability.",
@@ -94,7 +94,7 @@ export const churches: Church[] = [
     image: "/images/loughton.jpg",
     description:
       "A well-established congregation on Loughton High Road with strong ties to local schools and community groups.",
-    serviceTimes: [{ day: "Sunday", time: "10:00", label: "Morning Worship" }],
+    serviceTimes: [{ day: "Sunday", time: "10:30", label: "Morning Worship" }],
     facilities: ["Wheelchair access", "Hall hire", "Parking", "Hearing loop"],
     hallHireInfo: "Large hall with stage, plus two smaller rooms, all fully accessible and available for hire.",
     lat: 51.6496,
@@ -112,7 +112,7 @@ export const churches: Church[] = [
     image: "/images/trinity-debden.jpg",
     description:
       "A quieter, reflective congregation with a strong pastoral care network and monthly community lunches.",
-    serviceTimes: [{ day: "Sunday", time: "09:15", label: "Holy Communion" }],
+    serviceTimes: [{ day: "Sunday", time: "10:30", label: "Holy Communion" }],
     facilities: ["Wheelchair access", "Parking"],
     hallHireInfo: "Small hall suitable for meetings and classes of up to 30 people.",
     lat: 51.6549,
@@ -131,7 +131,7 @@ export const churches: Church[] = [
     description:
       "Shern Hall is one of the circuit's largest congregations, home to a thriving youth programme and community food bank.",
     serviceTimes: [
-      { day: "Sunday", time: "10:30", label: "Morning Worship" },
+      { day: "Sunday", time: "11:00", label: "Morning Worship" },
       { day: "Sunday", time: "18:00", label: "Evening Reflection" },
     ],
     facilities: ["Wheelchair access", "Hall hire", "Youth programme", "Food bank", "Parking"],
@@ -187,7 +187,7 @@ export const churches: Church[] = [
     image: "/images/woodford.jpg",
     description:
       "Woodford Methodist Church combines traditional worship with an active outreach programme across South Woodford.",
-    serviceTimes: [{ day: "Sunday", time: "11:00", label: "Morning Worship" }],
+    serviceTimes: [{ day: "Sunday", time: "10:30", label: "Morning Worship" }],
     facilities: ["Wheelchair access", "Hall hire", "Parking", "Youth programme"],
     hallHireInfo: "Spacious hall with modern kitchen, regularly hired by community and youth organisations.",
     lat: 51.5997,

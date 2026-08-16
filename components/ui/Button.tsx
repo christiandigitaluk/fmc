@@ -50,7 +50,13 @@ export function Button({
 
   if (href && !disabled) {
     return (
-      <Link href={href} target={target} rel={target === "_blank" ? "noreferrer" : undefined} className={classes}>
+      <Link
+        href={href}
+        target={target}
+        rel={target === "_blank" ? "noreferrer" : undefined}
+        className={classes}
+        onClick={onClick}
+      >
         {children}
       </Link>
     );
