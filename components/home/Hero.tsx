@@ -10,6 +10,22 @@ export function Hero() {
         className="pointer-events-none absolute -bottom-28 left-1/3 hidden h-64 w-64 rounded-full border-2 border-forest-700/25 lg:block"
       />
 
+      {/* A little orange warmth in the top corner, to answer the badge on the
+          photo below it. Outlines and small dots rather than fills — orange is
+          the accent in this palette, not a surface. */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-24 -top-28 h-64 w-64 rounded-full border-2 border-orange-500/30 sm:-right-20 sm:h-80 sm:w-80"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute right-10 top-10 h-2.5 w-2.5 rounded-full bg-orange-500/45 sm:right-40 sm:top-14 sm:h-3 sm:w-3"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute right-24 top-20 h-1.5 w-1.5 rounded-full bg-orange-500/35 sm:right-56 sm:top-28 sm:h-2 sm:w-2"
+      />
+
       <div className="container-max relative grid gap-12 py-20 md:py-28 lg:grid-cols-[1.05fr_1fr] lg:items-center">
         <div>
           <span className="sticker mb-6 inline-flex -rotate-2 items-center rounded-full bg-white px-6 py-3 text-lg font-extrabold uppercase tracking-wide text-ink-900 md:text-xl">
