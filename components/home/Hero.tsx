@@ -54,7 +54,8 @@ export function Hero() {
                 alt="Members of the congregation singing together from hymn books during a Sunday service"
                 fill
                 sizes="(min-width: 1024px) 45vw, 90vw"
-                className="object-cover"
+                draggable={false}
+                className="no-long-press object-cover"
                 priority
               />
             </div>

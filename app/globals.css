@@ -222,6 +222,21 @@
   clip-path: polygon(0 var(--slant-h), 100% 0, 100% calc(100% - var(--slant-h)), 0 100%);
 }
 
+/* Opts an image out of iOS Safari's long-press sheet, which otherwise offers
+   Share / Save to Photos over the top of it and interrupts a scroll. Applied
+   to the artwork and photography the circuit owns, none of which is
+   interactive in its own right — anything clickable sits above it and keeps
+   its own pointer events.
+
+   Suppresses the gesture, not access: a screenshot or the image URL still
+   works, as they must for the browser to display anything at all. */
+.no-long-press {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  pointer-events: none;
+}
+
 /* Sticker-style hard-shadow block, used for chunky CTAs and accent cards */
 .sticker {
   border: var(--border-chunky);

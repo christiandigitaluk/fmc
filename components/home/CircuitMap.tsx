@@ -127,11 +127,7 @@ export function CircuitMap() {
             quality={92}
             sizes="(min-width: 1024px) 1160px, 200vw"
             draggable={false}
-            // Long-pressing the map on iOS otherwise raises the Share / Save
-            // to Photos sheet over it, which interrupts a scroll and offers
-            // the branded artwork up as a saveable photo. The map is not
-            // interactive in its own right, so nothing is lost by opting out.
-            className="pointer-events-none block h-full w-full select-none [-webkit-touch-callout:none]"
+            className="no-long-press block h-full w-full"
           />
 
           {CHURCH_PINS.map((pin, i) => (
@@ -178,7 +174,7 @@ export function CircuitMap() {
             width={72}
             height={72}
             draggable={false}
-            className="pointer-events-none h-16 w-16 select-none [-webkit-touch-callout:none] sm:h-20 sm:w-20"
+            className="no-long-press h-16 w-16 sm:h-20 sm:w-20"
           />
         </span>
 
