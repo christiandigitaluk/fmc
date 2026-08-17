@@ -74,7 +74,7 @@ export default function StaffPage() {
   return (
     <div className="relative container-max max-w-3xl py-14 md:py-20">
       <PageAccents variant="rings" />
-      <p className="eyebrow mb-3">Who runs the circuit</p>
+      <p className="eyebrow mb-3">Meet the team</p>
       <h1 style={{ fontSize: "var(--text-h1)" }} className="mb-6">
         Circuit staff
       </h1>
