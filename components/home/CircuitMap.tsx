@@ -112,7 +112,12 @@ export function CircuitMap() {
             height={1180}
             quality={92}
             sizes="(min-width: 1024px) 1160px, 200vw"
-            className="block h-full w-full"
+            draggable={false}
+            // Long-pressing the map on iOS otherwise raises the Share / Save
+            // to Photos sheet over it, which interrupts a scroll and offers
+            // the branded artwork up as a saveable photo. The map is not
+            // interactive in its own right, so nothing is lost by opting out.
+            className="pointer-events-none block h-full w-full select-none [-webkit-touch-callout:none]"
           />
 
           {CHURCH_PINS.map((pin, i) => (
@@ -153,7 +158,14 @@ export function CircuitMap() {
         </div>
 
         <span className="sticker absolute left-4 top-4 z-10 flex h-20 w-20 items-center justify-center rounded-full bg-white sm:h-24 sm:w-24">
-          <Image src="/images/logo-ink.png" alt="Forest Circuit" width={72} height={72} className="h-16 w-16 sm:h-20 sm:w-20" />
+          <Image
+            src="/images/logo-ink.png"
+            alt="Forest Circuit"
+            width={72}
+            height={72}
+            draggable={false}
+            className="pointer-events-none h-16 w-16 select-none [-webkit-touch-callout:none] sm:h-20 sm:w-20"
+          />
         </span>
       </div>
 
