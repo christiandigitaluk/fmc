@@ -11,19 +11,11 @@ export function Hero() {
       />
 
       {/* A little orange warmth in the top corner, to answer the badge on the
-          photo below it. Outlines and small dots rather than fills — orange is
-          the accent in this palette, not a surface. */}
+          photo below it. An outline rather than a fill — orange is the accent
+          in this palette, not a surface. */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -right-24 -top-28 h-64 w-64 rounded-full border-2 border-orange-500/30 sm:-right-20 sm:h-80 sm:w-80"
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute right-10 top-10 h-2.5 w-2.5 rounded-full bg-orange-500/45 sm:right-40 sm:top-14 sm:h-3 sm:w-3"
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute right-24 top-20 h-1.5 w-1.5 rounded-full bg-orange-500/35 sm:right-56 sm:top-28 sm:h-2 sm:w-2"
       />
 
       <div className="container-max relative grid gap-12 py-20 md:py-28 lg:grid-cols-[1.05fr_1fr] lg:items-center">
