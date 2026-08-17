@@ -6,6 +6,7 @@ const BASE_URL = "https://www.forestcircuit.co.uk";
 const STATIC_ROUTES = [
   "",
   "/about",
+  "/staff",
   "/churches",
   "/preaching-plan",
   "/events",
