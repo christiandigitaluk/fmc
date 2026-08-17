@@ -6,6 +6,7 @@ import type { SiteSettings } from "@/lib/types";
 
 const FOOTER_LINKS = [
   { href: "/about", label: "About us" },
+  { href: "/staff", label: "Circuit staff" },
   { href: "/churches", label: "Find a church" },
   { href: "/preaching-plan", label: "Preaching plan" },
   { href: "/events", label: "Events" },
