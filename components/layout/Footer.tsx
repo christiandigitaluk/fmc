@@ -16,6 +16,7 @@ const FOOTER_LINKS = [
 ];
 
 const LEGAL_LINKS = [
+  { href: "/privacy", label: "Privacy notice" },
   { href: "/safeguarding", label: "Safeguarding" },
   { href: "/safeguarding/connection", label: "Connection safeguarding" },
   { href: "/safeguarding/data-protection", label: "Data protection" },

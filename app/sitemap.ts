@@ -13,6 +13,7 @@ const STATIC_ROUTES = [
   "/hall-hire",
   "/jobs",
   "/contact",
+  "/privacy",
   "/safeguarding",
   "/safeguarding/connection",
   "/safeguarding/data-protection",
