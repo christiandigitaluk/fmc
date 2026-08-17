@@ -14,6 +14,9 @@ export function buildIcs(event: CircuitEvent, churchName: string): string {
     "VERSION:2.0",
     "PRODID:-//Forest Circuit//Events//EN",
     "BEGIN:VEVENT",
+    // Not an address — a calendar UID, which is conventionally domain-qualified
+    // and must stay stable: change it and calendars treat a re-download as a
+    // new event rather than an update, duplicating whatever people have saved.
     `UID:${event.slug}@forestcircuit.co.uk`,
     `DTSTAMP:${now}Z`,
     `DTSTART:${start}`,

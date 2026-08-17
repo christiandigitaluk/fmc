@@ -7,7 +7,9 @@ export const siteSettings: SiteSettings = {
   bannerLinkHref: "/documents/preaching-plan-sept-nov-2026.pdf",
   bannerLinkLabel: "print",
   phone: "020 8558 7645",
-  email: "office@forestcircuit.co.uk",
+  // The circuit's mail runs on forestcircuit.org.uk; the website is on
+  // forestcircuit.co.uk. Different domains, deliberately.
+  email: "office@forestcircuit.org.uk",
   facebookUrl: "https://facebook.com",
   instagramUrl: "https://instagram.com",
 };

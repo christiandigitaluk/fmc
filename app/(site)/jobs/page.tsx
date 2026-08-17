@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Alert } from "@/components/ui/Alert";
 import { PageAccents } from "@/components/ui/PageAccents";
-import { getJobVacancies } from "@/lib/content";
+import { getJobVacancies, getSiteSettings } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Jobs",
@@ -10,7 +10,9 @@ export const metadata: Metadata = {
 };
 
 export default async function JobsPage() {
-  const vacancies = await getJobVacancies();
+  // Read the address from Site settings rather than hard-coding it — a copy
+  // here is how this page ended up on the wrong domain in the first place.
+  const [vacancies, settings] = await Promise.all([getJobVacancies(), getSiteSettings()]);
 
   return (
     <div className="relative container-max max-w-3xl py-14 md:py-20">
@@ -27,7 +29,7 @@ export default async function JobsPage() {
       {vacancies.length === 0 ? (
         <Alert tone="info" title="No current vacancies">
           There are no paid roles advertised at the moment. Please check back soon, or{" "}
-          <a href="mailto:office@forestcircuit.co.uk" className="font-semibold underline">
+          <a href={`mailto:${settings.email}`} className="font-semibold underline">
             get in touch
           </a>{" "}
           if you&apos;d like to be notified when a position opens.
