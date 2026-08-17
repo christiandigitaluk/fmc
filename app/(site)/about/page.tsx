@@ -4,7 +4,7 @@ import { PageAccents } from "@/components/ui/PageAccents";
 
 export const metadata: Metadata = {
   title: "About us",
-  description: "About Forest Methodist Circuit — our mission, our area, and our ministers.",
+  description: "About Forest Methodist Circuit: our mission, our area, and our ministers.",
   alternates: { canonical: "/about" },
 };
 

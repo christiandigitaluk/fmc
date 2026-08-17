@@ -48,7 +48,7 @@ export const churches: Church[] = [
     minister: "Rev Stephanie Njeru",
     email: "stephanie.njeru@methodist.org.uk",
     image: "/images/leyton-trinity.jpg",
-    description: "A church on Leyton High Road where you are welcome exactly as you are — whether you have worshipped here for years or are simply looking for somewhere to belong.",
+    description: "A church on Leyton High Road where you are welcome exactly as you are, whether you have worshipped here for years or are simply looking for somewhere to belong.",
     serviceTimes: [{ day: "Sunday", time: "11:00", label: "Morning Worship" }],
     facilities: [],
     hallHireInfo: "",
@@ -85,7 +85,7 @@ export const churches: Church[] = [
     image: "/images/lighthouse.jpg",
     // Opening date and listed status per Historic England (list entry 1391928).
     description:
-      "Known for the lantern tower that gives it its name, this Grade II listed church has stood on Markhouse Road since 1893 — and still opens its doors to the neighbourhood every Sunday.",
+      "Known for the lantern tower that gives it its name, this Grade II listed church has stood on Markhouse Road since 1893, and still opens its doors to the neighbourhood every Sunday.",
     serviceTimes: [{ day: "Sunday", time: "11:00", label: "Morning Worship" }],
     facilities: [],
     hallHireInfo: "",
@@ -136,7 +136,7 @@ export const churches: Church[] = [
     minister: "Rev Kong Ching Hii",
     email: "kongching.hii@methodist.org.uk",
     image: "/images/shern-hall.jpg",
-    description: "There is a welcome waiting on Shernhall Street every Sunday morning — come as you are, and come as you find us.",
+    description: "There is a welcome waiting on Shernhall Street every Sunday morning. Come as you are, and come as you find us.",
     serviceTimes: [{ day: "Sunday", time: "11:00", label: "Morning Worship" }],
     facilities: [],
     hallHireInfo: "",
@@ -153,7 +153,7 @@ export const churches: Church[] = [
     phone: "020 8220 1221",
     email: "mike.long@methodist.org.uk",
     image: "/images/south-chingford.jpg",
-    description: "A friendly Sunday morning on New Road, and an open door to anyone who would like to join us — no need to have been before.",
+    description: "A friendly Sunday morning on New Road, and an open door to anyone who would like to join us. There is no need to have been before.",
     serviceTimes: [{ day: "Sunday", time: "10:30", label: "Morning Worship" }],
     facilities: [],
     hallHireInfo: "",
@@ -207,7 +207,7 @@ export const churches: Church[] = [
     email: "operations@forestcircuit.org.uk",
     image: "/images/wanstead.jpg",
     description:
-      "Wanstead Methodist Church stopped holding Sunday services a few years back, but the building never went quiet — it's now a busy community hub, home to The Wanstead Curtain theatre company and a regular venue for rehearsals, classes and local groups. Five minutes' walk from Snaresbrook station.",
+      "Wanstead Methodist Church stopped holding Sunday services a few years back, but the building never went quiet. It is now a busy community hub, home to The Wanstead Curtain theatre company and a regular venue for rehearsals, classes and local groups. Five minutes' walk from Snaresbrook station.",
     serviceTimes: [],
     facilities: ["Hall hire", "Parking", "Accessible parking"],
     hallHireInfo:

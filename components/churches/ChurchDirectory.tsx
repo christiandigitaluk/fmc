@@ -176,8 +176,8 @@ export function ChurchDirectory({ churches, initialQuery = "" }: { churches: Chu
             )}
             {geoStatus === "denied" && (
               <p className="mt-1.5 text-sm text-[var(--error)]">
-                Location access was denied or blocked. You can still search by area or postcode above — or check
-                your browser/device location settings for this site and try again.
+                Location access was denied or blocked. You can still search by area or postcode above, or check
+                your browser and device location settings for this site and try again.
               </p>
             )}
           </div>

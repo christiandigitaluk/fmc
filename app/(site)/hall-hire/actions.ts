@@ -29,6 +29,6 @@ export async function submitHallHireRequest(
 
   const result = await submitBookingRequest(request);
   return result.ok
-    ? { status: "success", message: "Thank you — your enquiry has been sent. A member of our team will be in touch shortly." }
+    ? { status: "success", message: "Thank you. Your enquiry has been sent, and a member of our team will be in touch shortly." }
     : { status: "error", message: "Sorry, something went wrong sending your enquiry. Please try again or email us directly." };
 }

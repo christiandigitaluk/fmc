@@ -26,6 +26,6 @@ export async function submitContactForm(
 
   const result = await submitContactMessage(contact);
   return result.ok
-    ? { status: "success", message: "Thank you — your message has been sent. We'll get back to you soon." }
+    ? { status: "success", message: "Thank you. Your message has been sent, and we'll get back to you soon." }
     : { status: "error", message: "Sorry, something went wrong sending your message. Please try again or email us directly." };
 }
