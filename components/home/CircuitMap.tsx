@@ -15,7 +15,10 @@ const RAW_PINS: Pin[] = [
   { name: "Loughton Methodist Church", slug: "loughton", xPct: 58.83, yPct: 22.19 },
   { name: "South Chingford Methodist Church", slug: "south-chingford", xPct: 37.85, yPct: 43.25 },
   { name: "Winchester Road Methodist Church", slug: "winchester-road", xPct: 41.11, yPct: 52.74 },
-  { name: "Woodford Methodist Church", slug: "woodford", xPct: 46.49, yPct: 54.22 },
+  // Repositioned after Woodford's postcode was corrected (E18 2PQ -> E18 2PU);
+  // derived from the building's coordinates via the map's own projection,
+  // which the other nine hand-placed pins match to within 1%.
+  { name: "Woodford Methodist Church", slug: "woodford", xPct: 47.92, yPct: 54.54 },
   { name: "Shern Hall Methodist Church", slug: "shern-hall", xPct: 41.26, yPct: 65.7 },
   { name: "Lighthouse Methodist Church", slug: "lighthouse-walthamstow", xPct: 33.35, yPct: 69.81 },
   { name: "Leytonstone Methodist Church", slug: "leytonstone", xPct: 45.28, yPct: 75.45 },
