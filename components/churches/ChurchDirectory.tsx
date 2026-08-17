@@ -4,7 +4,15 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { LayoutGrid, List as ListIcon, LocateFixed, Loader2, X } from "lucide-react";
 import { Card } from "@/components/ui/Card";
 import { Select } from "@/components/ui/Select";
-import { geocodePostcode, geocodePlaceName, looksLikePostcode, milesBetween, KNOWN_PLACE_NAMES, type LatLng } from "@/lib/geo";
+import {
+  geocodePostcode,
+  geocodePlaceName,
+  geocodePlaceRemote,
+  looksLikePostcode,
+  milesBetween,
+  KNOWN_PLACE_NAMES,
+  type LatLng,
+} from "@/lib/geo";
 import type { Church } from "@/lib/types";
 
 type Origin = { location: LatLng; label: string; source: "postcode" | "place" | "geolocation" };
@@ -14,7 +22,7 @@ export function ChurchDirectory({ churches, initialQuery = "" }: { churches: Chu
   const [area, setArea] = useState("All areas");
   const [view, setView] = useState<"grid" | "list">("grid");
   const [origin, setOrigin] = useState<Origin | null>(null);
-  const [geoStatus, setGeoStatus] = useState<"idle" | "loading" | "error" | "denied">("idle");
+  const [geoStatus, setGeoStatus] = useState<"idle" | "loading" | "error" | "denied" | "notfound">("idle");
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const areas = useMemo(() => ["All areas", ...Array.from(new Set(churches.map((c) => c.area))).sort()], [churches]);
@@ -36,7 +44,19 @@ export function ChurchDirectory({ churches, initialQuery = "" }: { churches: Chu
       return;
     }
 
-    if (!looksLikePostcode(trimmed)) {
+    const isPostcode = looksLikePostcode(trimmed);
+
+    // A church's own name, area or address is a plain text search. Postcodes
+    // are checked first, so "E17" still sorts every church by distance from
+    // E17 rather than narrowing to the two that happen to sit in it.
+    const matchesAChurch =
+      !isPostcode &&
+      trimmed.length > 0 &&
+      churches.some((c) =>
+        [c.name, c.area, c.address].some((field) => field.toLowerCase().includes(trimmed.toLowerCase()))
+      );
+
+    if (trimmed.length < 3 || matchesAChurch) {
       setOrigin((prev) => (prev?.source === "postcode" || prev?.source === "place" ? null : prev));
       if (geoStatus !== "loading" || debounceRef.current === null) setGeoStatus("idle");
       return;
@@ -45,13 +65,16 @@ export function ChurchDirectory({ churches, initialQuery = "" }: { churches: Chu
     setGeoStatus("loading");
     if (debounceRef.current) clearTimeout(debounceRef.current);
     debounceRef.current = setTimeout(async () => {
-      const result = await geocodePostcode(trimmed);
+      // A postcode is looked up as one; anything else is treated as the name
+      // of a town or area near the circuit, which is what "Buckhurst Hill"
+      // used to fall through and fail on.
+      const result = isPostcode ? await geocodePostcode(trimmed) : await geocodePlaceRemote(trimmed);
       if (result) {
-        setOrigin({ ...result, source: "postcode" });
+        setOrigin({ ...result, source: isPostcode ? "postcode" : "place" });
         setGeoStatus("idle");
       } else {
-        setOrigin((prev) => (prev?.source === "postcode" ? null : prev));
-        setGeoStatus("error");
+        setOrigin((prev) => (prev?.source === "postcode" || prev?.source === "place" ? null : prev));
+        setGeoStatus("notfound");
       }
     }, 500);
 
@@ -172,6 +195,12 @@ export function ChurchDirectory({ churches, initialQuery = "" }: { churches: Chu
             {geoStatus === "error" && (
               <p className="mt-1.5 text-sm text-[var(--error)]">
                 We couldn&apos;t find that postcode or location. Try again, or search by area name.
+              </p>
+            )}
+            {geoStatus === "notfound" && (
+              <p className="mt-1.5 text-sm text-[var(--text-muted)]">
+                We couldn&apos;t find anywhere by that name in or around the circuit. The ten churches are
+                spread across Waltham Forest, Wanstead and Loughton.
               </p>
             )}
             {geoStatus === "denied" && (

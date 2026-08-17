@@ -51,6 +51,57 @@ export function geocodePlaceName(input: string): GeocodeResult | null {
   return KNOWN_PLACES[input.trim().toLowerCase()] ?? null;
 }
 
+/** Rough centre of the ten churches, used to judge what counts as local. */
+const CIRCUIT_CENTRE: LatLng = { lat: 51.594, lng: 0.014 };
+
+/**
+ * How far out still counts as "around the circuit". Wide enough for the towns
+ * people actually travel in from — Epping, Romford, Stratford, Brentwood — and
+ * tight enough to rule out Chelmsford, Southend and the rest of the country.
+ */
+const LOCAL_RADIUS_MILES = 20;
+
+/**
+ * Resolves a nearby town or area via postcodes.io, covering the many local
+ * places missing from the short list above: Buckhurst Hill and Chigwell sit
+ * inside the circuit's own boundary yet returned nothing at all.
+ *
+ * Two things need care. Place names repeat across the country and the API
+ * answers in its own order rather than by relevance — "Ilford" comes back as
+ * Ilford in Somerset, 134 miles off, and "Woodford" as Woodford in Somerset
+ * ahead of the one a mile up the road — so every candidate is considered and
+ * the closest to the circuit wins. And anywhere genuinely distant is refused
+ * rather than answered, because sorting ten East London churches by their
+ * distance from Manchester is a worse answer than admitting there isn't one.
+ */
+export async function geocodePlaceRemote(input: string): Promise<GeocodeResult | null> {
+  const value = input.trim();
+  if (value.length < 3) return null;
+
+  try {
+    const res = await fetch(`https://api.postcodes.io/places?q=${encodeURIComponent(value)}&limit=10`);
+    if (!res.ok) return null;
+    const data = await res.json();
+    const candidates: Array<{ name_1: string; latitude: number; longitude: number }> = data?.result ?? [];
+    if (candidates.length === 0) return null;
+
+    let best: GeocodeResult | null = null;
+    let bestMiles = Infinity;
+    for (const c of candidates) {
+      const location = { lat: c.latitude, lng: c.longitude };
+      const miles = milesBetween(CIRCUIT_CENTRE, location);
+      if (miles < bestMiles) {
+        bestMiles = miles;
+        best = { location, label: c.name_1 };
+      }
+    }
+
+    return bestMiles <= LOCAL_RADIUS_MILES ? best : null;
+  } catch {
+    return null;
+  }
+}
+
 /** Geocodes a full or partial UK postcode via the free postcodes.io API. Returns null if not found. */
 export async function geocodePostcode(input: string): Promise<GeocodeResult | null> {
   const value = input.trim();
