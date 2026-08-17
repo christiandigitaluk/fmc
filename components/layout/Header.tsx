@@ -6,6 +6,7 @@ import Image from "next/image";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { NotificationBanner } from "@/components/layout/NotificationBanner";
 import { Button } from "@/components/ui/Button";
+import { cn } from "@/lib/cn";
 import type { SiteSettings } from "@/lib/types";
 
 type SimpleNavItem = { href: string; label: string };
@@ -46,10 +47,56 @@ const MOBILE_LINKS: SimpleNavItem[] = [
 export function Header({ settings }: { settings: SiteSettings }) {
   const [open, setOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [navHidden, setNavHidden] = useState(false);
   const drawerRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const navRef = useRef<HTMLElement>(null);
   const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const drawerOpenRef = useRef(false);
+
+  useEffect(() => {
+    drawerOpenRef.current = open;
+  }, [open]);
+
+  /**
+   * The header is 110px on a phone — 13.5% of the screen — so it slides out
+   * of the way while reading down the page and comes straight back on any
+   * upward flick, keeping the menu one gesture away without permanently
+   * spending the space. Desktop has the room, so it stays put there.
+   */
+  useEffect(() => {
+    const wideScreen = window.matchMedia("(min-width: 1024px)");
+    let lastY = Math.max(0, window.scrollY);
+    let queued = false;
+
+    function onScroll() {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(() => {
+        queued = false;
+        // Closing the drawer restores the saved scroll offset in one jump;
+        // that isn't the user scrolling, so don't read a direction from it.
+        if (drawerOpenRef.current) {
+          lastY = Math.max(0, window.scrollY);
+          return;
+        }
+        if (wideScreen.matches) {
+          setNavHidden(false);
+          return;
+        }
+        // Clamp: iOS reports negative/overshooting values while rubber-banding.
+        const y = Math.min(Math.max(0, window.scrollY), document.body.scrollHeight - window.innerHeight);
+        const delta = y - lastY;
+        if (Math.abs(delta) < 8) return; // ride out scroll jitter
+        // Near the top there's nothing to reclaim, so never hide there.
+        setNavHidden(y > 140 && delta > 0);
+        lastY = y;
+      });
+    }
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   function clearCloseTimer() {
     if (closeTimerRef.current) {
@@ -141,7 +188,17 @@ export function Header({ settings }: { settings: SiteSettings }) {
   return (
     <>
       <NotificationBanner settings={settings} />
-      <header className="sticky top-0 z-40 border-b-2 border-ink-900 bg-[var(--surface-page)]/95 backdrop-blur">
+      <header
+        // Keyboard users can tab into the header while it's tucked away, so
+        // bring it back rather than moving focus somewhere invisible.
+        onFocusCapture={() => setNavHidden(false)}
+        className={cn(
+          "sticky top-0 z-40 border-b-2 border-ink-900 bg-[var(--surface-page)]/95 backdrop-blur",
+          "transition-transform duration-300 ease-[cubic-bezier(.22,.61,.36,1)] motion-reduce:transition-none",
+          navHidden ? "-translate-y-full" : "translate-y-0",
+          "lg:translate-y-0"
+        )}
+      >
         <div className="container-max flex items-center justify-between py-3.5">
           <Link href="/" className="flex shrink-0 items-center" aria-label="Forest Circuit home">
             <Image src="/images/logo-ink.png" alt="" width={112} height={112} className="h-20 w-20 xl:h-28 xl:w-28" />
