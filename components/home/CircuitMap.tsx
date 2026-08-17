@@ -110,11 +110,15 @@ export function CircuitMap() {
 
   return (
     <div>
-      <div className="relative aspect-[1000/1239] w-full overflow-hidden rounded-[14px] lg:aspect-[1600/1180]">
+      <div className="relative aspect-[1000/1239] w-full overflow-hidden rounded-[14px] md:aspect-[1600/1180]">
         {/* The full artwork, oversized and offset so the crop window above
             frames just the circuit. Pin percentages stay relative to this,
-            i.e. to the image itself, so they need no adjusting. */}
-        <div className="absolute left-[-50%] top-[-9.52%] h-[119.05%] w-[200%] lg:left-0 lg:top-0 lg:h-full lg:w-full">
+            i.e. to the image itself, so they need no adjusting.
+
+            Only phones need it. By 768px the uncropped map already holds the
+            pins ~32px apart, which the numbered dots clear, and cropping
+            there would rear up to 82% of a tablet's screen height. */}
+        <div className="absolute left-[-50%] top-[-9.52%] h-[119.05%] w-[200%] md:left-0 md:top-0 md:h-full md:w-full">
           <Image
             src="/images/hero-map.png"
             alt="Map of Forest Circuit's ten Methodist churches across Waltham Forest, Wanstead and Loughton"
@@ -141,12 +145,12 @@ export function CircuitMap() {
               onClick={() => setLockedIndex((cur) => (cur === i ? null : i))}
               aria-expanded={lockedIndex === i}
               aria-label={pin.name}
-              className="pointer-events-none absolute flex h-6 w-6 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-ink-900 bg-orange-500 text-[11px] font-bold leading-none text-ink-900 shadow-[1px_1px_0_var(--ink-900)] transition-transform before:absolute before:inset-[-14px] before:content-[''] focus:outline-none focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2 lg:pointer-events-auto lg:h-5 lg:w-5 lg:hover:scale-125"
+              className="pointer-events-none absolute flex h-6 w-6 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-ink-900 bg-orange-500 text-[11px] font-bold leading-none text-ink-900 shadow-[1px_1px_0_var(--ink-900)] transition-transform before:absolute before:inset-[-14px] before:content-[''] focus:outline-none focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2 pointer-desktop:pointer-events-auto pointer-desktop:h-5 pointer-desktop:w-5 pointer-desktop:hover:scale-125"
               style={{ left: `${pin.xPct}%`, top: `${pin.yPct}%`, outlineColor: "var(--focus-ring)" }}
             >
-              {/* Desktop identifies pins by their hover label instead, and a
-                  numeral in a 20px dot would only crowd it. */}
-              <span aria-hidden="true" className="lg:hidden">
+              {/* Only a mouse gets the hover label instead, and a numeral in a
+                  20px dot would only crowd it. */}
+              <span aria-hidden="true" className="pointer-desktop:hidden">
                 {i + 1}
               </span>
             </button>
@@ -155,7 +159,7 @@ export function CircuitMap() {
           {activePin && (
             <span
               aria-hidden="true"
-              className="pointer-events-none absolute z-10 hidden whitespace-nowrap rounded-full border-2 border-ink-900 bg-white px-3 py-1.5 text-xs font-bold text-ink-900 shadow-[2px_2px_0_var(--ink-900)] sm:text-sm lg:block"
+              className="pointer-events-none absolute z-10 hidden whitespace-nowrap rounded-full border-2 border-ink-900 bg-white px-3 py-1.5 text-xs font-bold text-ink-900 shadow-[2px_2px_0_var(--ink-900)] sm:text-sm pointer-desktop:block"
               style={{
                 left: `${activePin.xPct}%`,
                 transform: `translateX(${labelTranslateX})`,
@@ -184,7 +188,7 @@ export function CircuitMap() {
         <span
           aria-hidden="true"
           className={cn(
-            "sticker pointer-events-none absolute bottom-5 left-5 z-10 hidden -rotate-2 items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-bold text-ink-900 transition-all duration-500 ease-[cubic-bezier(.22,.61,.36,1)] motion-reduce:transition-none lg:flex",
+            "sticker pointer-events-none absolute bottom-5 left-5 z-10 hidden -rotate-2 items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-bold text-ink-900 transition-all duration-500 ease-[cubic-bezier(.22,.61,.36,1)] motion-reduce:transition-none pointer-desktop:flex",
             hintTaken ? "translate-y-1 opacity-0" : "opacity-100"
           )}
         >
@@ -195,7 +199,7 @@ export function CircuitMap() {
 
       {/* A key for the numbered pins, deliberately not links — the section's
           "View all churches" button is the single route onward from here. */}
-      <ol className="mt-4 grid gap-x-4 gap-y-2 px-1 sm:grid-cols-2 lg:hidden">
+      <ol className="mt-4 grid gap-x-4 gap-y-2 px-1 sm:grid-cols-2 lg:grid-cols-3 pointer-desktop:hidden">
         {CHURCH_PINS.map((pin, i) => (
           <li key={pin.slug} className="flex items-center gap-3 text-sm font-semibold text-[var(--text-heading)]">
             <span

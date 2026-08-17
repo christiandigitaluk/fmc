@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+/* "A wide screen driven by a mouse." Width alone isn't enough to assume one:
+   an iPad in landscape is 1024px but has nothing to hover with, so it needs
+   the tap-friendly treatment a phone gets, not hover-only labels. */
+@custom-variant pointer-desktop (@media (min-width: 1024px) and (hover: hover));
+
 :root {
   /* Base palette — fresh, vibrant, Barnardo's-influenced: light warm
      backgrounds carry the page, saturated green + a confident orange are
