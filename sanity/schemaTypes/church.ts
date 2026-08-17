@@ -53,6 +53,7 @@ export const church = defineType({
           "Hall hire",
           "Youth programme",
           "Parking",
+          "Accessible parking",
           "Toddler group",
           "Food bank",
           "Hearing loop",

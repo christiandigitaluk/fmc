@@ -3,6 +3,7 @@ export type Facility =
   | "Hall hire"
   | "Youth programme"
   | "Parking"
+  | "Accessible parking"
   | "Toddler group"
   | "Food bank"
   | "Hearing loop";
