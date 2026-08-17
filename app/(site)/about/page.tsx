@@ -1,19 +1,12 @@
 import type { Metadata } from "next";
-import { Mail } from "lucide-react";
+import Link from "next/link";
 import { PageAccents } from "@/components/ui/PageAccents";
 
 export const metadata: Metadata = {
   title: "About us",
-  description: "About Forest Methodist Circuit: our mission, our area, and our ministers.",
+  description: "About Forest Methodist Circuit: our mission and our area.",
   alternates: { canonical: "/about" },
 };
-
-const MINISTERS = [
-  { name: "Rev Mike Long", role: "Superintendent minister", churches: "Leytonstone and Cann Hall", email: "mike.long@methodist.org.uk" },
-  { name: "Rev Sue Creighton", role: "Minister", churches: "Loughton and Trinity Debden", email: "suegriffiths@mybroadbandmail.com" },
-  { name: "Rev Stephanie Njeru", role: "Minister", churches: "Leyton, Lighthouse and Winchester Road", email: "stephanie.njeru@methodist.org.uk" },
-  { name: "Rev Kong Ching Hii", role: "Minister", churches: "Shern Hall and Woodford", email: "kongching.hii@methodist.org.uk" },
-];
 
 export default function AboutPage() {
   return (
@@ -34,11 +27,16 @@ export default function AboutPage() {
           and includes churches in Chingford, Leyton, Leytonstone and Woodford.
         </p>
         <p>
-          The Superintendent of Forest Methodist Circuit is <strong>Rev Mike Long</strong>.
+          The Superintendent of Forest Methodist Circuit is <strong>Revd Mike Long</strong>. Meet the rest of the
+          team on our{" "}
+          <Link href="/staff" className="text-forest-600 hover:underline">
+            circuit staff
+          </Link>{" "}
+          page.
         </p>
       </div>
 
-      <div className="mb-12 rounded-[10px] border-2 border-ink-900 bg-forest-100 p-6">
+      <div className="rounded-[10px] border-2 border-ink-900 bg-forest-100 p-6">
         <p className="eyebrow mb-3">Circuit mission statement</p>
         <p className="text-[var(--text-body)]">
           Forest Circuit exists to further God&apos;s kingdom by enabling and supporting local churches in their
@@ -46,24 +44,6 @@ export default function AboutPage() {
           effective worship, witness, and welfare centres.
         </p>
       </div>
-
-      <h2 style={{ fontSize: "var(--text-h3)" }} className="mb-6">
-        Circuit ministers
-      </h2>
-      <ul className="flex flex-col gap-4">
-        {MINISTERS.map((minister) => (
-          <li key={minister.email} className="rounded-[10px] border border-line-200 bg-white p-5 shadow-[var(--shadow-card)]">
-            <p className="font-bold text-[var(--text-heading)]">{minister.name}</p>
-            <p className="text-sm text-[var(--text-muted)]">
-              {minister.role} &middot; {minister.churches}
-            </p>
-            <a href={`mailto:${minister.email}`} className="mt-2 inline-flex items-center gap-2 text-sm font-semibold text-forest-600">
-              <Mail size={14} aria-hidden="true" />
-              {minister.email}
-            </a>
-          </li>
-        ))}
-      </ul>
     </div>
   );
 }
