@@ -16,7 +16,10 @@ export type Church = {
   minister: string;
   phone?: string;
   email?: string;
+  /** The church's own site, where it has one. */
+  website?: string;
   image: string;
+  /** May be empty: better a shorter page than an invented one. */
   description: string;
   serviceTimes: { day: string; time: string; label: string }[];
   facilities: Facility[];

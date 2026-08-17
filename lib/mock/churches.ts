@@ -1,5 +1,17 @@
 import type { Church } from "@/lib/types";
 
+/**
+ * Every field here is either supplied by the circuit or traceable to a public
+ * source — the Methodist Church's own directory (methodist.org.uk/findachurch),
+ * the church's own website, or the circuit's Sept–Nov 2026 preaching plan,
+ * which is the authority for service times.
+ *
+ * Where nothing could be verified the field is left empty rather than filled
+ * in. A church page with fewer facts is not a problem; a church page that
+ * promises step-free access, a toddler group or a phone number that turns out
+ * not to exist sends someone on a wasted journey. Staff can fill the gaps in
+ * Sanity Studio, where they know the answers.
+ */
 export const churches: Church[] = [
   {
     slug: "cann-hall",
@@ -8,15 +20,13 @@ export const churches: Church[] = [
     address: "296 Cann Hall Road, Leytonstone",
     postcode: "E11 3NN",
     minister: "Rev Mike Long",
-    phone: "020 8555 0101",
-    email: "cannhall@forestcircuit.co.uk",
+    phone: "020 8220 1221", // methodist.org.uk/findachurch/cann-hall-road
+    email: "mike.long@methodist.org.uk",
     image: "/images/cann-hall.jpg",
-    description:
-      "A warm, welcoming congregation at the heart of Cann Hall, with a lively toddler group and a well-used hall for the local community.",
+    description: "",
     serviceTimes: [{ day: "Sunday", time: "09:00", label: "Morning Worship" }],
-    facilities: ["Wheelchair access", "Hall hire", "Toddler group", "Parking"],
-    hallHireInfo:
-      "Our hall seats up to 80 and is available for community groups, birthday parties and classes. Kitchen and parking included.",
+    facilities: [],
+    hallHireInfo: "",
     lat: 51.5575068,
     lng: 0.0162585,
   },
@@ -27,18 +37,12 @@ export const churches: Church[] = [
     address: "274 High Road, Leyton",
     postcode: "E10 5PW",
     minister: "Rev Stephanie Njeru",
-    phone: "020 8555 0102",
-    email: "leytontrinity@forestcircuit.co.uk",
+    email: "stephanie.njeru@methodist.org.uk",
     image: "/images/leyton-trinity.jpg",
-    description:
-      "Leyton Trinity has served the High Road community for generations, with a strong food bank ministry and accessible worship space.",
-    serviceTimes: [
-      { day: "Sunday", time: "11:00", label: "Holy Communion" },
-      { day: "Wednesday", time: "12:00", label: "Midweek Prayer" },
-    ],
-    facilities: ["Wheelchair access", "Food bank", "Hearing loop", "Hall hire"],
-    hallHireInfo:
-      "A bright, flexible hall in the centre of Leyton, popular with local support groups and after-school clubs.",
+    description: "",
+    serviceTimes: [{ day: "Sunday", time: "11:00", label: "Morning Worship" }],
+    facilities: [],
+    hallHireInfo: "",
     lat: 51.5601,
     lng: -0.0089,
   },
@@ -49,17 +53,16 @@ export const churches: Church[] = [
     address: "578 High Road, Leytonstone",
     postcode: "E11 3DA",
     minister: "Rev Mike Long",
-    phone: "020 8555 0103",
-    email: "leytonstone@forestcircuit.co.uk",
+    email: "church@leytonstonemethodistchurch.org",
+    website: "https://leytonstonemethodistchurch.org",
     image: "/images/leytonstone.jpg",
-    description:
-      "A family-friendly church on the High Road offering Sunday worship, a youth programme and space for community hire.",
-    serviceTimes: [{ day: "Sunday", time: "11:00", label: "Family Worship" }],
-    facilities: ["Wheelchair access", "Youth programme", "Hall hire", "Parking"],
-    hallHireInfo:
-      "Main hall and a smaller meeting room, both available for weekday and weekend hire. Enquire for current availability.",
+    description: "",
+    serviceTimes: [{ day: "Sunday", time: "11:00", label: "Morning Worship" }],
+    // The church's own site takes bookings for the building.
+    facilities: ["Hall hire"],
+    hallHireInfo: "The church takes bookings for events and tabletop sales through its own website.",
     lat: 51.5657106,
-    lng: 0.0106050,
+    lng: 0.010605,
   },
   {
     slug: "lighthouse-walthamstow",
@@ -68,17 +71,15 @@ export const churches: Church[] = [
     address: "120 Markhouse Road, Walthamstow",
     postcode: "E17 8BQ",
     minister: "Rev Stephanie Njeru",
-    phone: "020 8555 0104",
-    email: "lighthouse@forestcircuit.co.uk",
+    email: "stephanie.njeru@methodist.org.uk",
+    website: "https://www.lighthousemethodist.org.uk",
     image: "/images/lighthouse.jpg",
+    // Opening date and listed status per Historic England (list entry 1391928).
     description:
-      "Lighthouse is a diverse, multicultural congregation known for its music ministry and open-door community welcome.",
-    serviceTimes: [
-      { day: "Sunday", time: "11:00", label: "Sunday Celebration" },
-      { day: "Friday", time: "18:30", label: "Youth Group" },
-    ],
-    facilities: ["Wheelchair access", "Youth programme", "Toddler group"],
-    hallHireInfo: "Community room available for local groups; contact the church office to arrange a visit.",
+      "A Grade II listed church on Markhouse Road, open since 1893 and known locally for the lantern tower that gives it its name.",
+    serviceTimes: [{ day: "Sunday", time: "11:00", label: "Morning Worship" }],
+    facilities: [],
+    hallHireInfo: "",
     lat: 51.5760404,
     lng: -0.0300766,
   },
@@ -89,14 +90,15 @@ export const churches: Church[] = [
     address: "260 High Road, Loughton",
     postcode: "IG10 1RB",
     minister: "Rev Sue Creighton",
-    phone: "020 8555 0105",
-    email: "loughton@forestcircuit.co.uk",
+    phone: "020 8502 3071", // loughtonmethodist.org.uk/visit
+    email: "administrator@loughtonmethodist.org.uk",
+    website: "https://www.loughtonmethodist.org.uk",
     image: "/images/loughton.jpg",
     description:
-      "A well-established congregation on Loughton High Road with strong ties to local schools and community groups.",
+      "A church on Loughton High Road with an office open weekday mornings and limited parking at the rear, including two accessible bays.",
     serviceTimes: [{ day: "Sunday", time: "10:30", label: "Morning Worship" }],
-    facilities: ["Wheelchair access", "Hall hire", "Parking", "Hearing loop"],
-    hallHireInfo: "Large hall with stage, plus two smaller rooms, all fully accessible and available for hire.",
+    facilities: ["Hall hire", "Parking"],
+    hallHireInfo: "Rooms are available to hire; the church office can be reached on weekdays between 9.30am and 3.30pm.",
     lat: 51.6496245,
     lng: 0.0566101,
   },
@@ -107,14 +109,12 @@ export const churches: Church[] = [
     address: "Mannock Drive, Loughton",
     postcode: "IG10 2JD",
     minister: "Rev Sue Creighton",
-    phone: "020 8555 0106",
-    email: "trinitydebden@forestcircuit.co.uk",
     image: "/images/trinity-debden.jpg",
-    description:
-      "A quieter, reflective congregation with a strong pastoral care network and monthly community lunches.",
-    serviceTimes: [{ day: "Sunday", time: "10:30", label: "Holy Communion" }],
-    facilities: ["Wheelchair access", "Parking"],
-    hallHireInfo: "Small hall suitable for meetings and classes of up to 30 people.",
+    // Shared congregation per the Victoria County History of Essex (vol 4).
+    description: "A joint Anglican and Methodist congregation serving the Debden estate, with all-age and café-style worship through the year.",
+    serviceTimes: [{ day: "Sunday", time: "10:30", label: "Morning Worship" }],
+    facilities: [],
+    hallHireInfo: "",
     lat: 51.6549,
     lng: 0.0833,
   },
@@ -125,17 +125,12 @@ export const churches: Church[] = [
     address: "Shernhall Street, Walthamstow",
     postcode: "E17 9HX",
     minister: "Rev Kong Ching Hii",
-    phone: "020 8555 0107",
-    email: "shernhall@forestcircuit.co.uk",
+    email: "kongching.hii@methodist.org.uk",
     image: "/images/shern-hall.jpg",
-    description:
-      "Shern Hall is one of the circuit's largest congregations, home to a thriving youth programme and community food bank.",
-    serviceTimes: [
-      { day: "Sunday", time: "11:00", label: "Morning Worship" },
-      { day: "Sunday", time: "18:00", label: "Evening Reflection" },
-    ],
-    facilities: ["Wheelchair access", "Hall hire", "Youth programme", "Food bank", "Parking"],
-    hallHireInfo: "Multiple spaces available, from the main hall (seats 150) to small meeting rooms. Regular hirers welcome.",
+    description: "",
+    serviceTimes: [{ day: "Sunday", time: "11:00", label: "Morning Worship" }],
+    facilities: [],
+    hallHireInfo: "",
     lat: 51.5825842,
     lng: -0.0036702,
   },
@@ -143,17 +138,16 @@ export const churches: Church[] = [
     slug: "south-chingford",
     name: "South Chingford Methodist Church",
     area: "Chingford",
-    address: "New Road, Chingford",
+    address: "3 New Road, Chingford",
     postcode: "E4 9EU",
-    minister: "",
-    phone: "020 8555 0108",
-    email: "southchingford@forestcircuit.co.uk",
+    minister: "Rev Mike Long", // methodist.org.uk/findachurch/new-road-south-chingford
+    phone: "020 8220 1221",
+    email: "mike.long@methodist.org.uk",
     image: "/images/south-chingford.jpg",
-    description:
-      "South Chingford welcomes visitors of all backgrounds to a friendly Sunday service and a busy weekly toddler group.",
+    description: "",
     serviceTimes: [{ day: "Sunday", time: "10:30", label: "Morning Worship" }],
-    facilities: ["Wheelchair access", "Toddler group", "Hall hire"],
-    hallHireInfo: "Hall and kitchen available for hire, popular with local classes and celebrations.",
+    facilities: [],
+    hallHireInfo: "",
     lat: 51.6168,
     lng: -0.0147,
   },
@@ -164,14 +158,15 @@ export const churches: Church[] = [
     address: "82 Winchester Road, Highams Park",
     postcode: "E4 9JP",
     minister: "Rev Stephanie Njeru",
-    phone: "020 8555 0109",
-    email: "winchesterroad@forestcircuit.co.uk",
+    phone: "020 8531 8663", // premises warden, winchesterroadchurch.org.uk
+    email: "admin@winchesterroadchurch.org.uk",
+    website: "https://winchesterroadchurch.org.uk",
     image: "/images/winchester-road.jpg",
     description:
-      "A neighbourhood church in Highams Park with an active seniors' fellowship and a well-loved community garden.",
+      "Young people join the first part of the service before their own groups. The church also hosts Beavers, Cubs and Scouts, Rainbows, Brownies, Guides and Rangers, and a Sunday Lunch Club open to all on the first Sunday of the month.",
     serviceTimes: [{ day: "Sunday", time: "10:30", label: "Morning Worship" }],
-    facilities: ["Wheelchair access", "Hall hire"],
-    hallHireInfo: "Ground-floor hall, step-free access, available weekdays and weekends.",
+    facilities: ["Hall hire", "Youth programme"],
+    hallHireInfo: "Hall bookings are handled by the church's lettings manager.",
     lat: 51.6038039,
     lng: -0.0031947,
   },
@@ -182,14 +177,13 @@ export const churches: Church[] = [
     address: "Derby Road, South Woodford",
     postcode: "E18 2PU",
     minister: "Rev Kong Ching Hii",
-    phone: "020 8555 0110",
-    email: "woodford@forestcircuit.co.uk",
+    email: "kongching.hii@methodist.org.uk",
+    website: "https://www.woodfordmethodistchurch.org.uk",
     image: "/images/woodford.jpg",
-    description:
-      "Woodford Methodist Church combines traditional worship with an active outreach programme across South Woodford.",
+    description: "Regular activities include Messy Church, a community lunch and the Boys' Brigade.",
     serviceTimes: [{ day: "Sunday", time: "10:30", label: "Morning Worship" }],
-    facilities: ["Wheelchair access", "Hall hire", "Parking", "Youth programme"],
-    hallHireInfo: "Spacious hall with modern kitchen, regularly hired by community and youth organisations.",
+    facilities: ["Youth programme"],
+    hallHireInfo: "",
     lat: 51.5994756,
     lng: 0.0195111,
   },
@@ -206,7 +200,7 @@ export const churches: Church[] = [
     description:
       "Wanstead Methodist Church stopped holding Sunday services a few years back, but the building never went quiet — it's now a busy community hub, home to The Wanstead Curtain theatre company and a regular venue for rehearsals, classes and local groups. Five minutes' walk from Snaresbrook station.",
     serviceTimes: [],
-    facilities: ["Wheelchair access", "Hall hire", "Parking"],
+    facilities: ["Hall hire", "Parking"],
     hallHireInfo:
       "A main hall with a stage end, plus smaller additional rooms and a kitchen/servery, available for rehearsals, classes, committees, workshops and more. This is a no-alcohol venue and we're unable to take birthday party bookings. Contact David Bishop (Operations) to enquire.",
     lat: 51.582154,

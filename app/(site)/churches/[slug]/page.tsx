@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Clock, Mail, Phone, MapPin, Check } from "lucide-react";
+import { Clock, Mail, Phone, MapPin, Check, Globe } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { getChurch, getChurches } from "@/lib/content";
@@ -120,27 +120,34 @@ export default async function ChurchDetailPage({ params }: { params: Promise<{ s
             </section>
           )}
 
-          <section aria-labelledby="facilities-heading" className="mb-10">
-            <h2 id="facilities-heading" style={{ fontSize: "var(--text-h3)" }} className="mb-4">
-              Facilities
-            </h2>
-            <ul className="flex flex-wrap gap-2">
-              {church.facilities.map((facility) => (
-                <li key={facility}>
-                  <Badge tone="forest">
-                    <Check size={12} className="mr-1 inline" aria-hidden="true" />
-                    {facility}
-                  </Badge>
-                </li>
-              ))}
-            </ul>
-          </section>
+          {/* Only listed where the church has confirmed them — an unverified
+              facilities list is worse than none, since someone may rely on it
+              to decide whether they can get in. */}
+          {church.facilities.length > 0 && (
+            <section aria-labelledby="facilities-heading" className="mb-10">
+              <h2 id="facilities-heading" style={{ fontSize: "var(--text-h3)" }} className="mb-4">
+                Facilities
+              </h2>
+              <ul className="flex flex-wrap gap-2">
+                {church.facilities.map((facility) => (
+                  <li key={facility}>
+                    <Badge tone="forest">
+                      <Check size={12} className="mr-1 inline" aria-hidden="true" />
+                      {facility}
+                    </Badge>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
 
           <section aria-labelledby="hall-hire-heading" className="mb-10 rounded-[10px] bg-forest-100 p-6">
             <h2 id="hall-hire-heading" style={{ fontSize: "var(--text-h3)" }} className="mb-3">
               Hall &amp; hire
             </h2>
-            <p className="mb-4 text-[var(--text-body)]">{church.hallHireInfo}</p>
+            <p className="mb-4 text-[var(--text-body)]">
+              {church.hallHireInfo || "Get in touch to ask what this church has available."}
+            </p>
             <Button href={`/hall-hire?church=${church.slug}`} variant="primary">
               Enquire about hiring this space
             </Button>
@@ -197,11 +204,25 @@ export default async function ChurchDetailPage({ params }: { params: Promise<{ s
             </div>
           )}
           {church.email && (
-            <div className="mb-6">
+            <div className="mb-5">
               <p className="eyebrow mb-1">Email</p>
               <a href={`mailto:${church.email}`} className="flex items-center gap-2 break-all font-semibold text-forest-600">
                 <Mail size={16} className="shrink-0" aria-hidden="true" />
                 {church.email}
+              </a>
+            </div>
+          )}
+          {church.website && (
+            <div className="mb-6">
+              <p className="eyebrow mb-1">Website</p>
+              <a
+                href={church.website}
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-2 break-all font-semibold text-forest-600"
+              >
+                <Globe size={16} className="shrink-0" aria-hidden="true" />
+                {church.website.replace(/^https?:\/\/(www\.)?/, "")}
               </a>
             </div>
           )}

@@ -19,6 +19,12 @@ export const church = defineType({
     defineField({ name: "minister", title: "Minister", type: "string" }),
     defineField({ name: "phone", title: "Phone", type: "string" }),
     defineField({ name: "email", title: "Email", type: "string" }),
+    defineField({
+      name: "website",
+      title: "Church website",
+      type: "url",
+      description: "The church's own site, if it has one. Leave empty otherwise.",
+    }),
     defineField({ name: "image", title: "Cover image", type: "image", options: { hotspot: true } }),
     defineField({ name: "description", title: "Description", type: "text" }),
     defineField({
