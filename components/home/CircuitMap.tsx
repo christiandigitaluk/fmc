@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 
 type Pin = { name: string; slug: string; xPct: number; yPct: number };
 type LabelAlign = "center" | "left" | "right";
@@ -67,15 +66,22 @@ const CHURCH_PINS = withLabelAlign(RAW_PINS);
  * enough to number them. The numbers then key into a list underneath, which
  * is where the tapping happens.
  *
- * The crop shows x 28%-72% and y 8%-92% of the source image, which keeps the
+ * The crop shows x 25%-75% and y 8%-92% of the source image, which keeps the
  * whole green circuit outline (measured at x 30.9%-69.0%, y 10.3%-90.3%)
  * inside frame. Only the horizontal crop sets the scale — the image is
  * sized to the box width — so the generous vertical bounds cost no pin
  * spacing. Expressed as Tailwind classes rather than inline styles so the
  * `lg:` variants can switch the crop off:
- *   width  100/0.44 = 227.27%     left  -(28/44) = -63.64%
+ *   width  100/0.50 = 200%        left  -(25/50) = -50%
  *   height 100/0.84 = 119.05%     top   -(8/84)  =  -9.52%
- *   box aspect (0.44*1600)/(0.84*1180) = 880/1239
+ *   box aspect (0.50*1600)/(0.84*1180) = 1000/1239
+ *
+ * How far to crop is a three-way trade against sharpness: the source is only
+ * 1600px wide, so cropping to half of it leaves 800 source pixels to fill a
+ * ~300px box, which a 3x phone screen renders at ~900 — near enough to 1:1.
+ * Cropping tighter would space the pins further apart but start visibly
+ * upscaling the map. 50% is the point where the pins still clear each other
+ * at 24px and the cartography stays crisp.
  */
 export function CircuitMap() {
   // Only one index is ever "active" (hover previews, click locks it open for
@@ -91,17 +97,18 @@ export function CircuitMap() {
 
   return (
     <div>
-      <div className="relative aspect-[880/1239] w-full overflow-hidden rounded-[14px] lg:aspect-[1600/1180]">
+      <div className="relative aspect-[1000/1239] w-full overflow-hidden rounded-[14px] lg:aspect-[1600/1180]">
         {/* The full artwork, oversized and offset so the crop window above
             frames just the circuit. Pin percentages stay relative to this,
             i.e. to the image itself, so they need no adjusting. */}
-        <div className="absolute left-[-63.64%] top-[-9.52%] h-[119.05%] w-[227.27%] lg:left-0 lg:top-0 lg:h-full lg:w-full">
+        <div className="absolute left-[-50%] top-[-9.52%] h-[119.05%] w-[200%] lg:left-0 lg:top-0 lg:h-full lg:w-full">
           <Image
             src="/images/hero-map.png"
             alt="Map of Forest Circuit's ten Methodist churches across Waltham Forest, Wanstead and Loughton"
             width={1600}
             height={1180}
-            sizes="(min-width: 1024px) 1160px, 230vw"
+            quality={92}
+            sizes="(min-width: 1024px) 1160px, 200vw"
             className="block h-full w-full"
           />
 
@@ -147,22 +154,18 @@ export function CircuitMap() {
         </span>
       </div>
 
-      <ol className="mt-4 grid gap-x-4 gap-y-0.5 sm:grid-cols-2 lg:hidden">
+      {/* A key for the numbered pins, deliberately not links — the section's
+          "View all churches" button is the single route onward from here. */}
+      <ol className="mt-4 grid gap-x-4 gap-y-2 px-1 sm:grid-cols-2 lg:hidden">
         {CHURCH_PINS.map((pin, i) => (
-          <li key={pin.slug}>
-            <Link
-              href={`/churches/${pin.slug}`}
-              className="flex items-center gap-3 rounded-full px-2 py-2.5 text-sm font-semibold text-[var(--text-heading)] no-underline transition-colors hover:bg-forest-100 hover:no-underline focus:outline-none focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2"
-              style={{ outlineColor: "var(--focus-ring)" }}
+          <li key={pin.slug} className="flex items-center gap-3 text-sm font-semibold text-[var(--text-heading)]">
+            <span
+              aria-hidden="true"
+              className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-2 border-ink-900 bg-orange-500 text-[11px] font-bold leading-none text-ink-900"
             >
-              <span
-                aria-hidden="true"
-                className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-2 border-ink-900 bg-orange-500 text-[11px] font-bold leading-none text-ink-900"
-              >
-                {i + 1}
-              </span>
-              {pin.name}
-            </Link>
+              {i + 1}
+            </span>
+            {pin.name}
           </li>
         ))}
       </ol>
