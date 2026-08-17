@@ -33,6 +33,9 @@ const NAV_LINKS: NavItem[] = [
   { href: "/contact", label: "Contact" },
 ];
 
+/** Kept in step with the `drawer-out` animation in globals.css. */
+const DRAWER_EXIT_MS = 200;
+
 const MOBILE_LINKS: SimpleNavItem[] = [
   { href: "/about", label: "About us" },
   { href: "/churches", label: "Find a church" },
@@ -48,15 +51,42 @@ export function Header({ settings }: { settings: SiteSettings }) {
   const [open, setOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [navHidden, setNavHidden] = useState(false);
+  const [drawerClosing, setDrawerClosing] = useState(false);
   const drawerRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const navRef = useRef<HTMLElement>(null);
   const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const drawerOpenRef = useRef(false);
+  const lastScrollYRef = useRef(0);
+  const exitTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  // A link closes the drawer on its way to another page, where the router
+  // scrolls to the top — restoring this page's offset would fight that.
+  const navigatingRef = useRef(false);
 
   useEffect(() => {
     drawerOpenRef.current = open;
   }, [open]);
+
+  useEffect(() => () => {
+    if (exitTimerRef.current) clearTimeout(exitTimerRef.current);
+  }, []);
+
+  /** Let the panel animate out before unmounting, so it slides rather than pops. */
+  function closeDrawer() {
+    if (drawerClosing) return;
+    setDrawerClosing(true);
+    exitTimerRef.current = setTimeout(() => {
+      setDrawerClosing(false);
+      setOpen(false);
+      triggerRef.current?.focus();
+    }, DRAWER_EXIT_MS);
+  }
+
+  /** Closing because we're navigating away: no exit animation, no scroll restore. */
+  function closeDrawerForNavigation() {
+    navigatingRef.current = true;
+    setOpen(false);
+  }
 
   /**
    * The header is 110px on a phone — 13.5% of the screen — so it slides out
@@ -66,7 +96,7 @@ export function Header({ settings }: { settings: SiteSettings }) {
    */
   useEffect(() => {
     const wideScreen = window.matchMedia("(min-width: 1024px)");
-    let lastY = Math.max(0, window.scrollY);
+    lastScrollYRef.current = Math.max(0, window.scrollY);
     let queued = false;
 
     function onScroll() {
@@ -74,10 +104,10 @@ export function Header({ settings }: { settings: SiteSettings }) {
       queued = true;
       requestAnimationFrame(() => {
         queued = false;
-        // Closing the drawer restores the saved scroll offset in one jump;
-        // that isn't the user scrolling, so don't read a direction from it.
+        // Pinning and unpinning the body for the drawer moves the page
+        // without the user scrolling, so never read a direction from it.
         if (drawerOpenRef.current) {
-          lastY = Math.max(0, window.scrollY);
+          lastScrollYRef.current = Math.max(0, window.scrollY);
           return;
         }
         if (wideScreen.matches) {
@@ -86,11 +116,11 @@ export function Header({ settings }: { settings: SiteSettings }) {
         }
         // Clamp: iOS reports negative/overshooting values while rubber-banding.
         const y = Math.min(Math.max(0, window.scrollY), document.body.scrollHeight - window.innerHeight);
-        const delta = y - lastY;
+        const delta = y - lastScrollYRef.current;
         if (Math.abs(delta) < 8) return; // ride out scroll jitter
         // Near the top there's nothing to reclaim, so never hide there.
         setNavHidden(y > 140 && delta > 0);
-        lastY = y;
+        lastScrollYRef.current = y;
       });
     }
 
@@ -120,8 +150,7 @@ export function Header({ settings }: { settings: SiteSettings }) {
 
     function onKeyDown(e: KeyboardEvent) {
       if (e.key === "Escape") {
-        setOpen(false);
-        triggerRef.current?.focus();
+        closeDrawer();
         return;
       }
       if (e.key !== "Tab" || !drawerRef.current) return;
@@ -161,7 +190,25 @@ export function Header({ settings }: { settings: SiteSettings }) {
       body.style.top = "";
       body.style.left = "";
       body.style.right = "";
+
+      if (navigatingRef.current) {
+        // Heading elsewhere — leave the scroll position to the router.
+        navigatingRef.current = false;
+        return;
+      }
+
+      // Unpinning drops the page to the top, so it has to be put back. The
+      // global `scroll-behavior: smooth` would animate that journey, which
+      // reads as the page lurching about after the menu closes, so force the
+      // jump to be instant.
+      const root = document.documentElement;
+      const previousBehavior = root.style.scrollBehavior;
+      root.style.scrollBehavior = "auto";
       window.scrollTo(0, scrollY);
+      root.style.scrollBehavior = previousBehavior;
+      // Land the auto-hide handler on the restored offset so it reads no
+      // movement here and leaves the header exactly as the user left it.
+      lastScrollYRef.current = scrollY;
     };
   }, [open]);
 
@@ -275,7 +322,7 @@ export function Header({ settings }: { settings: SiteSettings }) {
             aria-expanded={open}
             aria-controls="mobile-nav-drawer"
             aria-label={open ? "Close menu" : "Open menu"}
-            onClick={() => setOpen((o) => !o)}
+            onClick={() => (open ? closeDrawer() : setOpen(true))}
           >
             {open ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
           </button>
@@ -285,11 +332,11 @@ export function Header({ settings }: { settings: SiteSettings }) {
       {open && (
         <div className="fixed inset-0 z-50 xl:hidden">
           <div
-            className="absolute inset-0 touch-none overscroll-contain bg-ink-900/60"
-            onClick={() => {
-              setOpen(false);
-              triggerRef.current?.focus();
-            }}
+            className={cn(
+              "absolute inset-0 touch-none overscroll-contain bg-ink-900/60",
+              drawerClosing && "backdrop-out"
+            )}
+            onClick={closeDrawer}
             aria-hidden="true"
           />
           <div
@@ -298,7 +345,10 @@ export function Header({ settings }: { settings: SiteSettings }) {
             role="dialog"
             aria-modal="true"
             aria-label="Mobile navigation"
-            className="drawer-panel absolute right-0 top-0 flex h-full w-[86%] max-w-sm flex-col overflow-y-auto overflow-x-hidden overscroll-contain rounded-l-[28px] border-l-2 border-ink-900 bg-[var(--surface-page)] p-6 shadow-[var(--shadow-lift)]"
+            className={cn(
+              "absolute right-0 top-0 flex h-full w-[86%] max-w-sm flex-col overflow-y-auto overflow-x-hidden overscroll-contain rounded-l-[28px] border-l-2 border-ink-900 bg-[var(--surface-page)] p-6 shadow-[var(--shadow-lift)]",
+              drawerClosing ? "drawer-panel-out" : "drawer-panel"
+            )}
           >
             <div
               aria-hidden="true"
@@ -314,10 +364,7 @@ export function Header({ settings }: { settings: SiteSettings }) {
               <button
                 type="button"
                 aria-label="Close menu"
-                onClick={() => {
-                  setOpen(false);
-                  triggerRef.current?.focus();
-                }}
+                onClick={closeDrawer}
                 className="sticker flex h-10 w-10 items-center justify-center rounded-[12px] bg-cream-50 text-ink-900 transition-[transform,background-color] duration-200 ease-[cubic-bezier(.22,.61,.36,1)] hover:rotate-3 hover:bg-orange-500 focus:outline-none focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2"
                 style={{ outlineColor: "var(--focus-ring)" }}
               >
@@ -329,7 +376,7 @@ export function Header({ settings }: { settings: SiteSettings }) {
                 <li key={link.href} className="drawer-link" style={{ animationDelay: `${80 + i * 45}ms` }}>
                   <Link
                     href={link.href}
-                    onClick={() => setOpen(false)}
+                    onClick={closeDrawerForNavigation}
                     className="block rounded-full px-4 py-3 text-lg font-bold text-[var(--text-heading)] no-underline transition-colors hover:bg-forest-100"
                   >
                     {link.label}
@@ -338,7 +385,7 @@ export function Header({ settings }: { settings: SiteSettings }) {
               ))}
             </ul>
             <div className="drawer-link relative mt-8" style={{ animationDelay: `${80 + MOBILE_LINKS.length * 45}ms` }}>
-              <Button href="/churches" variant="primary" size="md" className="w-full" onClick={() => setOpen(false)}>
+              <Button href="/churches" variant="primary" size="md" className="w-full" onClick={closeDrawerForNavigation}>
                 Find a church near you
               </Button>
             </div>

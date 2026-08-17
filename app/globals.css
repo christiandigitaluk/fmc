@@ -308,6 +308,45 @@
   animation: drawer-in 320ms var(--ease-brand) both;
 }
 
+/* Closing mirrors the entrance, so the panel slides away instead of
+   vanishing. Kept in step with DRAWER_EXIT_MS in Header.tsx. */
+@keyframes drawer-out {
+  from {
+    transform: translateX(0) rotate(0deg);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(24px) rotate(1deg);
+    opacity: 0;
+  }
+}
+
+@keyframes backdrop-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.drawer-panel-out {
+  animation: drawer-out 200ms var(--ease-brand) both;
+}
+
+.backdrop-out {
+  animation: backdrop-out 200ms var(--ease-brand) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drawer-panel,
+  .drawer-panel-out,
+  .backdrop-out,
+  .drawer-link {
+    animation-duration: 1ms;
+  }
+}
+
 .drawer-link {
   animation: link-in 320ms var(--ease-brand) both;
 }
