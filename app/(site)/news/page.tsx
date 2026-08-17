@@ -28,7 +28,6 @@ export default async function NewsPage() {
             key={post.slug}
             href={`/news/${post.slug}`}
             image={post.coverImage}
-            imageOverlay
             eyebrow={new Date(post.publishedAt).toLocaleDateString("en-GB", {
               day: "numeric",
               month: "long",

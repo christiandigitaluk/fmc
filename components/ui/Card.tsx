@@ -56,8 +56,12 @@ export function Card({ eyebrow, title, image, imageOverlay, footer, href, tone =
             <div
               className="absolute inset-0"
               style={{
+                // Evenly spaced stops following a single quadratic falloff.
+                // The previous hand-picked stops changed slope by up to 59%
+                // from one band to the next, and the eye reads an abrupt
+                // change in a gradient's rate as a line across the image.
                 background:
-                  "linear-gradient(to top, rgba(16,25,15,0.62) 0%, rgba(16,25,15,0.42) 22%, rgba(16,25,15,0.24) 42%, rgba(16,25,15,0.12) 60%, rgba(16,25,15,0.04) 78%, rgba(16,25,15,0) 100%)",
+                  "linear-gradient(to top, rgba(16,25,15,0.62) 0%, rgba(16,25,15,0.502) 10%, rgba(16,25,15,0.397) 20%, rgba(16,25,15,0.304) 30%, rgba(16,25,15,0.223) 40%, rgba(16,25,15,0.155) 50%, rgba(16,25,15,0.099) 60%, rgba(16,25,15,0.056) 70%, rgba(16,25,15,0.025) 80%, rgba(16,25,15,0.006) 90%, rgba(16,25,15,0) 100%)",
               }}
               aria-hidden="true"
             />
