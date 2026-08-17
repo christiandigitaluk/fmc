@@ -26,7 +26,7 @@ const MINISTERS: Person[] = [
 
 const LAY_STAFF: Person[] = [
   { name: "David Bishop", role: "Operations Manager", phone: "07458 002275", email: "operations@forestcircuit.org.uk" },
-  { name: "Bradley McWhinney", role: "Communications Officer", email: "communications@forestcircuit.org.uk" },
+  { name: "Bradley M.", role: "Communications Officer", email: "communications@forestcircuit.org.uk" },
   { name: "Zak Njeru", role: "Pastoral Worker", phone: "07458 002244", email: "pastoralmethodist@gmail.com" },
   { name: "Valerie Rogers", role: "Finance Officer", phone: "07832 335641", email: "valerie.rogers@forestcircuit.org.uk" },
 ];
