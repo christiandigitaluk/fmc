@@ -82,9 +82,9 @@ export default function StaffPage() {
         The officers, ministers and lay staff who support the ten churches of Forest Circuit day to day.
       </p>
 
-      <PersonSection title="Circuit officers" people={OFFICERS} />
       <PersonSection title="Circuit staff" people={MINISTERS} />
       <PersonSection title="Lay circuit staff" people={LAY_STAFF} />
+      <PersonSection title="Circuit officers" people={OFFICERS} />
     </div>
   );
 }
