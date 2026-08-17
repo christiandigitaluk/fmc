@@ -1,7 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
+import { MousePointer2 } from "lucide-react";
+import { cn } from "@/lib/cn";
 
 type Pin = { name: string; slug: string; xPct: number; yPct: number };
 type LabelAlign = "center" | "left" | "right";
@@ -93,6 +95,14 @@ export function CircuitMap() {
   const [hoverIndex, setHoverIndex] = useState<number | null>(null);
   const [lockedIndex, setLockedIndex] = useState<number | null>(null);
   const activeIndex = hoverIndex ?? lockedIndex;
+  // Nothing about a plain dot says "point at me", so a nudge sits on the map
+  // until it has been taken, then retires rather than nagging.
+  const [hintTaken, setHintTaken] = useState(false);
+
+  useEffect(() => {
+    if (activeIndex !== null) setHintTaken(true);
+  }, [activeIndex]);
+
   const activePin = activeIndex !== null ? CHURCH_PINS[activeIndex] : null;
   const labelAbove = activePin ? activePin.yPct > 68 : false;
   const labelTranslateX =
@@ -166,6 +176,20 @@ export function CircuitMap() {
             draggable={false}
             className="pointer-events-none h-16 w-16 select-none [-webkit-touch-callout:none] sm:h-20 sm:w-20"
           />
+        </span>
+
+        {/* Desktop only: below lg the pins are inert and the numbered key
+            underneath does this job. Hidden from assistive tech, which gets
+            each church from the pins' own labels and can't hover anyway. */}
+        <span
+          aria-hidden="true"
+          className={cn(
+            "sticker pointer-events-none absolute bottom-5 left-5 z-10 hidden -rotate-2 items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-bold text-ink-900 transition-all duration-500 ease-[cubic-bezier(.22,.61,.36,1)] motion-reduce:transition-none lg:flex",
+            hintTaken ? "translate-y-1 opacity-0" : "opacity-100"
+          )}
+        >
+          <MousePointer2 size={15} aria-hidden="true" />
+          Hover a dot to meet a church
         </span>
       </div>
 
