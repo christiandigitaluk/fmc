@@ -32,6 +32,24 @@ const SHARE_IMAGE = "/images/og-share.png";
 const SITE_DESCRIPTION =
   "Forest Methodist Circuit is a team ministry of ten churches across East London and Essex. Find a church, worship with us, and get involved in your community.";
 
+/**
+ * Link-preview scrapers (WhatsApp, iMessage, Slack...) fetch og:image as a
+ * standalone request — a relative path only works if it happens to resolve
+ * against whichever domain the scraper reaches. Before forestcircuit.co.uk
+ * is cut over to this app, that domain still serves the old site and 404s
+ * on this path, so the image needs to be resolved against whatever host is
+ * actually serving this build.
+ *
+ * Vercel sets VERCEL_PROJECT_PRODUCTION_URL at build time to the project's
+ * current production domain — right now that's the vercel.app alias, and it
+ * becomes forestcircuit.co.uk automatically the day that domain is attached
+ * as Production, with no code change needed. Read at build time (not from
+ * request headers) so pages stay statically generated rather than forced
+ * dynamic on every request.
+ */
+const SITE_ORIGIN = `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL ?? "www.forestcircuit.co.uk"}`;
+const SHARE_IMAGE_URL = `${SITE_ORIGIN}${SHARE_IMAGE}`;
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.forestcircuit.co.uk"),
   title: {
@@ -46,14 +64,14 @@ export const metadata: Metadata = {
     title: "Forest Circuit | Methodist churches across Waltham Forest, Wanstead and Loughton",
     description: SITE_DESCRIPTION,
     url: "/",
-    images: [{ url: SHARE_IMAGE, width: 1200, height: 630, alt: "Forest Methodist Circuit" }],
+    images: [{ url: SHARE_IMAGE_URL, width: 1200, height: 630, alt: "Forest Methodist Circuit" }],
     locale: "en_GB",
   },
   twitter: {
     card: "summary_large_image",
     title: "Forest Circuit | Methodist churches across Waltham Forest, Wanstead and Loughton",
     description: SITE_DESCRIPTION,
-    images: [SHARE_IMAGE],
+    images: [SHARE_IMAGE_URL],
   },
 };
 
