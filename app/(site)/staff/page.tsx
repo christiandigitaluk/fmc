@@ -13,7 +13,7 @@ type Person = { name: string; role: string; email: string; phone?: string; dayOf
 const OFFICERS: Person[] = [
   { name: "Florestine Corbett", role: "Circuit Steward", email: "flo_corbett@hotmail.com" },
   { name: "Eric Aidoo", role: "Circuit Steward", email: "aidoobaker@yahoo.com" },
-  { name: "John Marange", role: "Safeguarding Officer", email: "safeguarding@forestcircuit.org.uk" },
+  { name: "John Marange", role: "Safeguarding Officer", email: "forestsafeguarding@outlook.com" },
   { name: "Dallion Roye", role: "Meeting Secretary", email: "d.roye818@btinternet.com" },
 ];
 

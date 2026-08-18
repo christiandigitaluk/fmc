@@ -86,7 +86,7 @@ export default function SafeguardingPage() {
 
       <div className="mb-10 rounded-[10px] border-2 border-ink-900 bg-forest-100 p-5">
         <p className="text-[var(--text-body)]">
-          <strong>Rev Stephanie Njeru</strong> is the Safeguarding Coordinator for Forest Circuit.
+          <strong>John Marange</strong> is the Safeguarding Officer for Forest Circuit.
         </p>
         <a
           href="mailto:forestsafeguarding@outlook.com"
