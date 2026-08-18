@@ -18,8 +18,8 @@ const PRINCIPLES = [
 
 const POLICY_DOCUMENTS = [
   {
-    label: "Forest Circuit Safeguarding Policy 2020-21",
-    href: "http://uploads.documents.cimpress.io/v1/uploads/a724f1f2-f054-40c7-8ee4-94204deb8604~110/original?tenant=vbu-digital",
+    label: "Forest Circuit Safeguarding Policy 2025-26",
+    href: "/documents/safeguarding-policy-2025-26.pdf",
   },
   {
     label: "Taking Children Off Site Policy",
