@@ -35,7 +35,7 @@ const RESOURCES: Resource[] = [
     title: "Safeguarding policy 2025–26",
     description: "The circuit's full safeguarding policy, roles and responsibilities.",
     href: "/documents/safeguarding-policy-2025-26.pdf",
-    size: "PDF · 131 KB",
+    size: "PDF · 590 KB",
   },
 ];
 
