@@ -3,6 +3,7 @@ import { CalendarDays, MapPin } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
 import { IcsExportButton } from "@/components/events/IcsExportButton";
 import { CATEGORY_TONE } from "@/lib/eventCategoryStyles";
+import { eventLocation } from "@/lib/eventLocation";
 import type { CircuitEvent, Church } from "@/lib/types";
 
 export function EventCard({ event, church }: { event: CircuitEvent; church?: Church }) {
@@ -29,14 +30,14 @@ export function EventCard({ event, church }: { event: CircuitEvent; church?: Chu
             <span className="flex items-center gap-1.5">
               <MapPin size={16} aria-hidden="true" />
               <Link href={`/churches/${church.slug}`} className="text-forest-600">
-                {event.location ?? church.name}
+                {eventLocation(event, church)}
               </Link>
             </span>
           )}
         </div>
       </div>
       <div className="flex shrink-0 flex-col items-start gap-2 sm:items-end">
-        <IcsExportButton event={event} churchName={church?.name ?? "Forest Circuit"} />
+        <IcsExportButton event={event} location={eventLocation(event, church)} />
         {event.ticketUrl && (
           <a
             href={event.ticketUrl}

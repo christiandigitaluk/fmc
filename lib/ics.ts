@@ -4,7 +4,7 @@ function toIcsDate(dateTime: string): string {
   return dateTime.replace(/[-:]/g, "").replace(/\.\d+/, "") + (dateTime.includes("T") ? "00" : "");
 }
 
-export function buildIcs(event: CircuitEvent, churchName: string): string {
+export function buildIcs(event: CircuitEvent, location: string): string {
   const start = toIcsDate(event.startDateTime);
   const end = toIcsDate(event.endDateTime);
   const now = toIcsDate(new Date().toISOString().slice(0, 19));
@@ -22,7 +22,7 @@ export function buildIcs(event: CircuitEvent, churchName: string): string {
     `DTSTART:${start}`,
     `DTEND:${end}`,
     `SUMMARY:${event.title}`,
-    `LOCATION:${event.location ?? churchName}`,
+    `LOCATION:${location}`,
     `DESCRIPTION:${event.description.replace(/\n/g, "\\n")}`,
     "END:VEVENT",
     "END:VCALENDAR",

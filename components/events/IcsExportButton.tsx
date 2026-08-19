@@ -4,9 +4,9 @@ import { CalendarPlus } from "lucide-react";
 import { buildIcs } from "@/lib/ics";
 import type { CircuitEvent } from "@/lib/types";
 
-export function IcsExportButton({ event, churchName }: { event: CircuitEvent; churchName: string }) {
+export function IcsExportButton({ event, location }: { event: CircuitEvent; location: string }) {
   function handleDownload() {
-    const ics = buildIcs(event, churchName);
+    const ics = buildIcs(event, location);
     const blob = new Blob([ics], { type: "text/calendar;charset=utf-8" });
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
