@@ -9,13 +9,15 @@ export interface SelectProps {
   label?: string;
   options?: SelectOption[];
   value?: string;
+  /** Uncontrolled initial selection. Use instead of `value` when there is no onChange. */
+  defaultValue?: string;
   name?: string;
   onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   className?: string;
   ariaLabel?: string;
 }
 
-export function Select({ label, options = [], value, name, onChange, className, ariaLabel }: SelectProps) {
+export function Select({ label, options = [], value, defaultValue, name, onChange, className, ariaLabel }: SelectProps) {
   const id = useId();
 
   return (
@@ -29,6 +31,7 @@ export function Select({ label, options = [], value, name, onChange, className, 
         id={id}
         name={name}
         value={value}
+        defaultValue={defaultValue}
         onChange={onChange}
         aria-label={!label ? ariaLabel : undefined}
         className={cn(

@@ -36,7 +36,7 @@ export function HallHireForm({ churches, defaultChurchSlug }: { churches: Church
         label="Which church would you like to hire?"
         name="churchSlug"
         options={churchOptions}
-        value={defaultChurchSlug}
+        defaultValue={defaultChurchSlug}
       />
 
       <div className="grid gap-6 sm:grid-cols-2">
