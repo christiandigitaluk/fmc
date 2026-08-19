@@ -23,6 +23,7 @@ const NAV_LINKS: NavItem[] = [
     items: [
       { href: "/about", label: "About us" },
       { href: "/staff", label: "Circuit staff" },
+      { href: "/resources", label: "Resources" },
       { href: "/jobs", label: "Jobs" },
     ],
   },
@@ -40,6 +41,7 @@ const DRAWER_EXIT_MS = 200;
 const MOBILE_LINKS: SimpleNavItem[] = [
   { href: "/about", label: "About us" },
   { href: "/staff", label: "Circuit staff" },
+  { href: "/resources", label: "Resources" },
   { href: "/churches", label: "Find a church" },
   { href: "/preaching-plan", label: "Preaching plan" },
   { href: "/events", label: "Events" },
