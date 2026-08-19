@@ -51,7 +51,7 @@ export const events: CircuitEvent[] = [
   {
     slug: "evangelism-workshop-emma-nash",
     title: "Worship and Evangelism Workshop with Emma Nash",
-    category: "Community",
+    category: "Worship",
     startDateTime: "2026-09-06T10:30:00",
     endDateTime: "2026-09-06T14:00:00",
     churchSlug: "loughton",
