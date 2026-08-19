@@ -48,4 +48,14 @@ export const events: CircuitEvent[] = [
     description:
       "A celebration of worship and community marking 150 years, featuring the Salway Singers, Indoor Pigeon, Shern Hall Steel Band, Gospel Choir, a piano recital from Debbie Hii, gospel soloist Londiwe Dhlomo-Dlamini, dance, and Crescendo Music School. Free entry, voluntary donations welcome — all proceeds go to local charities.",
   },
+  {
+    slug: "evangelism-workshop-emma-nash",
+    title: "Worship and Evangelism Workshop with Emma Nash",
+    category: "Community",
+    startDateTime: "2026-09-06T10:30:00",
+    endDateTime: "2026-09-06T14:00:00",
+    churchSlug: "loughton",
+    description:
+      "Worship at 10.30am with visiting preacher Emma Nash, from the Methodist Connexional Evangelism and Growth team, followed at 12 by a workshop Emma is leading. Emma says: “Bring your packed lunch and gather with others for an evangelism workshop that’s practical, down-to-earth, and doesn’t assume we’re all happy preaching to strangers. I will help us all explore how we meet with God, how to have simple faith conversations, and how we might weave faith-sharing into church activities we’re already doing.”",
+  },
 ];
