@@ -7,13 +7,13 @@ import type { SiteSettings } from "@/lib/types";
 const FOOTER_LINKS = [
   { href: "/about", label: "About us" },
   { href: "/staff", label: "Circuit staff" },
-  { href: "/resources", label: "Resources" },
   { href: "/churches", label: "Find a church" },
   { href: "/preaching-plan", label: "Preaching plan" },
   { href: "/events", label: "Events" },
   { href: "/news", label: "News" },
   { href: "/hall-hire", label: "Hall hire" },
   { href: "/jobs", label: "Jobs" },
+  { href: "/resources", label: "Resources" },
   { href: "/contact", label: "Contact" },
 ];
 
