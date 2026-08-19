@@ -39,9 +39,10 @@ export default function AboutPage() {
       <div className="rounded-[10px] border-2 border-ink-900 bg-forest-100 p-6">
         <p className="eyebrow mb-3">Circuit mission statement</p>
         <p className="text-[var(--text-body)]">
-          Forest Circuit exists to further God&apos;s kingdom by enabling and supporting local churches in their
-          discipleship and mission; resourcing local churches under the power of the Holy Spirit to function as
-          effective worship, witness, and welfare centres.
+          The London Forest Methodist Circuit is committed to furthering God&apos;s kingdom by: enabling and
+          supporting local churches in the growth of their discipleship and mission; resourcing local churches under
+          the power of the Holy Spirit to function as effective centres for worship, witness and community
+          wellbeing; and seeking new developments in mission between and beyond the existing churches.
         </p>
       </div>
     </div>
