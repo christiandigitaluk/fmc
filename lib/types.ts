@@ -42,7 +42,15 @@ export type Post = {
   tags: string[];
 };
 
-export type EventCategory = "Community" | "Worship" | "Youth" | "Special Services";
+export const EVENT_CATEGORIES = [
+  "Community",
+  "Worship",
+  "Youth",
+  "Special Services",
+  "Talks & Learning",
+] as const;
+
+export type EventCategory = (typeof EVENT_CATEGORIES)[number];
 
 export type EventRecurrence = {
   /** Which occurrence of the weekday in the month: 1st, 2nd, 3rd, 4th or 5th. */

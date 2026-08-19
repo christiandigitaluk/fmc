@@ -9,6 +9,7 @@ export const CATEGORY_TONE: Record<EventCategory, BadgeTone> = {
   Worship: "ink",
   Youth: "orange",
   "Special Services": "outline",
+  "Talks & Learning": "sage",
 };
 
 export const CATEGORY_PILL_CLASSES: Record<EventCategory, { active: string; inactive: string }> = {
@@ -27,6 +28,10 @@ export const CATEGORY_PILL_CLASSES: Record<EventCategory, { active: string; inac
   "Special Services": {
     active: "sticker bg-white text-ink-900",
     inactive: "border-2 border-line-200 bg-white text-ink-600 hover:border-ink-900/30",
+  },
+  "Talks & Learning": {
+    active: "sticker bg-forest-100 text-ink-900",
+    inactive: "border-2 border-transparent bg-cream-100 text-ink-600 hover:border-forest-700/30",
   },
 };
 

@@ -1,6 +1,6 @@
 import { cn } from "@/lib/cn";
 
-export type BadgeTone = "forest" | "orange" | "ink" | "outline";
+export type BadgeTone = "forest" | "orange" | "ink" | "outline" | "sage";
 
 export interface BadgeProps {
   tone?: BadgeTone;
@@ -13,6 +13,7 @@ const toneClasses: Record<BadgeTone, string> = {
   orange: "bg-orange-500 text-ink-900",
   ink: "bg-ink-900 text-cream-50",
   outline: "bg-cream-50 text-ink-800",
+  sage: "bg-forest-100 text-ink-900",
 };
 
 export function Badge({ tone = "forest", className, children }: BadgeProps) {

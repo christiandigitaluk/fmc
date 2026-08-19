@@ -1,4 +1,5 @@
 import { defineField, defineType } from "sanity";
+import { EVENT_CATEGORIES } from "@/lib/types";
 
 export const event = defineType({
   name: "event",
@@ -11,7 +12,7 @@ export const event = defineType({
       name: "category",
       title: "Category",
       type: "string",
-      options: { list: ["Community", "Worship", "Youth", "Special Services"] },
+      options: { list: [...EVENT_CATEGORIES] },
       validation: (r) => r.required(),
     }),
     defineField({

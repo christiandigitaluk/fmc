@@ -4,7 +4,7 @@ export const events: CircuitEvent[] = [
   {
     slug: "our-fear-our-hope-prof-anthony-reddie",
     title: "Our Fear, Our Hope with Prof Anthony Reddie",
-    category: "Community",
+    category: "Talks & Learning",
     startDateTime: "2026-10-03T10:00:00",
     endDateTime: "2026-10-03T13:00:00",
     churchSlug: "shern-hall",

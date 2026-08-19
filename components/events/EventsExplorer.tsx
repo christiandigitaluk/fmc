@@ -5,8 +5,9 @@ import { cn } from "@/lib/cn";
 import { EventCard } from "@/components/events/EventCard";
 import { CATEGORY_PILL_CLASSES, ALL_PILL_CLASSES } from "@/lib/eventCategoryStyles";
 import type { CircuitEvent, Church, EventCategory } from "@/lib/types";
+import { EVENT_CATEGORIES } from "@/lib/types";
 
-const CATEGORIES: (EventCategory | "All")[] = ["All", "Community", "Worship", "Youth", "Special Services"];
+const CATEGORIES: (EventCategory | "All")[] = ["All", ...EVENT_CATEGORIES];
 
 export function EventsExplorer({ events, churches }: { events: CircuitEvent[]; churches: Church[] }) {
   const [category, setCategory] = useState<string>("All");
