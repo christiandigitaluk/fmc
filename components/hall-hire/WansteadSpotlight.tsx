@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ExternalLink, Train, Utensils, Theater, DoorOpen, CircleParking } from "lucide-react";
+import { ExternalLink, Train, Utensils, Theater, DoorOpen, CircleParking, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 
 /**
@@ -8,6 +8,16 @@ import { Button } from "@/components/ui/Button";
  * developing it as a venue with a missional element. So it gets a spotlight
  * above the general enquiry form rather than sitting as one option among ten
  * in the dropdown.
+ *
+ * Collapsed by default: at full height it pushed the enquiry form well below
+ * the fold, which read as an advert rather than a prompt. The teaser keeps
+ * Wanstead in front of every visitor while leaving the form the main event.
+ *
+ * The photograph stays in the markup while collapsed but is not fetched:
+ * a closed panel paints nothing, so the lazy image never comes near the
+ * viewport. That is also why it no longer carries `priority`, which would
+ * preload an image the visitor may never open, competing with the real LCP
+ * element. Verified: no network request for it until the panel opens.
  */
 const FEATURES = [
   { icon: Theater, label: "Main hall with a stage end" },
@@ -19,74 +29,87 @@ const FEATURES = [
 
 export function WansteadSpotlight() {
   return (
-    <section
-      aria-labelledby="wanstead-spotlight-heading"
-      className="sticker mb-12 overflow-hidden rounded-[20px] bg-white"
-      style={{ borderColor: "var(--orange-500)" }}
-    >
-      <div className="grid md:grid-cols-[1fr_1.15fr]">
-        <div className="relative min-h-[220px] md:min-h-full">
-          <Image
-            src="/images/wanstead.jpg"
-            alt="Wanstead Methodist Church on Hermon Hill"
-            fill
-            sizes="(min-width: 768px) 40vw, 100vw"
-            draggable={false}
-            priority
-            className="no-long-press object-cover"
-          />
-        </div>
+    <section aria-labelledby="wanstead-spotlight-heading" className="mb-12">
+      <details
+        className="sticker overflow-hidden rounded-[20px] bg-white [&_summary::-webkit-details-marker]:hidden"
+        style={{ borderColor: "var(--orange-500)" }}
+      >
+        <summary className="flex cursor-pointer list-none items-start gap-4 p-6 focus:outline-none focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:[outline-color:var(--focus-ring)]">
+          <div className="min-w-0 flex-1">
+            <span className="sticker mb-3 inline-flex -rotate-1 items-center rounded-full bg-orange-500 px-4 py-1.5 text-xs font-extrabold uppercase tracking-wide text-ink-900">
+              Now seeking hirers
+            </span>
+            <h2 id="wanstead-spotlight-heading" style={{ fontSize: "var(--text-h3)" }} className="mb-2">
+              Wanstead: a venue with room for more
+            </h2>
+            <p className="text-[var(--text-body)]">
+              A community hub with a main hall and stage end, five minutes from Snaresbrook, and we are actively
+              looking for regular hirers.
+            </p>
+          </div>
 
-        <div className="p-6 md:p-8">
-          <span className="sticker mb-4 inline-flex -rotate-1 items-center rounded-full bg-orange-500 px-4 py-1.5 text-xs font-extrabold uppercase tracking-wide text-ink-900">
-            Now seeking hirers
+          <span className="mt-1 flex shrink-0 items-center gap-1.5 text-sm font-semibold text-forest-600">
+            <span className="when-collapsed hidden sm:inline">See more</span>
+            <span className="when-expanded hidden sm:inline">See less</span>
+            <ChevronDown size={18} aria-hidden="true" className="disclosure-chevron" />
           </span>
+        </summary>
 
-          <h2 id="wanstead-spotlight-heading" style={{ fontSize: "var(--text-h3)" }} className="mb-3">
-            Wanstead: a venue with room for more
-          </h2>
-
-          <div className="mb-5 flex flex-col gap-3 text-[var(--text-body)]">
-            <p>
-              Wanstead stopped holding Sunday services a few years ago, but the building never went quiet. It is now
-              a community hub and home to The Wanstead Curtain theatre company, and we are actively looking for more
-              regular hirers to fill the week.
-            </p>
-            <p>
-              It suits rehearsals, classes, workshops, committees and performance, and we would love to hear from
-              arts groups in particular.
-            </p>
+        <div className="grid border-t border-line-200 md:grid-cols-[1fr_1.15fr]">
+          <div className="relative min-h-[220px] md:min-h-full">
+            <Image
+              src="/images/wanstead.jpg"
+              alt="Wanstead Methodist Church on Hermon Hill"
+              fill
+              sizes="(min-width: 768px) 40vw, 100vw"
+              draggable={false}
+              className="no-long-press object-cover"
+            />
           </div>
 
-          <ul className="mb-5 grid gap-2 sm:grid-cols-2">
-            {FEATURES.map(({ icon: Icon, label }) => (
-              <li key={label} className="flex items-center gap-2 text-sm font-semibold text-[var(--text-heading)]">
-                <Icon size={15} className="shrink-0 text-forest-700" aria-hidden="true" />
-                {label}
-              </li>
-            ))}
-          </ul>
+          <div className="p-6 md:p-8">
+            <div className="mb-5 flex flex-col gap-3 text-[var(--text-body)]">
+              <p>
+                Wanstead stopped holding Sunday services a few years ago, but the building never went quiet. It is now
+                a community hub and home to The Wanstead Curtain theatre company, and we are actively looking for more
+                regular hirers to fill the week.
+              </p>
+              <p>
+                It suits rehearsals, classes, workshops, committees and performance, and we would love to hear from
+                arts groups in particular.
+              </p>
+            </div>
 
-          <p className="mb-5 rounded-[10px] bg-cream-100 px-4 py-3 text-sm text-[var(--text-body)]">
-            Please note this is a no-alcohol venue, and we are unable to take birthday party bookings.
-          </p>
+            <ul className="mb-5 grid gap-2 sm:grid-cols-2">
+              {FEATURES.map(({ icon: Icon, label }) => (
+                <li key={label} className="flex items-center gap-2 text-sm font-semibold text-[var(--text-heading)]">
+                  <Icon size={15} className="shrink-0 text-forest-700" aria-hidden="true" />
+                  {label}
+                </li>
+              ))}
+            </ul>
 
-          <div className="flex flex-wrap items-center gap-3">
-            <Button href="/hall-hire?church=wanstead#enquiry" variant="primary">
-              Enquire about Wanstead
-            </Button>
-            <a
-              href="https://wansteadmethodists.org.uk/"
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-1.5 text-sm font-semibold text-forest-600 hover:text-forest-700"
-            >
-              wansteadmethodists.org.uk
-              <ExternalLink size={14} aria-hidden="true" />
-            </a>
+            <p className="mb-5 rounded-[10px] bg-cream-100 px-4 py-3 text-sm text-[var(--text-body)]">
+              Please note this is a no-alcohol venue, and we are unable to take birthday party bookings.
+            </p>
+
+            <div className="flex flex-wrap items-center gap-3">
+              <Button href="/hall-hire?church=wanstead#enquiry" variant="primary">
+                Enquire about Wanstead
+              </Button>
+              <a
+                href="https://wansteadmethodists.org.uk/"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-forest-600 hover:text-forest-700"
+              >
+                wansteadmethodists.org.uk
+                <ExternalLink size={14} aria-hidden="true" />
+              </a>
+            </div>
           </div>
         </div>
-      </div>
+      </details>
     </section>
   );
 }

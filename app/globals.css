@@ -288,6 +288,12 @@ details[open] > summary .disclosure-chevron {
   }
 }
 
+/* Swap a summary's label between its collapsed and expanded wording. */
+details[open] > summary .when-collapsed,
+details:not([open]) > summary .when-expanded {
+  display: none;
+}
+
 .container-max {
   max-width: var(--container-max);
   margin-inline: auto;
