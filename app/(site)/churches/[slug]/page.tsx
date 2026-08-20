@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Clock, Mail, Phone, MapPin, Check, Globe } from "lucide-react";
+import { ChurchActivities } from "@/components/churches/ChurchActivities";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { getChurch, getChurches } from "@/lib/content";
@@ -117,6 +118,9 @@ export default async function ChurchDetailPage({ params }: { params: Promise<{ s
                   </li>
                 ))}
               </ul>
+              {church.activityGroups && church.activityGroups.length > 0 && (
+                <ChurchActivities groups={church.activityGroups} />
+              )}
             </section>
           )}
 

@@ -8,6 +8,30 @@ export type Facility =
   | "Food bank"
   | "Hearing loop";
 
+/** One regular gathering: a service, group or activity that repeats. */
+export type ChurchActivity = {
+  name: string;
+  /** As the church writes it, e.g. "9am", "12.15pm". */
+  time: string;
+  /** How often it runs, e.g. "Weekly", "Second Sunday". */
+  frequency: string;
+  /** Qualifier shown after the frequency, e.g. "term time". */
+  note?: string;
+  description: string;
+};
+
+/**
+ * A titled set of regular gatherings, shown collapsed under a church's
+ * service times. Churches group these their own way (a Sunday pattern, a
+ * weekday programme), so the grouping is theirs to define rather than fixed.
+ */
+export type ChurchActivityGroup = {
+  title: string;
+  /** Optional line under the title, e.g. "All are welcome". */
+  intro?: string;
+  activities: ChurchActivity[];
+};
+
 export type Church = {
   slug: string;
   name: string;
@@ -23,6 +47,8 @@ export type Church = {
   /** May be empty: better a shorter page than an invented one. */
   description: string;
   serviceTimes: { day: string; time: string; label: string }[];
+  /** Regular gatherings beyond the headline service times, shown collapsed. */
+  activityGroups?: ChurchActivityGroup[];
   facilities: Facility[];
   hallHireInfo: string;
   lat: number;

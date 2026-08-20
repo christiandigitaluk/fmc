@@ -106,6 +106,75 @@ export const churches: Church[] = [
     description:
       "A church for all ages on Loughton High Road, with a variety of worship, a community cafe, and an office open through the week if you would like to talk to someone before you visit.",
     serviceTimes: [{ day: "Sunday", time: "10:30", label: "Morning Worship" }],
+    // The church's own Sunday pattern and weekday programme, per
+    // loughtonmethodist.org.uk. The August holiday club is dated rather than
+    // regular, so it belongs on the events page instead of here.
+    activityGroups: [
+      {
+        title: "Sunday at Loughton",
+        intro: "All are welcome",
+        activities: [
+          {
+            name: "Communion",
+            time: "9am",
+            frequency: "Second Sunday",
+            description: "A 30 to 45 minute Communion service led by our minister. A time for quiet, song and prayer.",
+          },
+          {
+            name: "Intergen with LMC Kids",
+            time: "10.30am",
+            frequency: "Weekly",
+            description:
+              "A service for all generations to gather together, with singing, praying and learning. LMC Kids' groups meet alongside.",
+          },
+          {
+            name: "Messy Church",
+            time: "4pm",
+            frequency: "Third Sunday",
+            description:
+              "A time for families to come together for bible stories, crafts and songs, and to share a meal together.",
+          },
+          {
+            name: "The Six",
+            time: "6pm",
+            frequency: "Fourth Sunday",
+            description: "Contemporary worship, prayer and song with the LMC band.",
+          },
+        ],
+      },
+      {
+        title: "Through the week",
+        intro: "Stay for tea and coffee in the cafe",
+        activities: [
+          {
+            name: "Prayer Group",
+            time: "9am",
+            frequency: "Wednesday weekly",
+            description: "Join this small group for prayer, song and bible study.",
+          },
+          {
+            name: "Toddler Church",
+            time: "10am",
+            frequency: "Tuesday weekly",
+            note: "term time",
+            description: "Bible stories, songs, prayer, craft, toys and toast in the Worship Area and Church Hall.",
+          },
+          {
+            name: "Quiet Space",
+            time: "12.15pm",
+            frequency: "First Wednesday",
+            description: "A quiet time of reflection, prayer and silence in the Worship Area and on Zoom.",
+          },
+          {
+            name: "Messy Vintage",
+            time: "2.30pm",
+            frequency: "Second Saturday",
+            description:
+              "Bible stories, songs, prayer and craft, with afternoon tea, in the Worship Area and Church Hall.",
+          },
+        ],
+      },
+    ],
     facilities: ["Hall hire", "Parking", "Accessible parking"],
     hallHireInfo: "Rooms are available to hire; the church office can be reached on weekdays between 9.30am and 3.30pm.",
     lat: 51.6496245,

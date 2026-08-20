@@ -43,6 +43,41 @@ export const church = defineType({
       ],
     }),
     defineField({
+      name: "activityGroups",
+      title: "Regular gatherings",
+      description:
+        "Groups of regular services and activities, shown collapsed under the service times. Churches group these their own way, for example a Sunday pattern and a weekday programme.",
+      type: "array",
+      of: [
+        {
+          type: "object",
+          fields: [
+            { name: "title", title: "Group title", type: "string", validation: (r) => r.required() },
+            { name: "intro", title: "Intro line", type: "string" },
+            {
+              name: "activities",
+              title: "Gatherings",
+              type: "array",
+              of: [
+                {
+                  type: "object",
+                  fields: [
+                    { name: "name", title: "Name", type: "string", validation: (r) => r.required() },
+                    { name: "time", title: "Time", type: "string", description: 'As you would write it, e.g. "9am", "12.15pm".' },
+                    { name: "frequency", title: "How often", type: "string", description: 'e.g. "Weekly", "Second Sunday".' },
+                    { name: "note", title: "Note", type: "string", description: 'Qualifier after the frequency, e.g. "term time".' },
+                    { name: "description", title: "Description", type: "text" },
+                  ],
+                  preview: { select: { title: "name", subtitle: "frequency" } },
+                },
+              ],
+            },
+          ],
+          preview: { select: { title: "title", subtitle: "intro" } },
+        },
+      ],
+    }),
+    defineField({
       name: "facilities",
       title: "Facilities",
       type: "array",
