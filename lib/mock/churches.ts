@@ -81,7 +81,7 @@ export const churches: Church[] = [
     postcode: "E17 8BQ",
     minister: "Rev Stephanie Njeru",
     email: "stephanie.njeru@methodist.org.uk",
-    website: "https://www.lighthousemethodist.org.uk",
+    website: "https://lighthousemethodistchurch.org.uk",
     image: "/images/lighthouse.jpg",
     // Opening date and listed status per Historic England (list entry 1391928).
     description:
