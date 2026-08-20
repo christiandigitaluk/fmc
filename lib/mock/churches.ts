@@ -31,6 +31,7 @@ export const churches: Church[] = [
     minister: "Rev Mike Long",
     phone: "020 8220 1221", // methodist.org.uk/findachurch/cann-hall-road
     email: "mike.long@methodist.org.uk",
+    website: "https://cannhallmethodistchurch.org.uk",
     image: "/images/cann-hall.jpg",
     description: "Sunday mornings start early at Cann Hall. Whoever you are, and however long it has been since you were last in a church, you will find a welcome waiting.",
     serviceTimes: [{ day: "Sunday", time: "09:00", label: "Morning Worship" }],
@@ -46,7 +47,8 @@ export const churches: Church[] = [
     address: "274 High Road, Leyton",
     postcode: "E10 5PW",
     minister: "Rev Stephanie Njeru",
-    email: "stephanie.njeru@methodist.org.uk",
+    email: "trinitymethch@gmail.com",
+    website: "https://leytontrinitymethodistchurch.org.uk",
     image: "/images/leyton-trinity.jpg",
     description: "A church on Leyton High Road where you are welcome exactly as you are, whether you have worshipped here for years or are simply looking for somewhere to belong.",
     serviceTimes: [{ day: "Sunday", time: "11:00", label: "Morning Worship" }],
@@ -224,6 +226,7 @@ export const churches: Church[] = [
     minister: "Rev Mike Long", // methodist.org.uk/findachurch/new-road-south-chingford
     phone: "020 8220 1221",
     email: "mike.long@methodist.org.uk",
+    website: "https://southchingfordmethodistchurch.org.uk",
     image: "/images/south-chingford.jpg",
     description: "A friendly Sunday morning on New Road, and an open door to anyone who would like to join us. There is no need to have been before.",
     serviceTimes: [{ day: "Sunday", time: "10:30", label: "Morning Worship" }],
