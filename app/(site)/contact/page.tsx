@@ -24,19 +24,19 @@ export default async function ContactPage() {
         For general enquiries, reach the circuit office below, or send us a message using the form.
       </p>
 
-      <div className="mb-14 grid gap-6 sm:grid-cols-2">
-        <div className="rounded-[10px] border border-line-200 bg-white p-6 shadow-[var(--shadow-card)]">
+      <div className="mb-14 grid gap-6 md:grid-cols-2">
+        <div className="rounded-[10px] border border-line-200 bg-white p-5 shadow-[var(--shadow-card)] sm:p-6">
           <p className="eyebrow mb-2">Phone</p>
-          <a href={`tel:${settings.phone.replace(/\s/g, "")}`} className="flex items-center gap-2 text-lg font-semibold text-forest-600">
+          <a href={`tel:${settings.phone.replace(/\s/g, "")}`} className="flex items-center gap-2 text-base font-semibold text-forest-600">
             <Phone size={20} aria-hidden="true" />
             {settings.phone}
           </a>
         </div>
-        <div className="rounded-[10px] border border-line-200 bg-white p-6 shadow-[var(--shadow-card)]">
+        <div className="rounded-[10px] border border-line-200 bg-white p-5 shadow-[var(--shadow-card)] sm:p-6">
           <p className="eyebrow mb-2">Email</p>
-          <a href={`mailto:${settings.email}`} className="flex items-center gap-2 break-all text-lg font-semibold text-forest-600">
+          <a href={`mailto:${settings.email}`} className="flex items-center gap-2 text-base font-semibold text-forest-600">
             <Mail size={20} className="shrink-0" aria-hidden="true" />
-            {settings.email}
+            <span className="min-w-0 break-words">{settings.email}</span>
           </a>
         </div>
       </div>

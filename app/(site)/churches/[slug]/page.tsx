@@ -206,9 +206,9 @@ export default async function ChurchDetailPage({ params }: { params: Promise<{ s
           {church.email && (
             <div className="mb-5">
               <p className="eyebrow mb-1">Email</p>
-              <a href={`mailto:${church.email}`} className="flex items-center gap-2 break-all font-semibold text-forest-600">
+              <a href={`mailto:${church.email}`} className="flex items-center gap-2 font-semibold text-forest-600">
                 <Mail size={16} className="shrink-0" aria-hidden="true" />
-                {church.email}
+                <span className="min-w-0 break-words">{church.email}</span>
               </a>
             </div>
           )}
@@ -219,10 +219,10 @@ export default async function ChurchDetailPage({ params }: { params: Promise<{ s
                 href={church.website}
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center gap-2 break-all font-semibold text-forest-600"
+                className="flex items-center gap-2 font-semibold text-forest-600"
               >
                 <Globe size={16} className="shrink-0" aria-hidden="true" />
-                {church.website.replace(/^https?:\/\/(www\.)?/, "")}
+                <span className="min-w-0 break-words">{church.website.replace(/^https?:\/\/(www\.)?/, "")}</span>
               </a>
             </div>
           )}
