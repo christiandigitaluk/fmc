@@ -104,7 +104,7 @@ export const churches: Church[] = [
     website: "https://www.loughtonmethodist.org.uk",
     image: "/images/loughton.jpg",
     description:
-      "A warm Sunday welcome on Loughton High Road, with a church office open through the week if you would like to talk to someone before you visit.",
+      "A church for all ages on Loughton High Road, with a variety of worship, a community cafe, and an office open through the week if you would like to talk to someone before you visit.",
     serviceTimes: [{ day: "Sunday", time: "10:30", label: "Morning Worship" }],
     facilities: ["Hall hire", "Parking", "Accessible parking"],
     hallHireInfo: "Rooms are available to hire; the church office can be reached on weekdays between 9.30am and 3.30pm.",
@@ -113,14 +113,15 @@ export const churches: Church[] = [
   },
   {
     slug: "loughton-trinity",
-    name: "Trinity Church Debden Methodist",
+    name: "Trinity Church Debden",
     area: "Loughton",
     address: "Mannock Drive, Loughton",
     postcode: "IG10 2JD",
     minister: "Rev Sue Creighton",
     image: "/images/trinity-debden.jpg",
-    // Shared congregation per the Victoria County History of Essex (vol 4).
-    description: "Anglicans and Methodists worship side by side here at the top of Mannock Drive, with all-age services and café-style worship through the year. Everyone is welcome.",
+    // The Methodist and Anglican joint congregation here ended in 2014, so the
+    // description says ecumenical rather than naming the two denominations.
+    description: "An ecumenical congregation worships here at the top of Mannock Drive, with all-age services and café-style worship through the year. Everyone is welcome.",
     serviceTimes: [{ day: "Sunday", time: "10:30", label: "Morning Worship" }],
     facilities: [],
     hallHireInfo: "",

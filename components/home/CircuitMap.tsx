@@ -13,7 +13,7 @@ type LabelAlign = "center" | "left" | "right";
  * and matches the order of the list underneath it.
  */
 const RAW_PINS: Pin[] = [
-  { name: "Trinity Church Debden Methodist", slug: "loughton-trinity", xPct: 66.65, yPct: 18.78 },
+  { name: "Trinity Church Debden", slug: "loughton-trinity", xPct: 66.65, yPct: 18.78 },
   { name: "Loughton Methodist Church", slug: "loughton", xPct: 58.83, yPct: 22.19 },
   { name: "South Chingford Methodist Church", slug: "south-chingford", xPct: 37.85, yPct: 43.25 },
   { name: "Winchester Road Methodist Church", slug: "winchester-road", xPct: 41.11, yPct: 52.74 },
