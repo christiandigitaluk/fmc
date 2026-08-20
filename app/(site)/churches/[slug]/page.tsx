@@ -84,8 +84,16 @@ export default async function ChurchDetailPage({ params }: { params: Promise<{ s
         </div>
       </div>
 
+      {/*
+        min-w-0 on both tracks. Grid items default to min-width:auto, so a
+        track cannot shrink below its content's min-content width, and
+        overflow-wrap (break-words) does not reduce min-content. A long
+        unbroken address in the sidebar, such as Loughton's
+        administrator@loughtonmethodist.org.uk, therefore widened the single
+        mobile column past the viewport and pushed the whole page sideways.
+      */}
       <div className="container-max grid gap-12 py-14 md:py-20 lg:grid-cols-[2fr_1fr]">
-        <div>
+        <div className="min-w-0">
           <p className="mb-8 text-lg text-[var(--text-body)]" style={{ fontSize: "var(--text-lead)" }}>
             {church.description}
           </p>
@@ -180,7 +188,7 @@ export default async function ChurchDetailPage({ params }: { params: Promise<{ s
           </section>
         </div>
 
-        <aside aria-label="Church details" className="h-fit rounded-[10px] border border-line-200 bg-white p-6 shadow-[var(--shadow-card)]">
+        <aside aria-label="Church details" className="h-fit min-w-0 rounded-[10px] border border-line-200 bg-white p-6 shadow-[var(--shadow-card)]">
           {church.minister && (
             <div className="mb-5">
               <p className="eyebrow mb-1">Minister</p>
