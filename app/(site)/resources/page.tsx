@@ -23,14 +23,9 @@ const RESOURCES: Resource[] = [
     href: "/documents/Forest-Circuit-Overview-Map.pdf",
     size: "PDF · 9.2 MB",
   },
-  {
-    title: "Circuit Mission Strategy 2025–28",
-    description: "The circuit's mission statement and the five priorities agreed by the Circuit Leadership Team.",
-    // Spaces are percent-encoded here so the href is a valid URI, while the
-    // file on disk keeps the readable name people see when they save it.
-    href: "/documents/Circuit%20Mission%20Strategy%202025%20-%2028.pdf",
-    size: "PDF · 480 KB",
-  },
+  // The Circuit Mission Strategy 2025-28 is withdrawn while it is amended.
+  // Restore this entry and the PDF (both in commit 12a796d) once the revised
+  // version is ready.
   {
     title: "Safeguarding policy 2025–26",
     description: "The circuit's full safeguarding policy, roles and responsibilities.",
