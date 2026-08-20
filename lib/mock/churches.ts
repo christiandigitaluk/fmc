@@ -187,6 +187,8 @@ export const churches: Church[] = [
     address: "Mannock Drive, Loughton",
     postcode: "IG10 2JD",
     minister: "Rev Sue Creighton",
+    email: "trinitychurchdebden@gmail.com",
+    website: "https://trinitychurchdebden.org.uk",
     image: "/images/trinity-debden.jpg",
     // The Methodist and Anglican joint congregation here ended in 2014, so the
     // description says ecumenical rather than naming the two denominations.
