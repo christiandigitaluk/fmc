@@ -348,7 +348,7 @@ export function Header({ settings }: { settings: SiteSettings }) {
             aria-modal="true"
             aria-label="Mobile navigation"
             className={cn(
-              "absolute right-0 top-0 flex h-full w-[86%] max-w-sm flex-col overflow-y-auto overflow-x-hidden overscroll-contain rounded-l-[28px] border-l-2 border-ink-900 bg-[var(--surface-page)] p-6 shadow-[var(--shadow-lift)]",
+              "absolute right-0 top-0 flex h-full w-[86%] max-w-sm flex-col overflow-hidden overscroll-contain rounded-l-[28px] border-l-2 border-ink-900 bg-[var(--surface-page)] p-6 shadow-[var(--shadow-lift)]",
               drawerClosing ? "drawer-panel-out" : "drawer-panel"
             )}
           >
@@ -361,7 +361,7 @@ export function Header({ settings }: { settings: SiteSettings }) {
               className="pointer-events-none absolute -left-10 bottom-20 h-32 w-32 rounded-full bg-forest-100"
             />
 
-            <div className="relative mb-8 flex items-center justify-between">
+            <div className="relative mb-6 flex shrink-0 items-center justify-between">
               <span className="text-lg font-bold text-[var(--text-heading)]" style={{ fontFamily: "var(--font-display)" }}>Menu</span>
               <button
                 type="button"
@@ -373,20 +373,20 @@ export function Header({ settings }: { settings: SiteSettings }) {
                 <X size={20} aria-hidden="true" />
               </button>
             </div>
-            <ul className="relative flex flex-col gap-1.5">
+            <ul className="relative -mx-1 flex min-h-0 flex-1 flex-col gap-1.5 overflow-y-auto px-1">
               {MOBILE_LINKS.map((link, i) => (
                 <li key={link.href} className="drawer-link" style={{ animationDelay: `${80 + i * 45}ms` }}>
                   <Link
                     href={link.href}
                     onClick={closeDrawerForNavigation}
-                    className="block rounded-full px-4 py-3 text-lg font-bold text-[var(--text-heading)] no-underline transition-colors hover:bg-forest-100"
+                    className="block rounded-full px-4 py-2.5 text-lg font-bold text-[var(--text-heading)] no-underline transition-colors hover:bg-forest-100"
                   >
                     {link.label}
                   </Link>
                 </li>
               ))}
             </ul>
-            <div className="drawer-link relative mt-8" style={{ animationDelay: `${80 + MOBILE_LINKS.length * 45}ms` }}>
+            <div className="drawer-link relative mt-5 shrink-0" style={{ animationDelay: `${80 + MOBILE_LINKS.length * 45}ms` }}>
               <Button href="/churches" variant="primary" size="md" className="w-full" onClick={closeDrawerForNavigation}>
                 Find a church near you
               </Button>
