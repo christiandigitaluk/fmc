@@ -65,9 +65,14 @@ export default async function NewsArticlePage({ params }: { params: Promise<{ sl
   return (
     <article>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      {/*
+        No ink overlay here, unlike the church hero. Nothing sits on top of this
+        image (the date and title are below it), so the scrim served no legibility
+        purpose and only muted the cover. It turned the white logo on the brand
+        share graphic grey.
+      */}
       <div className="relative h-64 w-full overflow-hidden md:h-96">
         <Image src={post.coverImage} alt="" fill priority sizes="100vw" className="object-cover" />
-        <div className="absolute inset-0" style={{ background: "var(--overlay-ink)" }} />
       </div>
 
       <div className="container-max max-w-3xl py-14 md:py-20">
