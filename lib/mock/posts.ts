@@ -48,17 +48,4 @@ export const posts: Post[] = [
       "Sessions include songs, crafts and a cup of tea for the grown-ups. No booking required, just come along.",
     ],
   },
-  {
-    slug: "reflections-from-our-summer-outreach",
-    title: "Reflections from our summer outreach",
-    excerpt:
-      "Volunteers from across the circuit spent July serving alongside local food banks and community events. Here is what they learned.",
-    coverImage: "/images/news-summer-outreach.jpg",
-    publishedAt: "2026-08-01",
-    tags: ["Outreach", "Stories"],
-    body: [
-      "This July, volunteers from Shern Hall, Leyton Trinity and Woodford Methodist Churches joined forces to support local food banks and summer holiday activities.",
-      "We warmly invite you to read some of their reflections on what it means to serve our community together, and to consider getting involved this autumn.",
-    ],
-  },
 ];
