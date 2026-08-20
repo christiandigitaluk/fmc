@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Card } from "@/components/ui/Card";
 import { PageAccents } from "@/components/ui/PageAccents";
-import { getPosts } from "@/lib/content";
+import { NoticeBoard } from "@/components/news/NoticeBoard";
+import { getPosts, getNotices } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "News",
@@ -10,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default async function NewsPage() {
-  const posts = await getPosts();
+  const [posts, notices] = await Promise.all([getPosts(), getNotices()]);
 
   return (
     <div className="relative container-max py-14 md:py-20">
@@ -40,6 +41,8 @@ export default async function NewsPage() {
           </Card>
         ))}
       </div>
+
+      <NoticeBoard notices={notices} />
     </div>
   );
 }

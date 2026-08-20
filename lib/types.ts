@@ -8,6 +8,26 @@ export type Facility =
   | "Food bank"
   | "Hearing loop";
 
+/**
+ * A short notice pinned under the news articles: an opportunity, a deadline,
+ * something from the wider Methodist Church worth a line rather than a whole
+ * article.
+ */
+export type Notice = {
+  slug: string;
+  title: string;
+  summary: string;
+  /**
+   * ISO date (YYYY-MM-DD). Shown on the badge, and the notice removes itself
+   * once the date has passed, so nothing goes stale on the page.
+   */
+  deadline?: string;
+  /** Badge text when there is no deadline, e.g. "Opportunity". */
+  label?: string;
+  /** Where the notice points, usually off site. */
+  url?: string;
+};
+
 /** One regular gathering: a service, group or activity that repeats. */
 export type ChurchActivity = {
   name: string;

@@ -4,6 +4,7 @@ import { isSanityConfigured } from "@/sanity/env";
 import { client, previewClient, writeClient } from "@/sanity/lib/client";
 import { churches as mockChurches } from "@/lib/mock/churches";
 import { posts as mockPosts } from "@/lib/mock/posts";
+import { notices as mockNotices } from "@/lib/mock/notices";
 import { events as mockEvents } from "@/lib/mock/events";
 import { preachingPlan as mockPreachingPlan } from "@/lib/mock/preachingPlan";
 import { siteSettings as mockSettings } from "@/lib/mock/settings";
@@ -12,6 +13,7 @@ import { resolveEventOccurrences } from "@/lib/recurrence";
 import type {
   Church,
   Post,
+  Notice,
   CircuitEvent,
   PreachingPlanEntry,
   SiteSettings,
@@ -93,6 +95,30 @@ export async function getPosts(): Promise<Post[]> {
     ["post"]
   );
   return posts.map((p) => cleanStructural(p, ["slug", "coverImage"]));
+}
+
+/**
+ * Noticeboard items, soonest deadline first, with undated ones last.
+ *
+ * A notice whose deadline has passed is dropped here rather than in the
+ * component, so nothing stale can reach any page that uses it. The comparison
+ * is on plain YYYY-MM-DD strings, which sorts and compares correctly and
+ * avoids timezone drift around midnight. Pages using this revalidate on the
+ * usual interval, so an expired notice clears itself without a deploy.
+ */
+export async function getNotices(): Promise<Notice[]> {
+  const notices = await safeFetch(
+    `*[_type == "notice"] | order(coalesce(deadline, "9999-12-31") asc, title asc) {
+      ...,
+      "slug": slug.current
+    }`,
+    mockNotices,
+    ["notice"]
+  );
+  const today = new Date().toISOString().slice(0, 10);
+  return notices
+    .map((n) => cleanStructural(n, ["slug", "url"]))
+    .filter((n) => !n.deadline || n.deadline >= today);
 }
 
 export async function getPost(slug: string): Promise<Post | undefined> {

@@ -10,6 +10,7 @@ export const structure: StructureResolver = (S) =>
       S.divider(),
       S.documentTypeListItem("church").title("Churches"),
       S.documentTypeListItem("post").title("News posts"),
+      S.documentTypeListItem("notice").title("Noticeboard"),
       S.documentTypeListItem("event").title("Events"),
       S.documentTypeListItem("preachingPlanEntry").title("Preaching plan"),
       S.documentTypeListItem("jobVacancy").title("Jobs"),

@@ -1,5 +1,6 @@
 import { church } from "./church";
 import { post } from "./post";
+import { notice } from "./notice";
 import { event } from "./event";
 import { preachingPlanEntry } from "./preachingPlanEntry";
 import { bookingRequest } from "./bookingRequest";
@@ -11,6 +12,7 @@ import { siteSettings } from "./siteSettings";
 export const schemaTypes = [
   church,
   post,
+  notice,
   event,
   preachingPlanEntry,
   bookingRequest,
