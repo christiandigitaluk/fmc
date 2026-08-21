@@ -1,16 +1,18 @@
 /**
- * Syncs a church's contact details (phone, email, website) from
- * lib/mock/churches.ts into Sanity.
+ * Syncs a church's simple text fields from lib/mock/churches.ts into Sanity.
  *
- * Churches are managed in Sanity Studio; this is only here to apply
- * corrections without waiting on a Studio session. Replaces the earlier
- * per-church scripts, so the next correction needs a slug rather than a new
- * file.
+ * Covers name, description, phone, email, website and hallHireInfo. The
+ * structured fields have their own shapes and scripts: serviceTimes and
+ * facilities are edited in Studio, and activityGroups has
+ * set-church-activity-groups.ts.
+ *
+ * Replaces set-church-contact.ts, which only handled contact details and left
+ * a rename needing a hand-rolled one-off script.
  *
  * Fields absent from the mock entry are unset in Sanity rather than left
  * behind, so removing a detail here actually removes it from the site.
  *
- * Run with: npx tsx scripts/set-church-contact.ts <slug> [slug ...]
+ * Run with: npx tsx scripts/set-church.ts <slug> [slug ...]
  */
 import { createClient } from "@sanity/client";
 import { readFileSync, existsSync } from "fs";
@@ -44,12 +46,18 @@ const client = createClient({
   useCdn: false,
 });
 
-const FIELDS = ["phone", "email", "website"] as const;
+const FIELDS = ["name", "description", "phone", "email", "website", "hallHireInfo"] as const;
+
+function preview(value: unknown): string {
+  if (!value) return "(none)";
+  const text = String(value);
+  return text.length > 70 ? `${text.slice(0, 70)}...` : text;
+}
 
 async function main() {
   const slugs = process.argv.slice(2);
   if (slugs.length === 0) {
-    throw new Error("give at least one church slug, e.g. npx tsx scripts/set-church-contact.ts loughton-trinity");
+    throw new Error("give at least one church slug, e.g. npx tsx scripts/set-church.ts winchester-road");
   }
 
   for (const slug of slugs) {
@@ -74,9 +82,13 @@ async function main() {
 
     console.log(`✓ ${church.name}`);
     for (const field of FIELDS) {
-      const was = before[field] ?? "(none)";
-      const now = church[field] ?? "(none)";
-      if (was !== now) console.log(`  ${field}: ${was} -> ${now}`);
+      const was = before[field] ?? "";
+      const now = church[field] ?? "";
+      if (was !== now) {
+        console.log(`  ${field}:`);
+        console.log(`    was: ${preview(was)}`);
+        console.log(`    now: ${preview(now)}`);
+      }
     }
   }
 }

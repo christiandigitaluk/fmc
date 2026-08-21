@@ -269,7 +269,7 @@ export const churches: Church[] = [
     website: "https://winchesterroadchurch.org.uk",
     image: "/images/winchester-road.jpg",
     description:
-      "There is plenty going on in Highams Park. Children and young people join the first part of the service before heading off to their own groups, and the church is home to Beavers, Cubs and Scouts, Rainbows, Brownies, Guides and Rangers. The Sunday Lunch Club on the first Sunday of the month is open to all.",
+      "A warm welcome in Highams Park, in a church with a real energy for helping others, grown from people's own journeys of faith. That turns outwards into raising money and resources for food banks and local charities, and a Sunday Lunch Club open to all.",
     serviceTimes: [{ day: "Sunday", time: "10:30", label: "Morning Worship" }],
     facilities: ["Hall hire", "Youth programme"],
     hallHireInfo: "Hall bookings are handled by the church's lettings manager.",
