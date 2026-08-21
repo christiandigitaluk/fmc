@@ -44,7 +44,9 @@ export function Hero() {
         </div>
 
         <div className="relative mx-auto w-full max-w-md lg:mx-0 lg:max-w-none lg:justify-self-stretch">
-          <span className="sticker absolute -right-4 -top-5 z-10 hidden rotate-6 items-center rounded-full bg-orange-500 px-4 py-1.5 text-xs font-bold uppercase tracking-wide text-ink-900 sm:inline-flex">
+          {/* Sits 16px outside the image, inside the container's 24px gutter,
+              so it clears the viewport edge even at 320px. */}
+          <span className="sticker absolute -right-4 -top-5 z-10 inline-flex rotate-6 items-center rounded-full bg-orange-500 px-4 py-1.5 text-xs font-bold uppercase tracking-wide text-ink-900">
             Worship together
           </span>
           <div className="sticker rotate-1 overflow-hidden rounded-[20px] bg-white p-2">
