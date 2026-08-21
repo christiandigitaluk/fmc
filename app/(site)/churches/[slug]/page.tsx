@@ -105,8 +105,15 @@ export default async function ChurchDetailPage({ params }: { params: Promise<{ s
         24px of icon and gap and 48px of card padding, leaving a little to
         spare for anything slightly longer.
       */}
+      {/*
+        Three children, explicitly placed at lg. The map is last in the DOM so
+        that on mobile, where this is one column, it falls below the church
+        details card rather than pushing the minister and contact details down
+        the page. At lg it is pinned back to column 1 row 2, sitting under the
+        main content with the details card alongside, as before.
+      */}
       <div className="container-max grid gap-12 py-14 md:py-20 lg:grid-cols-[minmax(0,2fr)_minmax(384px,1fr)]">
-        <div className="min-w-0">
+        <div className="min-w-0 lg:col-start-1 lg:row-start-1">
           <p className="mb-8 text-lg text-[var(--text-body)]" style={{ fontSize: "var(--text-lead)" }}>
             {church.description}
           </p>
@@ -166,7 +173,7 @@ export default async function ChurchDetailPage({ params }: { params: Promise<{ s
             </section>
           )}
 
-          <section aria-labelledby="hall-hire-heading" className="mb-10 rounded-[10px] bg-forest-100 p-6">
+          <section aria-labelledby="hall-hire-heading" className="rounded-[10px] bg-forest-100 p-6">
             <h2 id="hall-hire-heading" style={{ fontSize: "var(--text-h3)" }} className="mb-3">
               Hall &amp; hire
             </h2>
@@ -177,31 +184,12 @@ export default async function ChurchDetailPage({ params }: { params: Promise<{ s
               Enquire about hiring this space
             </Button>
           </section>
-
-          <section aria-labelledby="map-heading">
-            <h2 id="map-heading" style={{ fontSize: "var(--text-h3)" }} className="mb-4">
-              Find us
-            </h2>
-            <div className="overflow-hidden rounded-[10px] border border-line-200">
-              <iframe
-                title={`Map showing the location of ${church.name}`}
-                src={`https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik&marker=${church.lat}%2C${church.lng}`}
-                className="h-72 w-full"
-                loading="lazy"
-              />
-            </div>
-            <a
-              href={`https://www.google.com/maps/search/?api=1&query=${mapQuery}`}
-              target="_blank"
-              rel="noreferrer"
-              className="mt-3 inline-block text-sm font-semibold text-forest-600"
-            >
-              Get directions on Google Maps →
-            </a>
-          </section>
         </div>
 
-        <aside aria-label="Church details" className="h-fit min-w-0 rounded-[10px] border border-line-200 bg-white p-6 shadow-[var(--shadow-card)]">
+        <aside
+          aria-label="Church details"
+          className="h-fit min-w-0 rounded-[10px] border border-line-200 bg-white p-6 shadow-[var(--shadow-card)] lg:col-start-2 lg:row-start-1"
+        >
           {church.minister && (
             <div className="mb-5">
               <p className="eyebrow mb-1">Minister</p>
@@ -261,6 +249,28 @@ export default async function ChurchDetailPage({ params }: { params: Promise<{ s
             </Link>
           </p>
         </aside>
+
+        <section aria-labelledby="map-heading" className="lg:col-start-1 lg:row-start-2">
+          <h2 id="map-heading" style={{ fontSize: "var(--text-h3)" }} className="mb-4">
+            Find us
+          </h2>
+          <div className="overflow-hidden rounded-[10px] border border-line-200">
+            <iframe
+              title={`Map showing the location of ${church.name}`}
+              src={`https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik&marker=${church.lat}%2C${church.lng}`}
+              className="h-72 w-full"
+              loading="lazy"
+            />
+          </div>
+          <a
+            href={`https://www.google.com/maps/search/?api=1&query=${mapQuery}`}
+            target="_blank"
+            rel="noreferrer"
+            className="mt-3 inline-block text-sm font-semibold text-forest-600"
+          >
+            Get directions on Google Maps →
+          </a>
+        </section>
       </div>
     </div>
   );
