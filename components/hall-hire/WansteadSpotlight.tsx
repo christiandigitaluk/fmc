@@ -27,7 +27,7 @@ const FEATURES = [
   { icon: Train, label: "5 minutes from Snaresbrook" },
 ];
 
-export function WansteadSpotlight() {
+export function WansteadSpotlight({ website }: { website?: string }) {
   return (
     <section aria-labelledby="wanstead-spotlight-heading" className="mb-12">
       <details
@@ -97,15 +97,17 @@ export function WansteadSpotlight() {
               <Button href="/hall-hire?church=wanstead#enquiry" variant="primary">
                 Enquire about Wanstead
               </Button>
-              <a
-                href="https://wansteadmethodists.org.uk/"
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-1.5 text-sm font-semibold text-forest-600 hover:text-forest-700"
-              >
-                wansteadmethodists.org.uk
-                <ExternalLink size={14} aria-hidden="true" />
-              </a>
+              {website && (
+                <a
+                  href={website}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-forest-600 hover:text-forest-700"
+                >
+                  {website.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "")}
+                  <ExternalLink size={14} aria-hidden="true" />
+                </a>
+              )}
             </div>
           </div>
         </div>

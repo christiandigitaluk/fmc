@@ -302,6 +302,7 @@ export const churches: Church[] = [
     minister: "",
     phone: "07458 002275",
     email: "operations@forestcircuit.org.uk",
+    website: "https://wansteadmethodists.org.uk",
     image: "/images/wanstead.jpg",
     description:
       "Wanstead Methodist Church stopped holding Sunday services a few years back, but the building never went quiet. It is now a busy community hub, home to The Wanstead Curtain theatre company and a regular venue for rehearsals, classes and local groups. Five minutes' walk from Snaresbrook station.",

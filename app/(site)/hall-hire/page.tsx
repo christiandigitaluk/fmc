@@ -29,7 +29,7 @@ export default async function HallHirePage({
         organisations. Tell us what you need and a member of our team will be in touch.
       </p>
 
-      <WansteadSpotlight />
+      <WansteadSpotlight website={churches.find((c) => c.slug === "wanstead")?.website} />
 
       <h2 id="enquiry" style={{ fontSize: "var(--text-h3)" }} className="mb-6 scroll-mt-28">
         Make an enquiry
