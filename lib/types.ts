@@ -84,6 +84,12 @@ export type Post = {
   excerpt: string;
   body: string[];
   coverImage: string;
+  /**
+   * How the cover fills the article hero. "cover" (the default) crops to fill,
+   * which is right for a photograph. "contain" shows the whole image on a
+   * green band, for a flat brand graphic whose centred mark must not be cut.
+   */
+  coverFit?: "cover" | "contain";
   publishedAt: string;
   tags: string[];
 };

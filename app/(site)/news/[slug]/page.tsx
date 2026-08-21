@@ -53,6 +53,7 @@ export default async function NewsArticlePage({ params }: { params: Promise<{ sl
   if (!post) notFound();
 
   const articleUrl = `${SITE_ORIGIN}/news/${post.slug}`;
+  const contained = post.coverFit === "contain";
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -72,11 +73,26 @@ export default async function NewsArticlePage({ params }: { params: Promise<{ sl
       {/*
         No ink overlay here, unlike the church hero. Nothing sits on top of this
         image (the date and title are below it), so the scrim served no legibility
-        purpose and only muted the cover. It turned the white logo on the brand
-        share graphic grey.
+        purpose and only muted the cover.
+
+        The band is a fixed height and full viewport width, so object-cover
+        scales a cover by width: a 1200x630 graphic reaches 1.6x and loses 62%
+        of its height at 1920px. Fine for a photograph, wrong for a centred
+        mark, so a post can ask to be shown whole instead. The green matches
+        the brand graphic's own background exactly, so the band reads as one
+        continuous colour rather than a letterbox.
       */}
-      <div className="relative h-64 w-full overflow-hidden md:h-96">
-        <Image src={post.coverImage} alt="" fill priority sizes="100vw" className="object-cover" />
+      <div
+        className={`relative h-64 w-full overflow-hidden md:h-96 ${contained ? "bg-forest-700" : ""}`}
+      >
+        <Image
+          src={post.coverImage}
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className={contained ? "object-contain" : "object-cover"}
+        />
       </div>
 
       <div className="container-max max-w-3xl py-14 md:py-20">

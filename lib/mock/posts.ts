@@ -7,6 +7,8 @@ export const posts: Post[] = [
     excerpt:
       "Ten churches, one circuit, and until now no single place that held it all together. Our new website and brand identity are live.",
     coverImage: "/images/og-share.png",
+    // A centred mark, not a photograph: cropping it to fill would cut it off.
+    coverFit: "contain",
     publishedAt: "2026-08-20",
     tags: ["Circuit news", "Communications"],
     body: [
