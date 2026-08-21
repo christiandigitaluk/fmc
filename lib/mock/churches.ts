@@ -82,7 +82,7 @@ export const churches: Church[] = [
     address: "120 Markhouse Road, Walthamstow",
     postcode: "E17 8BQ",
     minister: "Rev Stephanie Njeru",
-    email: "stephanie.njeru@methodist.org.uk",
+    email: "lighthousemethodist@outlook.com",
     website: "https://lighthousemethodistchurch.org.uk",
     image: "/images/lighthouse.jpg",
     // Opening date and listed status per Historic England (list entry 1391928).
