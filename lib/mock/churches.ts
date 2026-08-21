@@ -91,22 +91,22 @@ export const churches: Church[] = [
     serviceTimes: [{ day: "Sunday", time: "11:00", label: "Morning Worship" }],
     activityGroups: [
       {
-        title: "Children's pre-loved clothes",
-        intro: "No used underwear please",
+        title: "Children's pre-loved clothes project",
+        intro: "Passing outgrown clothes on to families who need them",
         activities: [
           {
-            name: "Recycling project",
+            name: "Clothes swap",
             time: "7pm",
             frequency: "1st Thursday",
             description:
-              "Choose free clothes, donate money if you can. Pass on outgrown children's clothes to help others.",
+              "Bring outgrown children's clothes to donate, and choose others free of charge. A donation towards the project is welcome if you're able. Please, no used underwear.",
           },
           {
-            name: "Recycling project",
+            name: "Clothes swap",
             time: "3pm",
             frequency: "3rd Thursday",
             description:
-              "Choose free clothes, donate money if you can. Pass on outgrown children's clothes to help others.",
+              "Bring outgrown children's clothes to donate, and choose others free of charge. A donation towards the project is welcome if you're able. Please, no used underwear.",
           },
         ],
       },
