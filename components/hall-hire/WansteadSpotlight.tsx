@@ -42,7 +42,11 @@ export function WansteadSpotlight({ website }: { website?: string }) {
             <h2 id="wanstead-spotlight-heading" style={{ fontSize: "var(--text-h3)" }} className="mb-2">
               Wanstead: a venue with room for more
             </h2>
-            <p className="text-[var(--text-body)]">
+            {/* Hidden on mobile. The badge and heading already say what this
+                is, and on a phone this paragraph pushed the enquiry form
+                further down for the many visitors who arrive from a different
+                church's enquiry link and did not come here for Wanstead. */}
+            <p className="hidden text-[var(--text-body)] sm:block">
               A community hub with a main hall and stage end, five minutes from Snaresbrook, and we are actively
               looking for regular hirers.
             </p>
