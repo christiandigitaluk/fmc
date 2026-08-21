@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Clock, Mail, Phone, MapPin, Check, Globe } from "lucide-react";
 import { ChurchActivities } from "@/components/churches/ChurchActivities";
+import { BreakableText } from "@/components/ui/BreakableText";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { getChurch, getChurches } from "@/lib/content";
@@ -92,7 +93,19 @@ export default async function ChurchDetailPage({ params }: { params: Promise<{ s
         administrator@loughtonmethodist.org.uk, therefore widened the single
         mobile column past the viewport and pushed the whole page sideways.
       */}
-      <div className="container-max grid gap-12 py-14 md:py-20 lg:grid-cols-[2fr_1fr]">
+      {/*
+        The sidebar track carries a floor rather than a bare fraction. At the
+        lg breakpoint a plain 1fr gave it only 304px, too narrow for a long
+        address, so church URLs wrapped between roughly 1024px and 1200px and
+        came right again above that. The floor keeps the column wide enough for
+        a full address at every width the two-column layout is used.
+
+        384px is measured, not picked: the longest value in the circuit
+        (church@leytonstonemethodistchurch.org) needs 297px at this size, plus
+        24px of icon and gap and 48px of card padding, leaving a little to
+        spare for anything slightly longer.
+      */}
+      <div className="container-max grid gap-12 py-14 md:py-20 lg:grid-cols-[minmax(0,2fr)_minmax(384px,1fr)]">
         <div className="min-w-0">
           <p className="mb-8 text-lg text-[var(--text-body)]" style={{ fontSize: "var(--text-lead)" }}>
             {church.description}
@@ -218,9 +231,11 @@ export default async function ChurchDetailPage({ params }: { params: Promise<{ s
           {church.email && (
             <div className="mb-5">
               <p className="eyebrow mb-1">Email</p>
-              <a href={`mailto:${church.email}`} className="flex items-center gap-2 font-semibold text-forest-600">
+              <a href={`mailto:${church.email}`} className="flex items-center gap-2 text-[0.9375rem] font-semibold text-forest-600">
                 <Mail size={16} className="shrink-0" aria-hidden="true" />
-                <span className="min-w-0 break-words">{church.email}</span>
+                <span className="min-w-0 break-words">
+                  <BreakableText text={church.email} />
+                </span>
               </a>
             </div>
           )}
@@ -231,10 +246,12 @@ export default async function ChurchDetailPage({ params }: { params: Promise<{ s
                 href={church.website}
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center gap-2 font-semibold text-forest-600"
+                className="flex items-center gap-2 text-[0.9375rem] font-semibold text-forest-600"
               >
                 <Globe size={16} className="shrink-0" aria-hidden="true" />
-                <span className="min-w-0 break-words">{church.website.replace(/^https?:\/\/(www\.)?/, "")}</span>
+                <span className="min-w-0 break-words">
+                  <BreakableText text={church.website.replace(/^https?:\/\/(www\.)?/, "")} />
+                </span>
               </a>
             </div>
           )}
