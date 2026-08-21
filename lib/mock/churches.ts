@@ -89,6 +89,28 @@ export const churches: Church[] = [
     description:
       "Known for the lantern tower that gives it its name, this Grade II listed church has stood on Markhouse Road since 1893, and still opens its doors to the neighbourhood every Sunday.",
     serviceTimes: [{ day: "Sunday", time: "11:00", label: "Morning Worship" }],
+    activityGroups: [
+      {
+        title: "Children's pre-loved clothes",
+        intro: "No used underwear please",
+        activities: [
+          {
+            name: "Recycling project",
+            time: "7pm",
+            frequency: "1st Thursday",
+            description:
+              "Choose free clothes, donate money if you can. Pass on outgrown children's clothes to help others.",
+          },
+          {
+            name: "Recycling project",
+            time: "3pm",
+            frequency: "3rd Thursday",
+            description:
+              "Choose free clothes, donate money if you can. Pass on outgrown children's clothes to help others.",
+          },
+        ],
+      },
+    ],
     facilities: [],
     hallHireInfo: "",
     lat: 51.5760404,
