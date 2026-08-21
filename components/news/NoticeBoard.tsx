@@ -1,4 +1,5 @@
 import { ExternalLink } from "lucide-react";
+import { noticeBadge } from "@/lib/notice";
 import type { Notice } from "@/lib/types";
 
 /**
@@ -12,18 +13,6 @@ import type { Notice } from "@/lib/types";
  * Expired notices are filtered out in getNotices, not here, so no page can
  * render a stale deadline.
  */
-function badgeText(notice: Notice): string {
-  if (!notice.deadline) return notice.label ?? "Opportunity";
-  // Parsed as UTC midnight, formatted in the site's locale. Only ever a date,
-  // never a time, so there is no hour to drift across a timezone boundary.
-  const on = new Date(`${notice.deadline}T00:00:00Z`).toLocaleDateString("en-GB", {
-    day: "numeric",
-    month: "short",
-    timeZone: "UTC",
-  });
-  return `Closes ${on}`;
-}
-
 function NoticeBody({ notice }: { notice: Notice }) {
   const dated = Boolean(notice.deadline);
   return (
@@ -33,7 +22,7 @@ function NoticeBody({ notice }: { notice: Notice }) {
           dated ? "bg-orange-500" : "bg-forest-100"
         }`}
       >
-        {badgeText(notice)}
+        {noticeBadge(notice)}
       </span>
       <p className="mb-1.5 font-bold text-[var(--text-heading)]">{notice.title}</p>
       <p className="text-sm text-[var(--text-body)]">{notice.summary}</p>

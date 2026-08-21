@@ -5,10 +5,11 @@ import { CircuitMap } from "@/components/home/CircuitMap";
 import { SectionDivider } from "@/components/ui/SectionDivider";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
-import { getChurches, getPosts } from "@/lib/content";
+import { NoticeStrip } from "@/components/news/NoticeStrip";
+import { getChurches, getPosts, getNotices } from "@/lib/content";
 
 export default async function HomePage() {
-  const [churches, posts] = await Promise.all([getChurches(), getPosts()]);
+  const [churches, posts, notices] = await Promise.all([getChurches(), getPosts(), getNotices()]);
   const areas = Array.from(new Set(churches.map((c) => c.area))).sort();
   const latestPosts = posts.slice(0, 3);
 
@@ -70,6 +71,8 @@ export default async function HomePage() {
               </Card>
             ))}
           </div>
+
+          <NoticeStrip notices={notices} />
         </div>
       </section>
     </>
