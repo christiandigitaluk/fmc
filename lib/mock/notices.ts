@@ -12,4 +12,14 @@ export const notices: Notice[] = [
     // traffic, and dm_i identifies the individual recipient of that send.
     url: "https://www.methodist.org.uk/for-churches/ministries/children-youth-family-ministry/methodist-young-adults/leadershipyear/",
   },
+  {
+    slug: "wanstead-venue-hire",
+    title: "Wanstead venue hire",
+    summary:
+      "A main hall with a stage end, smaller rooms and a kitchen, five minutes from Snaresbrook. Rehearsals, classes, workshops and committees all welcome.",
+    // No deadline: this is an ongoing search, so the badge carries the label
+    // instead and the notice stays up until it is removed in Studio.
+    label: "Now seeking hirers",
+    url: "https://wansteadmethodists.org.uk",
+  },
 ];
