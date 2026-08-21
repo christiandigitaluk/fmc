@@ -23,7 +23,9 @@ export function NoticeStrip({ notices }: { notices: Notice[] }) {
   return (
     <div aria-label="Noticeboard" className="mt-10 border-t border-ink-900/10 pt-5">
       <div className="flex flex-col gap-3 sm:flex-row sm:gap-8">
-        <p className="eyebrow shrink-0 !text-forest-700 sm:pt-0.5">Noticeboard</p>
+        {/* orange-700 rather than the brand orange-500, which only reaches
+            about 2.3:1 on this forest-100 band. */}
+        <p className="eyebrow shrink-0 !text-orange-700 sm:pt-0.5">Noticeboard</p>
 
         <ul className="flex min-w-0 flex-col gap-2.5">
           {shown.map((notice) => {
@@ -35,6 +37,10 @@ export function NoticeStrip({ notices }: { notices: Notice[] }) {
                   {...(external ? { target: "_blank", rel: "noreferrer" } : {})}
                   className="group inline text-sm text-[var(--text-body)] no-underline"
                 >
+                  <span
+                    aria-hidden="true"
+                    className="mr-2 inline-block h-3 w-3 rounded-full border-2 border-white bg-forest-700 align-[0.5px]"
+                  />
                   <span className="font-bold text-[var(--text-heading)] group-hover:underline">{notice.title}</span>
                   <span className="mx-1.5 text-[var(--text-muted)]">·</span>
                   {firstSentence(notice.summary)}
