@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SITE_ORIGIN } from "@/lib/siteOrigin";
 import localFont from "next/font/local";
 import { draftMode } from "next/headers";
 import { VisualEditing } from "next-sanity";
@@ -47,7 +48,6 @@ const SITE_DESCRIPTION =
  * request headers) so pages stay statically generated rather than forced
  * dynamic on every request.
  */
-const SITE_ORIGIN = `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL ?? "www.forestcircuit.co.uk"}`;
 const SHARE_IMAGE_URL = `${SITE_ORIGIN}${SHARE_IMAGE}`;
 
 export const metadata: Metadata = {

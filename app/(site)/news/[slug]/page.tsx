@@ -5,6 +5,8 @@ import { notFound } from "next/navigation";
 import { PortableText, type PortableTextBlock } from "@portabletext/react";
 import { Badge } from "@/components/ui/Badge";
 import { portableTextComponents } from "@/components/PortableTextComponents";
+import { ShareArticle } from "@/components/news/ShareArticle";
+import { SITE_ORIGIN } from "@/lib/siteOrigin";
 import { getPost, getPosts } from "@/lib/content";
 
 export async function generateStaticParams() {
@@ -50,6 +52,8 @@ export default async function NewsArticlePage({ params }: { params: Promise<{ sl
   const post = await getPost(slug);
   if (!post) notFound();
 
+  const articleUrl = `${SITE_ORIGIN}/news/${post.slug}`;
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -59,7 +63,7 @@ export default async function NewsArticlePage({ params }: { params: Promise<{ sl
     datePublished: post.publishedAt,
     author: { "@type": "Organization", name: "Forest Methodist Circuit" },
     publisher: { "@type": "Organization", name: "Forest Methodist Circuit" },
-    mainEntityOfPage: { "@type": "WebPage", "@id": `https://www.forestcircuit.co.uk/news/${post.slug}` },
+    mainEntityOfPage: { "@type": "WebPage", "@id": articleUrl },
   };
 
   return (
@@ -97,6 +101,8 @@ export default async function NewsArticlePage({ params }: { params: Promise<{ sl
             (post.body as string[]).map((paragraph, i) => <p key={i}>{paragraph}</p>)
           )}
         </div>
+
+        <ShareArticle url={articleUrl} title={post.title} />
 
         <p className="mt-12">
           <Link href="/news" className="text-forest-600">
