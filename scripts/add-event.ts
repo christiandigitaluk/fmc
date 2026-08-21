@@ -1,13 +1,12 @@
 /**
- * Adds the 6 September 2026 worship + evangelism workshop at Loughton to
- * Sanity. Events normally live in Sanity Studio, so this is only here to
- * apply the addition without waiting on a Studio session — manage it there
- * in future and this becomes stale.
+ * Adds one event from lib/mock/events.ts to Sanity by slug.
  *
- * Mirrors the entry added to lib/mock/events.ts so the local fallback and
- * the live dataset stay in step.
+ * Events are normally managed in Sanity Studio; this is only here to apply
+ * an addition without waiting on a Studio session. Replaces the earlier
+ * per-event scripts (add-event-emma-nash.ts and similar), so the next event
+ * needs a slug rather than a new file.
  *
- * Run with: npx tsx scripts/add-event-emma-nash.ts
+ * Run with: npx tsx scripts/add-event.ts <slug>
  */
 import { createClient } from "@sanity/client";
 import { readFileSync, existsSync } from "fs";
@@ -41,11 +40,12 @@ const client = createClient({
   useCdn: false,
 });
 
-const SLUG = "evangelism-workshop-emma-nash";
-
 async function main() {
-  const event = events.find((e) => e.slug === SLUG);
-  if (!event) throw new Error(`no event with slug "${SLUG}" in lib/mock/events.ts`);
+  const slug = process.argv[2];
+  if (!slug) throw new Error("give an event slug, e.g. npx tsx scripts/add-event.ts my-event-slug");
+
+  const event = events.find((e) => e.slug === slug);
+  if (!event) throw new Error(`no event with slug "${slug}" in lib/mock/events.ts`);
 
   const churchId = `church-${event.churchSlug}`;
   const church = await client.getDocument(churchId);
@@ -61,6 +61,10 @@ async function main() {
     endDateTime: event.endDateTime,
     church: { _type: "reference", _ref: churchId },
     description: event.description,
+    ...(event.location ? { location: event.location } : {}),
+    ...(event.image ? { image: event.image } : {}),
+    ...(event.ticketUrl ? { ticketUrl: event.ticketUrl } : {}),
+    ...(event.recurrence ? { recurrence: event.recurrence } : {}),
   });
 
   console.log(`✓ ${event.title}`);

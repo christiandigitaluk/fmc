@@ -24,7 +24,7 @@ const RAW_PINS: Pin[] = [
   { name: "Shern Hall Methodist Church", slug: "shern-hall", xPct: 41.26, yPct: 65.7 },
   { name: "Lighthouse Methodist Church", slug: "lighthouse-walthamstow", xPct: 33.35, yPct: 69.81 },
   { name: "Leytonstone Methodist Church", slug: "leytonstone", xPct: 45.28, yPct: 75.45 },
-  { name: "Leyton (Trinity) Methodist Church", slug: "leyton-trinity", xPct: 39.55, yPct: 79.62 },
+  { name: "Leyton Trinity Methodist Church", slug: "leyton-trinity", xPct: 39.55, yPct: 79.62 },
   { name: "Cann Hall Methodist Church", slug: "cann-hall", xPct: 47.05, yPct: 81.28 },
 ];
 

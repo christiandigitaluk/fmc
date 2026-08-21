@@ -42,7 +42,7 @@ export const churches: Church[] = [
   },
   {
     slug: "leyton-trinity",
-    name: "Leyton (Trinity) Methodist Church",
+    name: "Leyton Trinity Methodist Church",
     area: "Leyton",
     address: "274 High Road, Leyton",
     postcode: "E10 5PW",

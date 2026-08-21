@@ -2,6 +2,16 @@ import type { CircuitEvent } from "@/lib/types";
 
 export const events: CircuitEvent[] = [
   {
+    slug: "2nd-highams-park-guides-centenary",
+    title: "2nd Highams Park Guides Centenary Thanksgiving Service",
+    category: "Special Services",
+    startDateTime: "2026-09-20T14:00:00",
+    endDateTime: "2026-09-20T15:30:00",
+    churchSlug: "winchester-road",
+    description:
+      "Celebrating 100 years of 2nd Highams Park Guides, followed by coffee and cake. Current and past members of the Uniformed Organisations, friends and anyone associated with the group are warmly invited. To help with numbers, please RSVP by 30 June 2026 to 2ndhighamsparkguides@gmail.com or Debbie Crawford on 07702 165456.",
+  },
+  {
     slug: "our-fear-our-hope-prof-anthony-reddie",
     title: "Our Fear, Our Hope with Prof Anthony Reddie",
     category: "Talks & Learning",
