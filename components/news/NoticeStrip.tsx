@@ -23,9 +23,11 @@ export function NoticeStrip({ notices }: { notices: Notice[] }) {
   return (
     <div aria-label="Noticeboard" className="mt-10 border-t border-ink-900/10 pt-5">
       <div className="flex flex-col gap-3 sm:flex-row sm:gap-8">
-        {/* orange-700 rather than the brand orange-500, which only reaches
-            about 2.3:1 on this forest-100 band. */}
-        <p className="eyebrow shrink-0 !text-orange-700 sm:pt-0.5">Noticeboard</p>
+        {/* Brand orange, chosen deliberately for brand consistency. Note for
+            anyone tuning this later: as text on the forest-100 band it sits at
+            about 2.3:1, below the 4.5:1 WCAG AA asks for at this size, so
+            don't treat it as a precedent for orange body copy. */}
+        <p className="eyebrow shrink-0 !text-orange-500 sm:pt-0.5">Noticeboard</p>
 
         <ul className="flex min-w-0 flex-col gap-2.5">
           {shown.map((notice) => {

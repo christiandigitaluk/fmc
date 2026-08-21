@@ -19,11 +19,6 @@
   --forest-600: #156638;
   --forest-100: #def3e4;
   --orange-500: #f2803d;
-  /* Orange for text on light backgrounds. The brand orange is a fill colour:
-     it carries dark text well, but as text on cream or forest-100 it only
-     reaches about 2.3:1, short of the 4.5:1 small text needs. This darker
-     tone stays in the same family and clears 5:1 on both. */
-  --orange-700: #a84610;
   --orange-100: #fde3cf;
   --cream-50: #fbf8f1;
   --cream-100: #f2eddf;
@@ -124,7 +119,6 @@
   --color-forest-600: var(--forest-600);
   --color-forest-100: var(--forest-100);
   --color-orange-500: var(--orange-500);
-  --color-orange-700: var(--orange-700);
   --color-orange-100: var(--orange-100);
   --color-cream-50: var(--cream-50);
   --color-cream-100: var(--cream-100);
