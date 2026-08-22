@@ -7,6 +7,7 @@ import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { NoticeStrip } from "@/components/news/NoticeStrip";
 import { getChurches, getPosts, getNotices } from "@/lib/content";
+import { cn } from "@/lib/cn";
 
 export default async function HomePage() {
   const [churches, posts, notices] = await Promise.all([getChurches(), getPosts(), getNotices()]);
@@ -40,36 +41,69 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/*
+        With only one article live, a 3-column grid left two-thirds of the
+        row empty and stranded "Read all news" over that blank space. Below
+        three posts, the block narrows to fit what is actually there and the
+        button moves under the cards instead of floating beside the heading.
+        Revert to the plain header-row layout once there are three or more
+        posts and this bit of scaffolding is no longer earning its keep.
+      */}
       <section className="slant-top bg-forest-100">
         <div className="container-max py-16 md:py-24" aria-labelledby="news-heading">
-          <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
-            <div>
-              <p className="eyebrow mb-3">From the circuit</p>
-              <h2 id="news-heading" style={{ fontSize: "var(--text-h2)" }}>
-                News &amp; community stories
-              </h2>
+          <div className={cn("mb-10", latestPosts.length >= 3 ? "mx-auto max-w-none" : "mx-auto max-w-3xl")}>
+            <div
+              className={cn(
+                "mb-10 flex flex-wrap gap-4",
+                latestPosts.length >= 3 ? "items-end justify-between" : "flex-col items-start"
+              )}
+            >
+              <div>
+                <p className="eyebrow mb-3">From the circuit</p>
+                <h2 id="news-heading" style={{ fontSize: "var(--text-h2)" }}>
+                  News &amp; community stories
+                </h2>
+              </div>
+              {latestPosts.length >= 3 && (
+                <Button href="/news" variant="secondary">
+                  Read all news
+                </Button>
+              )}
             </div>
-            <Button href="/news" variant="secondary">
-              Read all news
-            </Button>
-          </div>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {latestPosts.map((post) => (
-              <Card
-                key={post.slug}
-                href={`/news/${post.slug}`}
-                image={post.coverImage}
-                eyebrow={new Date(post.publishedAt).toLocaleDateString("en-GB", {
-                  day: "numeric",
-                  month: "long",
-                  year: "numeric",
-                })}
-                title={post.title}
-                footer="Read more →"
-              >
-                {post.excerpt}
-              </Card>
-            ))}
+
+            <div
+              className={cn(
+                "grid gap-6",
+                latestPosts.length >= 3
+                  ? "sm:grid-cols-2 lg:grid-cols-3"
+                  : latestPosts.length === 2
+                    ? "sm:grid-cols-2"
+                    : "grid-cols-1"
+              )}
+            >
+              {latestPosts.map((post) => (
+                <Card
+                  key={post.slug}
+                  href={`/news/${post.slug}`}
+                  image={post.coverImage}
+                  eyebrow={new Date(post.publishedAt).toLocaleDateString("en-GB", {
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric",
+                  })}
+                  title={post.title}
+                  footer="Read more →"
+                >
+                  {post.excerpt}
+                </Card>
+              ))}
+            </div>
+
+            {latestPosts.length < 3 && (
+              <Button href="/news" variant="secondary" className="mt-6">
+                Read all news
+              </Button>
+            )}
           </div>
 
           <NoticeStrip notices={notices} />

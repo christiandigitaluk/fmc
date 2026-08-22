@@ -1,13 +1,14 @@
 /**
- * Removes the "Reflections from our summer outreach" placeholder post from
- * Sanity. It was filler content written before the churches supplied real
- * news, and it sat directly beneath the launch article inviting people to
- * send in their own stories.
+ * Removes one or more news posts from Sanity by slug.
  *
- * Mirrors the removal from lib/mock/posts.ts so the local fallback and the
- * live dataset stay in step.
+ * Replaces delete-post-summer-outreach.ts, which only ever handled one post
+ * by name. Deletes are permanent in Sanity, so back the document up first if
+ * there is any chance it is wanted back:
  *
- * Run with: npx tsx scripts/delete-post-summer-outreach.ts
+ *   curl -s -G "https://<project>.apicdn.sanity.io/v2026-01-01/data/query/production" \
+ *     --data-urlencode 'query=*[_type=="post" && slug.current=="<slug>"][0]' > backup.json
+ *
+ * Run with: npx tsx scripts/delete-post.ts <slug> [slug ...]
  */
 import { createClient } from "@sanity/client";
 import { readFileSync, existsSync } from "fs";
@@ -40,18 +41,23 @@ const client = createClient({
   useCdn: false,
 });
 
-const ID = "post-reflections-from-our-summer-outreach";
-
 async function main() {
-  const existing = await client.getDocument(ID);
-  if (!existing) {
-    console.log(`nothing to do, "${ID}" is not in the dataset`);
-    return;
+  const slugs = process.argv.slice(2);
+  if (slugs.length === 0) {
+    throw new Error("give at least one post slug, e.g. npx tsx scripts/delete-post.ts my-post-slug");
   }
 
-  await client.delete(ID);
-  console.log(`✓ deleted ${ID}`);
-  console.log(`  was: ${existing.title}`);
+  for (const slug of slugs) {
+    const id = `post-${slug}`;
+    const existing = await client.getDocument(id);
+    if (!existing) {
+      console.log(`nothing to do, "${id}" is not in the dataset`);
+      continue;
+    }
+    await client.delete(id);
+    console.log(`✓ deleted ${id}`);
+    console.log(`  was: ${existing.title}`);
+  }
 }
 
 main().catch((err) => {
