@@ -231,6 +231,7 @@ export const churches: Church[] = [
     postcode: "E17 9HX",
     minister: "Rev Kong Ching Hii",
     email: "kongching.hii@methodist.org.uk",
+    website: "https://www.methodist.org.uk/findachurch/shernhall/",
     image: "/images/shern-hall.jpg",
     description: "There is a welcome waiting on Shernhall Street every Sunday morning. Come as you are, and come as you find us.",
     serviceTimes: [{ day: "Sunday", time: "11:00", label: "Morning Worship" }],
