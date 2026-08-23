@@ -15,7 +15,7 @@ const RESOURCES: Resource[] = [
     title: "Autumn preaching plan",
     description: "Service times, preachers and communion dates for every church, September to November 2026.",
     href: "/documents/preaching-plan-sept-nov-2026.pdf",
-    size: "PDF · 158 KB",
+    size: "PDF · 91 KB",
   },
   {
     title: "Circuit overview map",
