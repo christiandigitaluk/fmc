@@ -15,9 +15,13 @@ export function EventCard({ event, church }: { event: CircuitEvent; church?: Chu
         <Badge tone={CATEGORY_TONE[event.category]} className="mb-3">
           {event.category}
         </Badge>
-        <h3 style={{ fontSize: "var(--text-h3)" }} className="mb-2">
+        {/* h2, not h3: same heading-order gap as QuickActionsGrid — these are
+            the first headings after the page h1, with no h2 between them
+            (Lighthouse). Visual size is set by the inline font-size, so the
+            tag change has no visual effect. */}
+        <h2 style={{ fontSize: "var(--text-h3)" }} className="mb-2">
           {event.title}
-        </h3>
+        </h2>
         <p className="mb-3 text-sm text-[var(--text-body)]">{event.description}</p>
         <div className="flex flex-wrap gap-x-5 gap-y-1 text-sm text-[var(--text-muted)]">
           <span className="flex items-center gap-1.5">

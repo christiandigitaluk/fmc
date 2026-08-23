@@ -35,7 +35,9 @@ export function NewsletterSignup() {
           <h2 id="newsletter-heading" className="max-w-md text-white" style={{ fontSize: "var(--text-h1)" }}>
             Get circuit news in your inbox
           </h2>
-          <p className="mt-4 max-w-md text-white/85" style={{ fontSize: "var(--text-lead)" }}>
+          {/* white/85 measured at 4.35:1 on forest-700, just under the 4.5:1
+              WCAG AA text needs (confirmed via Lighthouse). /90 clears it at 4.68:1. */}
+          <p className="mt-4 max-w-md text-white/90" style={{ fontSize: "var(--text-lead)" }}>
             Service updates, events and stories from across our ten churches, roughly once a month. No spam,
             unsubscribe whenever you like.
           </p>

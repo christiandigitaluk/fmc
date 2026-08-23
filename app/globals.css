@@ -14,7 +14,13 @@
   --ink-900: #1c2b22;
   --ink-800: #223429;
   --ink-600: #4a5a4f;
-  --ink-400: #7a897f;
+  /* Darkened from #7a897f (3.68:1 on white, short of the 4.5:1 WCAG AA
+     text needs at the sizes --text-muted is used at). Same hue, darkened to
+     4.82:1, confirmed by Lighthouse's color-contrast audit across the
+     thirteen places --text-muted renders on white: captions, hints, event
+     metadata, table notes. This is the token's only consumer, so the fix
+     lives here rather than at each call site. */
+  --ink-400: #68756d;
   --forest-700: #1b7a46;
   --forest-600: #156638;
   --forest-100: #def3e4;

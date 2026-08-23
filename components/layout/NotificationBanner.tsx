@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { X } from "lucide-react";
 import type { SiteSettings } from "@/lib/types";
 
@@ -16,9 +15,16 @@ export function NotificationBanner({ settings }: { settings: SiteSettings }) {
         <p className="mx-auto max-w-[calc(100%-56px)] text-sm sm:max-w-none sm:px-10">
           {settings.bannerText}{" "}
           {settings.bannerLinkHref && (
-            <Link href={settings.bannerLinkHref} className="font-bold underline text-cream-50 hover:text-forest-100">
+            // Plain anchor, not next/link: bannerLinkHref is a free-text
+            // settings field, and today it points at a static PDF rather
+            // than an app route. Link's prefetch treats every internal href
+            // as an RSC route and appends ?_rsc=..., which 404s on a file
+            // that isn't one — confirmed live via a Lighthouse console-error
+            // audit. A settings-driven target can't be typed as "always a
+            // route", so a plain anchor is the fix that can't break either way.
+            <a href={settings.bannerLinkHref} className="font-bold underline text-cream-50 hover:text-forest-100">
               {settings.bannerLinkLabel}
-            </Link>
+            </a>
           )}
         </p>
       </div>

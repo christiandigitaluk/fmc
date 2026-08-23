@@ -46,7 +46,11 @@ export function QuickActionsGrid() {
             <span className={cn("flex h-12 w-12 items-center justify-center rounded-full", iconTone)}>
               <Icon size={22} strokeWidth={2} aria-hidden="true" />
             </span>
-            <h3 style={{ fontSize: "var(--text-h3)", color: "inherit" }}>{title}</h3>
+            {/* h2, not h3: this is the first heading level after the hero
+                h1, so h3 skipped a level (flagged by Lighthouse's
+                heading-order audit). Visual size is set entirely by the
+                inline font-size, so the tag change has no visual effect. */}
+            <h2 style={{ fontSize: "var(--text-h3)", color: "inherit" }}>{title}</h2>
             <p className="text-sm opacity-90">{description}</p>
           </Link>
         ))}
