@@ -4,6 +4,7 @@ import { useActionState } from "react";
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
 import { Alert } from "@/components/ui/Alert";
+import { Honeypot } from "@/components/ui/Honeypot";
 import { submitContactForm, type ContactFormState } from "@/app/(site)/contact/actions";
 
 const initialState: ContactFormState = { status: "idle" };
@@ -21,6 +22,7 @@ export function ContactForm() {
 
   return (
     <form action={formAction} className="flex flex-col gap-6" noValidate>
+      <Honeypot />
       {state.status === "error" && (
         <Alert tone="error" title="Something's not right">
           {state.message}

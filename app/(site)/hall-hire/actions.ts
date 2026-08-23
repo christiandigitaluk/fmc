@@ -1,6 +1,7 @@
 "use server";
 
 import { submitBookingRequest } from "@/lib/content";
+import { isHoneypotFilled } from "@/lib/honeypot";
 import type { BookingRequest } from "@/lib/types";
 
 export type HallHireFormState = {
@@ -12,6 +13,13 @@ export async function submitHallHireRequest(
   _prevState: HallHireFormState,
   formData: FormData
 ): Promise<HallHireFormState> {
+  if (isHoneypotFilled(formData)) {
+    return {
+      status: "success",
+      message: "Thank you. Your enquiry has been sent, and a member of our team will be in touch shortly.",
+    };
+  }
+
   const request: BookingRequest = {
     churchSlug: String(formData.get("churchSlug") ?? ""),
     organisation: String(formData.get("organisation") ?? ""),
