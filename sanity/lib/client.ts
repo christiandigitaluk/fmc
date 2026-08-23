@@ -1,11 +1,16 @@
 import { createClient } from "next-sanity";
 import { projectId, dataset, apiVersion } from "@/sanity/env";
 
+// Authenticated so reads keep working once the dataset is switched from
+// public to private. useCdn is false because Sanity's CDN does not serve
+// token-authenticated requests — the client falls back to the API directly
+// either way, but setting it explicitly avoids a runtime warning.
 export const client = createClient({
   projectId: projectId || "placeholder",
   dataset,
   apiVersion,
-  useCdn: true,
+  useCdn: false,
+  token: process.env.SANITY_API_TOKEN,
 });
 
 // Server-only client for writes (booking requests). Requires SANITY_API_TOKEN
