@@ -141,41 +141,42 @@ export function Footer({ settings }: { settings: SiteSettings }) {
 
       <div className="border-t border-white/15 py-6">
         <div className="container-max flex flex-col gap-3 text-xs text-white/60">
-          <ul className="flex flex-wrap items-center gap-x-5 gap-y-2">
-            {LEGAL_LINKS.map((link) =>
-              link.external ? (
-                <li key={link.href}>
-                  <a
-                    href={link.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-white/60 no-underline hover:text-white hover:underline"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ) : (
-                <li key={link.href}>
-                  <Link href={link.href} className="text-white/60 no-underline hover:text-white hover:underline">
-                    {link.label}
-                  </Link>
-                </li>
-              )
-            )}
-          </ul>
-          <p>
-            &copy; {new Date().getFullYear()} Forest Methodist Circuit. A registered charity.
-            <span className="mx-2 text-white/30">&middot;</span>
-            Designed &amp; developed by{" "}
-            <a
-              href="https://satsuma.studio/"
-              target="_blank"
-              rel="noreferrer"
-              className="text-white/60 no-underline hover:text-white hover:underline"
-            >
-              Satsuma
-            </a>
-          </p>
+          <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3">
+            <ul className="flex flex-wrap items-center gap-x-5 gap-y-2">
+              {LEGAL_LINKS.map((link) =>
+                link.external ? (
+                  <li key={link.href}>
+                    <a
+                      href={link.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-white/60 no-underline hover:text-white hover:underline"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ) : (
+                  <li key={link.href}>
+                    <Link href={link.href} className="text-white/60 no-underline hover:text-white hover:underline">
+                      {link.label}
+                    </Link>
+                  </li>
+                )
+              )}
+            </ul>
+            <p>
+              Designed &amp; developed by{" "}
+              <a
+                href="https://satsuma.studio/"
+                target="_blank"
+                rel="noreferrer"
+                className="text-white/60 no-underline hover:text-white hover:underline"
+              >
+                Satsuma
+              </a>
+            </p>
+          </div>
+          <p>&copy; {new Date().getFullYear()} Forest Methodist Circuit. A registered charity.</p>
         </div>
       </div>
     </footer>
