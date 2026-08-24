@@ -10,7 +10,6 @@ export const bookingRequest = defineType({
     defineField({ name: "contactName", title: "Contact name", type: "string" }),
     defineField({ name: "contactEmail", title: "Contact email", type: "string" }),
     defineField({ name: "contactPhone", title: "Contact phone", type: "string" }),
-    defineField({ name: "room", title: "Room requested", type: "string" }),
     defineField({
       name: "orgWebsite",
       title: "Organisation website / social media",

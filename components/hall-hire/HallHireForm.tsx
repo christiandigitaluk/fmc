@@ -58,10 +58,7 @@ export function HallHireForm({ churches, defaultChurchSlug }: { churches: Church
         onChange={(e) => setChurchSlug(e.target.value)}
       />
 
-      <div className="grid gap-6 sm:grid-cols-2">
-        <Input label="Organisation or group name" name="organisation" required placeholder="e.g. Leytonstone Toddler Group" />
-        <Input label="Room or space needed" name="room" placeholder="e.g. Main hall, meeting room" />
-      </div>
+      <Input label="Organisation or group name" name="organisation" required placeholder="e.g. Leytonstone Toddler Group" />
 
       <div className="grid gap-6 sm:grid-cols-2">
         <Input label="Your name" name="contactName" required placeholder="Full name" />
@@ -73,7 +70,12 @@ export function HallHireForm({ churches, defaultChurchSlug }: { churches: Church
         <Input label="Phone number" name="contactPhone" type="tel" placeholder="Optional" />
       </div>
 
-      <Input label="Tell us about your enquiry" name="message" textarea placeholder="Dates, times, numbers attending, and anything else we should know." />
+      <Input
+        label="Tell us about your enquiry"
+        name="message"
+        textarea
+        placeholder="The room or space you need, dates, times, numbers attending, and anything else we should know."
+      />
 
       <Checkbox label="I agree to be contacted about this enquiry" />
 

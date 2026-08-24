@@ -166,7 +166,6 @@ export type BookingRequest = {
   contactName: string;
   contactEmail: string;
   contactPhone: string;
-  room: string;
   /** The enquirer's own website or social media, not the circuit's. Optional. */
   orgWebsite?: string;
   message: string;

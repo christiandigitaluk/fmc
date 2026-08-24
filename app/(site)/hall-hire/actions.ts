@@ -28,7 +28,6 @@ export async function submitHallHireRequest(
     contactName: String(formData.get("contactName") ?? ""),
     contactEmail: String(formData.get("contactEmail") ?? ""),
     contactPhone: String(formData.get("contactPhone") ?? ""),
-    room: String(formData.get("room") ?? ""),
     ...(orgWebsite ? { orgWebsite } : {}),
     message: String(formData.get("message") ?? ""),
   };
