@@ -20,7 +20,7 @@ const LINKS = [
   },
   { label: "London District of the Methodist Church", href: "http://www.methodistlondon.org.uk/" },
   { label: "Wesley's Chapel and Leysian Mission, City Road, London", href: "https://www.wesleyschapel.org.uk/" },
-  { label: "Methodist Central Hall, Storey's Gate, London", href: "https://methodist-central-hall.org.uk/" },
+  { label: "Methodist Central Hall, Storey's Gate, London", href: "https://www.mchw.live/" },
   { label: "The New Room, Bristol", href: "http://www.newroombristol.org.uk/" },
   { label: "Mow Cop, Staffordshire", href: "http://www.methodistheritage.org.uk/mowcop.htm" },
   { label: "Epworth Old Rectory, Lincolnshire", href: "https://www.epwortholdrectory.org.uk/index.php" },
