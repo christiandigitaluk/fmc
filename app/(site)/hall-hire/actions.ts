@@ -20,6 +20,8 @@ export async function submitHallHireRequest(
     };
   }
 
+  const orgWebsite = String(formData.get("orgWebsite") ?? "").trim();
+
   const request: BookingRequest = {
     churchSlug: String(formData.get("churchSlug") ?? ""),
     organisation: String(formData.get("organisation") ?? ""),
@@ -27,7 +29,7 @@ export async function submitHallHireRequest(
     contactEmail: String(formData.get("contactEmail") ?? ""),
     contactPhone: String(formData.get("contactPhone") ?? ""),
     room: String(formData.get("room") ?? ""),
-    requestedDate: String(formData.get("requestedDate") ?? ""),
+    ...(orgWebsite ? { orgWebsite } : {}),
     message: String(formData.get("message") ?? ""),
   };
 

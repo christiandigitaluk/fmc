@@ -65,7 +65,7 @@ export function HallHireForm({ churches, defaultChurchSlug }: { churches: Church
 
       <div className="grid gap-6 sm:grid-cols-2">
         <Input label="Your name" name="contactName" required placeholder="Full name" />
-        <Input label="Requested date" name="requestedDate" type="date" />
+        <Input label="Website or social media" name="orgWebsite" placeholder="Optional" />
       </div>
 
       <div className="grid gap-6 sm:grid-cols-2">
@@ -73,7 +73,7 @@ export function HallHireForm({ churches, defaultChurchSlug }: { churches: Church
         <Input label="Phone number" name="contactPhone" type="tel" placeholder="Optional" />
       </div>
 
-      <Input label="Tell us about your booking" name="message" textarea placeholder="Dates, times, numbers attending, and anything else we should know." />
+      <Input label="Tell us about your enquiry" name="message" textarea placeholder="Dates, times, numbers attending, and anything else we should know." />
 
       <Checkbox label="I agree to be contacted about this enquiry" />
 
