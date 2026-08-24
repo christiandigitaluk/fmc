@@ -13,6 +13,19 @@ export default async function HomePage() {
   const [churches, posts, notices] = await Promise.all([getChurches(), getPosts(), getNotices()]);
   const areas = Array.from(new Set(churches.map((c) => c.area))).sort();
   const latestPosts = posts.slice(0, 3);
+  // Matches the grid layout directly below: below three posts the section
+  // narrows to max-w-3xl (768px) instead of the full container. Card's
+  // default sizes hint assumes the standard 3-up grid, which is wrong here
+  // whenever there are fewer posts — a card can render at up to double what
+  // that hint claims, so the browser fetches an image too small for the box
+  // and quietly upscales it. Only visible as softness on ordinary screens,
+  // since a Retina display's extra pixel density happens to paper over it.
+  const newsCardSizes =
+    latestPosts.length >= 3
+      ? undefined // Card's own default already matches this layout
+      : latestPosts.length === 2
+        ? "(min-width: 640px) 384px, 100vw"
+        : "(min-width: 768px) 768px, 100vw";
 
   return (
     <>
@@ -86,6 +99,7 @@ export default async function HomePage() {
                   key={post.slug}
                   href={`/news/${post.slug}`}
                   image={post.coverImage}
+                  sizes={newsCardSizes}
                   eyebrow={new Date(post.publishedAt).toLocaleDateString("en-GB", {
                     day: "numeric",
                     month: "long",

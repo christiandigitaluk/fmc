@@ -17,6 +17,15 @@ export interface CardProps {
   tone?: CardTone;
   className?: string;
   children?: React.ReactNode;
+  /**
+   * How wide the card's image actually renders, as a next/image `sizes`
+   * string. Defaults to the standard 3-up grid (news listing, church
+   * directory). Pass an explicit value wherever a Card sits in a layout that
+   * doesn't match that — a wrong hint doesn't error, it just makes the
+   * browser fetch an image too small for the box and silently upscale it,
+   * which only shows up as softness on ordinary (non-Retina) screens.
+   */
+  sizes?: string;
 }
 
 const toneClasses: Record<CardTone, string> = {
@@ -40,18 +49,23 @@ const toneHeadingColor: Record<CardTone, string> = {
   ink: "var(--cream-50)",
 };
 
-export function Card({ eyebrow, title, image, imageOverlay, footer, href, tone = "cream", className, children }: CardProps) {
+export function Card({
+  eyebrow,
+  title,
+  image,
+  imageOverlay,
+  footer,
+  href,
+  tone = "cream",
+  className,
+  children,
+  sizes = "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw",
+}: CardProps) {
   const content = (
     <>
       {image && (
         <div className="relative aspect-[3/2] w-full overflow-hidden rounded-t-[8px] border-b-2 border-ink-900">
-          <Image
-            src={image}
-            alt=""
-            fill
-            sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-            className="object-cover"
-          />
+          <Image src={image} alt="" fill sizes={sizes} className="object-cover" />
           {imageOverlay && (
             <div
               className="absolute inset-0"
