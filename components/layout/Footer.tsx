@@ -11,7 +11,7 @@ const FOOTER_LINKS = [
   { href: "/preaching-plan", label: "Preaching plan" },
   { href: "/events", label: "Events" },
   { href: "/news", label: "News" },
-  { href: "/hall-hire", label: "Hall hire" },
+  { href: "/hall-hire", label: "Venue hire" },
   { href: "/jobs", label: "Jobs" },
   { href: "/resources", label: "Resources" },
   { href: "/contact", label: "Contact" },
