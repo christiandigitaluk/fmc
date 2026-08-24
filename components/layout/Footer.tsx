@@ -44,6 +44,10 @@ function isConfiguredSocialUrl(url: string | undefined): url is string {
   }
 }
 
+// Site is still being set up, so social accounts aren't ready to show yet.
+// Flip back to true once the circuit's Facebook/Instagram are live.
+const SHOW_SOCIAL_LINKS = false;
+
 export function Footer({ settings }: { settings: SiteSettings }) {
   const facebookConfigured = isConfiguredSocialUrl(settings.facebookUrl);
   const instagramConfigured = isConfiguredSocialUrl(settings.instagramUrl);
@@ -93,49 +97,53 @@ export function Footer({ settings }: { settings: SiteSettings }) {
               </a>
             </li>
           </ul>
-          <p className="mt-6 mb-3 text-xs font-bold uppercase tracking-wide text-white/70">Follow us</p>
-          <div className="flex items-center gap-3">
-            {facebookConfigured ? (
-              <a
-                href={settings.facebookUrl}
-                aria-label="Forest Circuit on Facebook"
-                className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-ink-900 bg-cream-50 text-ink-900 shadow-[var(--shadow-sticker-sm)] transition-[transform,background-color] duration-200 ease-[cubic-bezier(.22,.61,.36,1)] hover:-rotate-6 hover:bg-orange-500 hover:shadow-[var(--shadow-sticker)] focus:outline-none focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2"
-                style={{ outlineColor: "var(--focus-ring)" }}
-              >
-                <FacebookIcon />
-              </a>
-            ) : (
-              // Not yet linked, since the circuit has no Facebook page live.
-              // Kept visible rather than removed so the brand mark still
-              // reads, but inert: no href, out of tab order, no hover state.
-              <span
-                aria-hidden="true"
-                title="Coming soon"
-                className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-ink-900 bg-cream-50 text-ink-900/40 shadow-[var(--shadow-sticker-sm)]"
-              >
-                <FacebookIcon />
-              </span>
-            )}
-            {instagramConfigured ? (
-              <a
-                href={settings.instagramUrl}
-                aria-label="Forest Circuit on Instagram"
-                className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-ink-900 bg-cream-50 text-ink-900 shadow-[var(--shadow-sticker-sm)] transition-[transform,background-color] duration-200 ease-[cubic-bezier(.22,.61,.36,1)] hover:rotate-6 hover:bg-orange-500 hover:shadow-[var(--shadow-sticker)] focus:outline-none focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2"
-                style={{ outlineColor: "var(--focus-ring)" }}
-              >
-                <InstagramIcon />
-              </a>
-            ) : (
-              <span
-                aria-hidden="true"
-                title="Coming soon"
-                className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-ink-900 bg-cream-50 text-ink-900/40 shadow-[var(--shadow-sticker-sm)]"
-              >
-                <InstagramIcon />
-              </span>
-            )}
-            {!anySocialConfigured && <span className="sr-only">Social media links are coming soon.</span>}
-          </div>
+          {SHOW_SOCIAL_LINKS && (
+            <>
+              <p className="mt-6 mb-3 text-xs font-bold uppercase tracking-wide text-white/70">Follow us</p>
+              <div className="flex items-center gap-3">
+                {facebookConfigured ? (
+                  <a
+                    href={settings.facebookUrl}
+                    aria-label="Forest Circuit on Facebook"
+                    className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-ink-900 bg-cream-50 text-ink-900 shadow-[var(--shadow-sticker-sm)] transition-[transform,background-color] duration-200 ease-[cubic-bezier(.22,.61,.36,1)] hover:-rotate-6 hover:bg-orange-500 hover:shadow-[var(--shadow-sticker)] focus:outline-none focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2"
+                    style={{ outlineColor: "var(--focus-ring)" }}
+                  >
+                    <FacebookIcon />
+                  </a>
+                ) : (
+                  // Not yet linked, since the circuit has no Facebook page live.
+                  // Kept visible rather than removed so the brand mark still
+                  // reads, but inert: no href, out of tab order, no hover state.
+                  <span
+                    aria-hidden="true"
+                    title="Coming soon"
+                    className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-ink-900 bg-cream-50 text-ink-900/40 shadow-[var(--shadow-sticker-sm)]"
+                  >
+                    <FacebookIcon />
+                  </span>
+                )}
+                {instagramConfigured ? (
+                  <a
+                    href={settings.instagramUrl}
+                    aria-label="Forest Circuit on Instagram"
+                    className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-ink-900 bg-cream-50 text-ink-900 shadow-[var(--shadow-sticker-sm)] transition-[transform,background-color] duration-200 ease-[cubic-bezier(.22,.61,.36,1)] hover:rotate-6 hover:bg-orange-500 hover:shadow-[var(--shadow-sticker)] focus:outline-none focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2"
+                    style={{ outlineColor: "var(--focus-ring)" }}
+                  >
+                    <InstagramIcon />
+                  </a>
+                ) : (
+                  <span
+                    aria-hidden="true"
+                    title="Coming soon"
+                    className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-ink-900 bg-cream-50 text-ink-900/40 shadow-[var(--shadow-sticker-sm)]"
+                  >
+                    <InstagramIcon />
+                  </span>
+                )}
+                {!anySocialConfigured && <span className="sr-only">Social media links are coming soon.</span>}
+              </div>
+            </>
+          )}
         </div>
       </div>
 
