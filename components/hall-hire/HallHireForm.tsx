@@ -1,6 +1,7 @@
 "use client";
 
 import { useActionState, useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { Input } from "@/components/ui/Input";
 import { Select } from "@/components/ui/Select";
 import { Checkbox } from "@/components/ui/Checkbox";
@@ -12,17 +13,25 @@ import type { Church } from "@/lib/types";
 
 const initialState: HallHireFormState = { status: "idle" };
 
-export function HallHireForm({ churches, defaultChurchSlug }: { churches: Church[]; defaultChurchSlug?: string }) {
+export function HallHireForm({ churches }: { churches: Church[] }) {
   const [state, formAction, pending] = useActionState(submitHallHireRequest, initialState);
 
   /**
+   * Read client-side rather than passed down from the server. The page
+   * previously read searchParams in its Server Component just to pass this
+   * one value down, which forces the whole route to render fresh on every
+   * request in the App Router — no static caching at all, and a measured
+   * ~1.3s versus ~0.1-0.25s for the site's other pages. useSearchParams here
+   * needs the <Suspense> boundary the page now wraps this component in, but
+   * costs nothing else, and lets the page go back to being static.
+   *
    * Controlled rather than defaultValue. The "Enquire about Wanstead" button
    * on this same page links to ?church=wanstead, which is a same-route
    * navigation: this component never unmounts, so a defaultValue would only
-   * ever reflect the church selected on first load. Syncing on the prop keeps
-   * the select in step with the URL while leaving the visitor free to change
-   * it afterwards.
+   * ever reflect the church selected on first load. Syncing on the URL keeps
+   * the select in step while leaving the visitor free to change it afterwards.
    */
+  const defaultChurchSlug = useSearchParams().get("church") ?? undefined;
   const [churchSlug, setChurchSlug] = useState(defaultChurchSlug ?? "");
 
   useEffect(() => {

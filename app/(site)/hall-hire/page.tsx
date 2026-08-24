@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { HallHireForm } from "@/components/hall-hire/HallHireForm";
 import { WansteadSpotlight } from "@/components/hall-hire/WansteadSpotlight";
 import { PageAccents } from "@/components/ui/PageAccents";
@@ -10,12 +11,8 @@ export const metadata: Metadata = {
   alternates: { canonical: "/hall-hire" },
 };
 
-export default async function HallHirePage({
-  searchParams,
-}: {
-  searchParams: Promise<{ church?: string }>;
-}) {
-  const [churches, params] = await Promise.all([getChurches(), searchParams]);
+export default async function HallHirePage() {
+  const churches = await getChurches();
 
   return (
     <div className="relative container-max max-w-3xl py-14 md:py-20">
@@ -34,7 +31,15 @@ export default async function HallHirePage({
       <h2 id="enquiry" style={{ fontSize: "var(--text-h3)" }} className="mb-6 scroll-mt-28">
         Make an enquiry
       </h2>
-      <HallHireForm churches={churches} defaultChurchSlug={params.church} />
+      {/* Suspense boundary required by useSearchParams inside HallHireForm,
+          which is what lets this page stay static instead of every visit
+          being rendered fresh on the server. The fallback only shows during
+          the initial SSR stream, not on client navigations, so a plain
+          height-matched placeholder is enough — no need to hand-maintain a
+          full field-by-field skeleton that could drift from the real form. */}
+      <Suspense fallback={<div className="h-96 animate-pulse rounded-[10px] bg-white" />}>
+        <HallHireForm churches={churches} />
+      </Suspense>
     </div>
   );
 }
