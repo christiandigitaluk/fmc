@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { LayoutGrid, List as ListIcon, LocateFixed, Loader2, X } from "lucide-react";
 import { Card } from "@/components/ui/Card";
 import { Select } from "@/components/ui/Select";
@@ -17,8 +18,20 @@ import type { Church } from "@/lib/types";
 
 type Origin = { location: LatLng; label: string; source: "postcode" | "place" | "geolocation" };
 
-export function ChurchDirectory({ churches, initialQuery = "" }: { churches: Church[]; initialQuery?: string }) {
-  const [query, setQuery] = useState(initialQuery);
+export function ChurchDirectory({ churches }: { churches: Church[] }) {
+  /**
+   * Read client-side rather than passed down from the server. The page
+   * previously read searchParams in its Server Component just to pass this
+   * one value down, which forces the whole route to render fresh on every
+   * request — no static caching at all. Same fix as HallHireForm.
+   *
+   * No re-sync effect needed here unlike that case: FindAChurchBar only
+   * lives on the home page, so arriving at /churches?q=... is always a
+   * fresh navigation onto this component, not an in-place URL change while
+   * it's already mounted.
+   */
+  const searchParams = useSearchParams();
+  const [query, setQuery] = useState(() => searchParams.get("q") ?? "");
   const [area, setArea] = useState("All areas");
   const [view, setView] = useState<"grid" | "list">("grid");
   const [origin, setOrigin] = useState<Origin | null>(null);

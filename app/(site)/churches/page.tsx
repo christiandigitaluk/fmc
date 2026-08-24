@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { ChurchDirectory } from "@/components/churches/ChurchDirectory";
 import { getChurches } from "@/lib/content";
 
@@ -8,12 +9,8 @@ export const metadata: Metadata = {
   alternates: { canonical: "/churches" },
 };
 
-export default async function ChurchesPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ q?: string }>;
-}) {
-  const [allChurches, params] = await Promise.all([getChurches(), searchParams]);
+export default async function ChurchesPage() {
+  const allChurches = await getChurches();
   const churches = allChurches.filter((c) => c.worshipping !== false);
 
   return (
@@ -26,7 +23,13 @@ export default async function ChurchesPage({
         Every church in Forest Circuit offers a warm welcome, whatever your background or story. Search by name,
         area or postcode to find your nearest congregation.
       </p>
-      <ChurchDirectory churches={churches} initialQuery={params.q ?? ""} />
+      {/* Suspense required by useSearchParams inside ChurchDirectory, which
+          is what lets this page stay static instead of every visit being
+          rendered fresh on the server (same fix as /hall-hire). Fallback
+          only shows during the initial SSR stream, not client navigations. */}
+      <Suspense fallback={<div className="h-96 animate-pulse rounded-[10px] bg-white" />}>
+        <ChurchDirectory churches={churches} />
+      </Suspense>
     </div>
   );
 }
