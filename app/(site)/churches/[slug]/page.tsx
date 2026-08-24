@@ -180,7 +180,7 @@ export default async function ChurchDetailPage({ params }: { params: Promise<{ s
             <p className="mb-4 text-[var(--text-body)]">
               {church.hallHireInfo || "Get in touch to ask what this church has available."}
             </p>
-            <Button href={`/hall-hire?church=${church.slug}`} variant="primary">
+            <Button href={`/venue-hire?church=${church.slug}`} variant="primary">
               Enquire about hiring this space
             </Button>
           </section>

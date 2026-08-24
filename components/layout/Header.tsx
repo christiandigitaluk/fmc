@@ -30,7 +30,7 @@ const NAV_LINKS: NavItem[] = [
   { href: "/preaching-plan", label: "Preaching plan" },
   { href: "/events", label: "Events" },
   { href: "/news", label: "News" },
-  { href: "/hall-hire", label: "Venue hire" },
+  { href: "/venue-hire", label: "Venue hire" },
   { href: "/contact", label: "Contact" },
 ];
 
@@ -44,7 +44,7 @@ const MOBILE_LINKS: SimpleNavItem[] = [
   { href: "/preaching-plan", label: "Preaching plan" },
   { href: "/events", label: "Events" },
   { href: "/news", label: "News" },
-  { href: "/hall-hire", label: "Venue hire" },
+  { href: "/venue-hire", label: "Venue hire" },
   { href: "/jobs", label: "Jobs" },
   { href: "/contact", label: "Contact" },
 ];

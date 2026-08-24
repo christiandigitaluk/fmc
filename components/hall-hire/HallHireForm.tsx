@@ -8,7 +8,7 @@ import { Checkbox } from "@/components/ui/Checkbox";
 import { Button } from "@/components/ui/Button";
 import { Alert } from "@/components/ui/Alert";
 import { Honeypot } from "@/components/ui/Honeypot";
-import { submitHallHireRequest, type HallHireFormState } from "@/app/(site)/hall-hire/actions";
+import { submitHallHireRequest, type HallHireFormState } from "@/app/(site)/venue-hire/actions";
 import type { Church } from "@/lib/types";
 
 const initialState: HallHireFormState = { status: "idle" };

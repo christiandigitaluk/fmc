@@ -98,7 +98,7 @@ export function WansteadSpotlight({ website }: { website?: string }) {
             </p>
 
             <div className="flex flex-wrap items-center gap-3">
-              <Button href="/hall-hire?church=wanstead#enquiry" variant="primary">
+              <Button href="/venue-hire?church=wanstead#enquiry" variant="primary">
                 Enquire about Wanstead
               </Button>
               {website && (

@@ -6,9 +6,9 @@ import { PageAccents } from "@/components/ui/PageAccents";
 import { getChurches } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "Hall & premises hire",
+  title: "Venue hire",
   description: "Enquire about hiring a hall or meeting space at one of our ten churches across East London and Essex.",
-  alternates: { canonical: "/hall-hire" },
+  alternates: { canonical: "/venue-hire" },
 };
 
 export default async function HallHirePage() {

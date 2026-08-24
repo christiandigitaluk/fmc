@@ -41,6 +41,16 @@ const nextConfig: NextConfig = {
   async headers() {
     return [{ source: "/:path*", headers: SECURITY_HEADERS }];
   },
+  async redirects() {
+    return [
+      // The nav link was renamed from "Hall hire" to "Venue hire" and the
+      // route with it. Nothing is indexed under the real domain yet, so
+      // there's no SEO history to protect, but this catches anyone who
+      // already bookmarked or was sent the old /hall-hire link. Query
+      // strings (?church=...) carry through automatically.
+      { source: "/hall-hire", destination: "/venue-hire", permanent: true },
+    ];
+  },
 };
 
 export default nextConfig;

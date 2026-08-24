@@ -28,7 +28,7 @@ const ACTIONS = [
     iconTone: "bg-forest-700 text-white",
   },
   {
-    href: "/hall-hire",
+    href: "/venue-hire",
     icon: Building2,
     title: "Hall & premises hire",
     description: "Warm, affordable spaces for local groups, classes and celebrations.",

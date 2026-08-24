@@ -25,7 +25,7 @@ export default async function ChurchesPage() {
       </p>
       {/* Suspense required by useSearchParams inside ChurchDirectory, which
           is what lets this page stay static instead of every visit being
-          rendered fresh on the server (same fix as /hall-hire). Fallback
+          rendered fresh on the server (same fix as /venue-hire). Fallback
           only shows during the initial SSR stream, not client navigations. */}
       <Suspense fallback={<div className="h-96 animate-pulse rounded-[10px] bg-white" />}>
         <ChurchDirectory churches={churches} />

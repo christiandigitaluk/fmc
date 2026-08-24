@@ -12,7 +12,7 @@ const STATIC_ROUTES = [
   "/preaching-plan",
   "/events",
   "/news",
-  "/hall-hire",
+  "/venue-hire",
   "/jobs",
   "/contact",
   "/privacy",
