@@ -151,7 +151,7 @@ export function Footer({ settings }: { settings: SiteSettings }) {
               rel="noreferrer"
               className="text-white/60 no-underline hover:text-white hover:underline"
             >
-              Satsuma Studio
+              Satsuma
             </a>
           </p>
           <ul className="flex flex-wrap items-center gap-x-5 gap-y-2">
