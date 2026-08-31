@@ -31,15 +31,22 @@ export function WansteadSpotlight({ website }: { website?: string }) {
   return (
     <section aria-labelledby="wanstead-spotlight-heading" className="mb-12">
       <details
-        className="sticker overflow-hidden rounded-[20px] bg-white [&_summary::-webkit-details-marker]:hidden"
-        style={{ borderColor: "var(--orange-500)" }}
+        className="wanstead-card sticker overflow-hidden rounded-[20px] bg-white [&_summary::-webkit-details-marker]:hidden"
       >
         <summary className="flex cursor-pointer list-none items-start gap-4 p-6 focus:outline-none focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:[outline-color:var(--focus-ring)]">
           <div className="min-w-0 flex-1">
-            <span className="sticker mb-3 inline-flex -rotate-1 items-center rounded-full bg-orange-500 px-4 py-1.5 text-xs font-extrabold uppercase tracking-wide text-ink-900">
+            <span className="wanstead-badge sticker mb-3 inline-flex items-center rounded-full bg-orange-500 px-4 py-1.5 text-xs font-extrabold uppercase tracking-wide text-ink-900 sm:-rotate-1">
               Now seeking hirers
             </span>
-            <h2 id="wanstead-spotlight-heading" style={{ fontSize: "var(--text-h3)" }} className="mb-2">
+            {/* Same size as "Make an enquiry" below (text-h3) from sm up,
+                where the two sit further apart with room to be equals. On a
+                phone, stepped down to text-lead so the enquiry heading reads
+                as the clearly primary one once this card is no longer loud
+                enough to compete with it visually. */}
+            <h2
+              id="wanstead-spotlight-heading"
+              className="mb-2 text-[length:var(--text-lead)] sm:text-[length:var(--text-h3)]"
+            >
               Wanstead: a venue with room for more
             </h2>
             {/* Hidden on mobile. The badge and heading already say what this
