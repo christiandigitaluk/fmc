@@ -31,21 +31,27 @@ export function WansteadSpotlight({ website }: { website?: string }) {
   return (
     <section aria-labelledby="wanstead-spotlight-heading" className="mb-12">
       <details
-        className="wanstead-card sticker overflow-hidden rounded-[20px] bg-white [&_summary::-webkit-details-marker]:hidden"
+        className="sticker overflow-hidden rounded-[10px] bg-white [&_summary::-webkit-details-marker]:hidden sm:rounded-[20px]"
+        style={{ borderColor: "var(--orange-500)" }}
       >
-        <summary className="flex cursor-pointer list-none items-start gap-4 p-6 focus:outline-none focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:[outline-color:var(--focus-ring)]">
+        {/* Sized like a Noticeboard card on mobile (p-5, rounded-[10px],
+            a small bold title, badge at px-3 py-1) rather than muted: those
+            cards keep the full loud sticker/orange treatment and still read
+            as minor, purely because they're compact. The earlier attempt
+            toned down colour and shadow instead, which missed the actual
+            cause. Grows back to the original spacious layout from sm up. */}
+        <summary className="flex cursor-pointer list-none items-start gap-4 p-5 focus:outline-none focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:[outline-color:var(--focus-ring)] sm:p-6">
           <div className="min-w-0 flex-1">
-            <span className="wanstead-badge sticker mb-3 inline-flex items-center rounded-full bg-orange-500 px-4 py-1.5 text-xs font-extrabold uppercase tracking-wide text-ink-900 sm:-rotate-1">
+            <span className="sticker mb-2 inline-flex items-center rounded-full bg-orange-500 px-3 py-1 text-xs font-extrabold uppercase tracking-wide text-ink-900 sm:mb-3 sm:-rotate-1 sm:px-4 sm:py-1.5">
               Now seeking hirers
             </span>
-            {/* Same size as "Make an enquiry" below (text-h3) from sm up,
-                where the two sit further apart with room to be equals. On a
-                phone, stepped down to text-lead so the enquiry heading reads
-                as the clearly primary one once this card is no longer loud
-                enough to compete with it visually. */}
+            {/* Body-text size and weight on mobile, matching a Noticeboard
+                title; grows to the full text-h3 heading (same size as "Make
+                an enquiry" below) from sm up, where there's room for the two
+                to sit as equals. */}
             <h2
               id="wanstead-spotlight-heading"
-              className="mb-2 text-[length:var(--text-lead)] sm:text-[length:var(--text-h3)]"
+              className="mb-1.5 text-[length:var(--text-body-size)] font-bold sm:mb-2 sm:text-[length:var(--text-h3)]"
             >
               Wanstead: a venue with room for more
             </h2>

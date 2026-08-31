@@ -260,37 +260,6 @@
   transform: translate(3px, 3px);
 }
 
-/* Wanstead spotlight, below sm: the full sticker treatment (thick border,
-   hard shadow, orange accent) is what every button and CTA on the site
-   uses to say "the one thing to do here." On a phone, that made the card
-   read as the single path to hiring a hall, when it is one option among
-   ten covered by the form directly beneath it. Two classes beats plain
-   .sticker on specificity, so this needs no !important; from sm up, the
-   media query stops applying and .sticker's own rules take back over
-   unchanged. */
-@media (max-width: 639px) {
-  .wanstead-card.sticker {
-    border: 1px solid var(--line-200);
-    box-shadow: none;
-  }
-  .wanstead-badge.sticker {
-    border: none;
-    box-shadow: none;
-    background: var(--cream-100);
-    color: var(--ink-600);
-  }
-}
-/* From sm up, .sticker's own `border` shorthand (2px solid ink-900) resets
-   border-color same-specificity race, wins the color back here explicitly
-   rather than depending on source order against a Tailwind utility class,
-   which is fragile and was in fact losing. Two classes beats plain
-   .sticker regardless of which rule the bundler emits second. */
-@media (min-width: 640px) {
-  .wanstead-card.sticker {
-    border-color: var(--orange-500);
-  }
-}
-
 /* Visible AAA-friendly focus ring on every interactive element */
 :focus-visible {
   outline: 3px solid var(--focus-ring);
