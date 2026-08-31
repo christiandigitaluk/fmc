@@ -53,8 +53,13 @@ export function WansteadSpotlight({ website }: { website?: string }) {
           </div>
 
           <span className="mt-1 flex shrink-0 items-center gap-1.5 text-sm font-semibold text-forest-600">
-            <span className="when-collapsed hidden sm:inline">See more</span>
-            <span className="when-expanded hidden sm:inline">See less</span>
+            {/* Visible at every width, not just sm+: a bare chevron on this
+                sticker-bordered card reads as a button leading somewhere,
+                not as a disclosure toggle, and mobile visitors were tapping
+                it expecting navigation. The label is what says "this just
+                expands in place." */}
+            <span className="when-collapsed">See more</span>
+            <span className="when-expanded">See less</span>
             <ChevronDown size={18} aria-hidden="true" className="disclosure-chevron" />
           </span>
         </summary>
