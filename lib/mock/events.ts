@@ -65,4 +65,14 @@ export const events: CircuitEvent[] = [
     description:
       "Worship at 10.30am with visiting preacher Emma Nash, from the Methodist Connexional Evangelism and Growth team, followed at 12 by a workshop Emma is leading. Emma says: “Bring your packed lunch and gather with others for an evangelism workshop that’s practical, down-to-earth, and doesn’t assume we’re all happy preaching to strangers. I will help us all explore how we meet with God, how to have simple faith conversations, and how we might weave faith-sharing into church activities we’re already doing.”",
   },
+  {
+    slug: "black-history-month-notting-hill-carnival",
+    title: "Black History Month: 60 Years of Notting Hill Carnival",
+    category: "Special Services",
+    startDateTime: "2026-10-17T17:30:00",
+    endDateTime: "2026-10-17T21:00:00",
+    churchSlug: "shern-hall",
+    description:
+      "A fundraising evening of spoken word, music and thanksgiving celebrating 60 years of Notting Hill Carnival, featuring the Shern Hall Methodist Youth Steelband and more exciting acts. Light refreshments served. Adults £15, ages 12–18 £5, under 11s free — donations welcome. Call 0208 503 6750 or 0208 550 2763.",
+  },
 ];
