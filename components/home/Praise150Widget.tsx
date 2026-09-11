@@ -116,7 +116,7 @@ export function Praise150Widget() {
               type="button"
               onClick={() => setExpanded(false)}
               aria-label="Close"
-              className="absolute -right-3 -top-3 flex h-9 w-9 items-center justify-center rounded-full border-2 border-ink-900 bg-white text-ink-900 transition-transform hover:scale-110"
+              className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full border-2 border-ink-900 bg-white text-ink-900 transition-transform hover:scale-110"
             >
               <X size={18} strokeWidth={3} aria-hidden="true" />
             </button>
