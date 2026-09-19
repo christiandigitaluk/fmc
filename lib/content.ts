@@ -9,7 +9,7 @@ import { events as mockEvents } from "@/lib/mock/events";
 import { preachingPlan as mockPreachingPlan } from "@/lib/mock/preachingPlan";
 import { siteSettings as mockSettings } from "@/lib/mock/settings";
 import { jobVacancies as mockJobVacancies } from "@/lib/mock/jobVacancies";
-import { resolveEventOccurrences } from "@/lib/recurrence";
+import { resolveEventOccurrences, toLocalIso } from "@/lib/recurrence";
 import type {
   Church,
   Post,
@@ -139,7 +139,10 @@ export async function getEvents(): Promise<CircuitEvent[]> {
   );
   const cleaned = events.map((e) => cleanStructural(e, ["slug", "churchSlug", "image"]));
   const resolved = resolveEventOccurrences(cleaned);
-  return resolved.sort((a, b) => a.startDateTime.localeCompare(b.startDateTime));
+  const now = toLocalIso(new Date());
+  return resolved
+    .filter((e) => e.endDateTime >= now)
+    .sort((a, b) => a.startDateTime.localeCompare(b.startDateTime));
 }
 
 export async function getEvent(slug: string): Promise<CircuitEvent | undefined> {

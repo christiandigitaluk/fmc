@@ -4,7 +4,7 @@ function pad(n: number): string {
   return String(n).padStart(2, "0");
 }
 
-function toLocalIso(d: Date): string {
+export function toLocalIso(d: Date): string {
   return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
 }
 
