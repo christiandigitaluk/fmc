@@ -254,7 +254,7 @@ export function Header({ settings }: { settings: SiteSettings }) {
             <Image
               src="/images/logo-horizontal-ink.png"
               alt=""
-              width={2679}
+              width={2165}
               height={431}
               className="hidden h-10 w-auto sm:block md:h-11 xl:h-14"
             />
