@@ -2,7 +2,6 @@ import { Hero } from "@/components/home/Hero";
 import { FindAChurchBar } from "@/components/home/FindAChurchBar";
 import { QuickActionsGrid } from "@/components/home/QuickActionsGrid";
 import { CircuitMap } from "@/components/home/CircuitMap";
-import { Praise150Widget } from "@/components/home/Praise150Widget";
 import { SectionDivider } from "@/components/ui/SectionDivider";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
@@ -124,8 +123,6 @@ export default async function HomePage() {
           <NoticeStrip notices={notices} />
         </div>
       </section>
-
-      <Praise150Widget />
     </>
   );
 }

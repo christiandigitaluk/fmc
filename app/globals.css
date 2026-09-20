@@ -397,30 +397,6 @@ details:not([open]) > summary .when-expanded {
   }
 }
 
-/* Floating promo widget's entrance — a small pop up from the corner it's
-   anchored to, so it reads as arriving from off-screen rather than fading
-   in over the page. */
-@keyframes widget-in {
-  from {
-    transform: translateY(16px) scale(0.9);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0) scale(1);
-    opacity: 1;
-  }
-}
-
-.animate-widget-in {
-  animation: widget-in 320ms var(--ease-brand) both;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .animate-widget-in {
-    animation-duration: 1ms;
-  }
-}
-
 .drawer-link {
   animation: link-in 320ms var(--ease-brand) both;
 }
