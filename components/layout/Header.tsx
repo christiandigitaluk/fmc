@@ -250,7 +250,14 @@ export function Header({ settings }: { settings: SiteSettings }) {
       >
         <div className="container-max flex items-center justify-between py-3.5">
           <Link href="/" className="flex shrink-0 items-center" aria-label="Forest Circuit home">
-            <Image src="/images/logo-ink.png" alt="" width={112} height={112} className="h-20 w-20 xl:h-28 xl:w-28" />
+            <Image src="/images/logo-ink.png" alt="" width={112} height={112} className="h-20 w-20 sm:hidden" />
+            <Image
+              src="/images/logo-horizontal-ink.png"
+              alt=""
+              width={2679}
+              height={431}
+              className="hidden h-10 w-auto sm:block md:h-11 xl:h-14"
+            />
           </Link>
 
           <nav aria-label="Primary" className="hidden xl:block" ref={navRef}>
