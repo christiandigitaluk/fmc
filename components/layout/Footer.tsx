@@ -15,6 +15,7 @@ const FOOTER_LINKS = [
   { href: "/jobs", label: "Jobs" },
   { href: "/resources", label: "Resources" },
   { href: "/contact", label: "Contact" },
+  { href: "/feedback", label: "Website feedback" },
 ];
 
 const LEGAL_LINKS = [
