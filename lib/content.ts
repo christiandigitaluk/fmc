@@ -21,6 +21,7 @@ import type {
   BookingRequest,
   NewsletterSignup,
   ContactMessage,
+  WebsiteFeedback,
 } from "@/lib/types";
 
 /**
@@ -204,6 +205,19 @@ export async function submitContactMessage(contact: ContactMessage): Promise<{ o
   }
   try {
     await writeClient.create({ _type: "contactMessage", ...contact, status: "new" });
+    return { ok: true };
+  } catch {
+    return { ok: false };
+  }
+}
+
+export async function submitWebsiteFeedback(feedback: WebsiteFeedback): Promise<{ ok: boolean }> {
+  if (!isSanityConfigured) {
+    console.info("[feedback] mock feedback received", feedback);
+    return { ok: true };
+  }
+  try {
+    await writeClient.create({ _type: "websiteFeedback", ...feedback, status: "new" });
     return { ok: true };
   } catch {
     return { ok: false };

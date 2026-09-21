@@ -183,3 +183,13 @@ export type ContactMessage = {
   subject: string;
   message: string;
 };
+
+export type WebsiteFeedback = {
+  respondentType: string;
+  easeOfUse: string;
+  overallRating: string;
+  recommend: string;
+  comments?: string;
+  name?: string;
+  email?: string;
+};

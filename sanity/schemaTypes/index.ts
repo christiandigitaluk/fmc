@@ -8,6 +8,7 @@ import { newsletterSignup } from "./newsletterSignup";
 import { contactMessage } from "./contactMessage";
 import { jobVacancy } from "./jobVacancy";
 import { siteSettings } from "./siteSettings";
+import { websiteFeedback } from "./websiteFeedback";
 
 export const schemaTypes = [
   church,
@@ -20,4 +21,5 @@ export const schemaTypes = [
   contactMessage,
   jobVacancy,
   siteSettings,
+  websiteFeedback,
 ];
