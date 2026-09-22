@@ -18,4 +18,5 @@ export const structure: StructureResolver = (S) =>
       S.documentTypeListItem("bookingRequest").title("Hall hire requests"),
       S.documentTypeListItem("newsletterSignup").title("Newsletter signups"),
       S.documentTypeListItem("contactMessage").title("Contact messages"),
+      S.documentTypeListItem("websiteFeedback").title("Website feedback"),
     ]);
