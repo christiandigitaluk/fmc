@@ -75,4 +75,32 @@ export const events: CircuitEvent[] = [
     description:
       "A fundraising evening of spoken word, music and thanksgiving celebrating 60 years of Notting Hill Carnival, featuring the Shern Hall Methodist Youth Steelband and more exciting acts. Light refreshments served. Adults £15, ages 12–18 £5, under 11s free — donations welcome. Call 0208 503 6750 or 0208 550 2763.",
   },
+  {
+    slug: "peoples-emergency-briefing-loughton",
+    title: "People's Emergency Briefing: Community Screening",
+    category: "Talks & Learning",
+    startDateTime: "2026-10-14T19:30:00",
+    endDateTime: "2026-10-14T21:00:00",
+    churchSlug: "loughton",
+    description:
+      "A screening of the People's Emergency Briefing, a 50 minute film on what climate change means for everyday life in the UK, hosted with the Emergency Planning Society.",
+  },
+  {
+    slug: "eco-exhibition-loughton-day-1",
+    title: "Eco Exhibition",
+    category: "Community",
+    startDateTime: "2026-10-16T10:00:00",
+    endDateTime: "2026-10-16T16:00:00",
+    churchSlug: "loughton",
+    description: "Energy saving ideas and planet saving thoughts. Drop in any time between 10am and 4pm.",
+  },
+  {
+    slug: "eco-exhibition-loughton-day-2",
+    title: "Eco Exhibition",
+    category: "Community",
+    startDateTime: "2026-10-17T10:00:00",
+    endDateTime: "2026-10-17T16:00:00",
+    churchSlug: "loughton",
+    description: "Energy saving ideas and planet saving thoughts. Drop in any time between 10am and 4pm.",
+  },
 ];
