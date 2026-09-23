@@ -27,7 +27,11 @@ export const notices: Notice[] = [
     title: "Our Fear, Our Hope",
     summary:
       "Professor Anthony Reddie, one of Britain's foremost Black theologians, explores the afterlife through cultural, theological and pastoral perspectives. Saturday 3 October, 10am, at Shern Hall Methodist Church.",
+    // Deadline still drives expiry (the notice comes off the site after the
+    // event), but the badge shows this label instead of "Closes 3 Oct".
     deadline: "2026-10-03",
+    label: "Book free tickets",
+    highlight: "One not to miss.",
     url: "https://www.eventbrite.com/e/our-fear-our-hope-with-prof-anthony-reddie-tickets-1995663566449",
   },
 ];

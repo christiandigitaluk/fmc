@@ -25,6 +25,11 @@ function NoticeBody({ notice }: { notice: Notice }) {
         {noticeBadge(notice)}
       </span>
       <p className="mb-1.5 font-bold text-[var(--text-heading)]">{notice.title}</p>
+      {notice.highlight && (
+        <p className="mb-1.5 text-sm font-bold" style={{ color: "var(--orange-500)" }}>
+          {notice.highlight}
+        </p>
+      )}
       <p className="text-sm text-[var(--text-body)]">{notice.summary}</p>
       {notice.url && (
         <span className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-forest-600">

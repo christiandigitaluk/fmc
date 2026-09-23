@@ -22,8 +22,10 @@ export type Notice = {
    * once the date has passed, so nothing goes stale on the page.
    */
   deadline?: string;
-  /** Badge text when there is no deadline, e.g. "Opportunity". */
+  /** Badge text. Falls back to "Closes {deadline}" when unset and there is a deadline, otherwise "Opportunity". */
   label?: string;
+  /** Short bold callout shown above the summary, e.g. "One not to miss." Optional. */
+  highlight?: string;
   /** Where the notice points, usually off site. */
   url?: string;
 };

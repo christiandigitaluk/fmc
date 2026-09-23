@@ -35,7 +35,14 @@ export const notice = defineType({
       name: "label",
       title: "Badge label",
       type: "string",
-      description: 'Used only when there is no deadline. Defaults to "Opportunity".',
+      description:
+        'Overrides the badge text, e.g. "Book free tickets" instead of "Closes 3 Oct". Leave blank to show the deadline, or "Opportunity" if there is none.',
+    }),
+    defineField({
+      name: "highlight",
+      title: "Highlight",
+      type: "string",
+      description: 'Optional short bold callout above the summary, e.g. "One not to miss."',
     }),
     defineField({
       name: "url",

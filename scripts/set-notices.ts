@@ -56,6 +56,7 @@ async function main() {
       summary: notice.summary,
       ...(notice.deadline ? { deadline: notice.deadline } : {}),
       ...(notice.label ? { label: notice.label } : {}),
+      ...(notice.highlight ? { highlight: notice.highlight } : {}),
       ...(notice.url ? { url: notice.url } : {}),
     });
 
