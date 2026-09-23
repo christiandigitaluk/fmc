@@ -4,11 +4,10 @@ import { Badge } from "@/components/ui/Badge";
 import { IcsExportButton } from "@/components/events/IcsExportButton";
 import { CATEGORY_TONE } from "@/lib/eventCategoryStyles";
 import { eventLocation } from "@/lib/eventLocation";
+import { formatEventDate } from "@/lib/eventDate";
 import type { CircuitEvent, Church } from "@/lib/types";
 
 export function EventCard({ event, church }: { event: CircuitEvent; church?: Church }) {
-  const start = new Date(event.startDateTime);
-
   return (
     <li className="flex flex-col gap-3 rounded-[10px] border border-line-200 bg-white p-6 shadow-[var(--shadow-card)] sm:flex-row sm:items-start sm:justify-between">
       <div>
@@ -26,9 +25,7 @@ export function EventCard({ event, church }: { event: CircuitEvent; church?: Chu
         <div className="flex flex-wrap gap-x-5 gap-y-1 text-sm text-[var(--text-muted)]">
           <span className="flex items-center gap-1.5">
             <CalendarDays size={16} aria-hidden="true" />
-            {start.toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "long", year: "numeric" })}
-            {" · "}
-            {start.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" })}
+            {formatEventDate(event)}
           </span>
           {church && (
             <span className="flex items-center gap-1.5">
@@ -49,7 +46,7 @@ export function EventCard({ event, church }: { event: CircuitEvent; church?: Chu
             rel="noopener noreferrer"
             className="text-sm font-semibold text-forest-600 underline"
           >
-            Get tickets ↗
+            Book your place ↗
           </a>
         )}
       </div>

@@ -84,23 +84,16 @@ export const events: CircuitEvent[] = [
     churchSlug: "loughton",
     description:
       "A screening of the People's Emergency Briefing, a 50 minute film on what climate change means for everyday life in the UK, hosted with the Emergency Planning Society.",
+    ticketUrl: "https://loughtonmethodistchurch.churchsuite.com/events/t137h14a",
   },
   {
-    slug: "eco-exhibition-loughton-day-1",
+    slug: "eco-exhibition-loughton",
     title: "Eco Exhibition",
     category: "Community",
     startDateTime: "2026-10-16T10:00:00",
-    endDateTime: "2026-10-16T16:00:00",
-    churchSlug: "loughton",
-    description: "Energy saving ideas and planet saving thoughts. Drop in any time between 10am and 4pm.",
-  },
-  {
-    slug: "eco-exhibition-loughton-day-2",
-    title: "Eco Exhibition",
-    category: "Community",
-    startDateTime: "2026-10-17T10:00:00",
     endDateTime: "2026-10-17T16:00:00",
     churchSlug: "loughton",
-    description: "Energy saving ideas and planet saving thoughts. Drop in any time between 10am and 4pm.",
+    description:
+      "Energy saving ideas and planet saving thoughts. Drop in any time between 10am and 4pm on either day.",
   },
 ];
