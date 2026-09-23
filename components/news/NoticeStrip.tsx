@@ -4,7 +4,7 @@ import { noticeBadge, firstSentence } from "@/lib/notice";
 import type { Notice } from "@/lib/types";
 
 /** Never more than this on the home page, however many are live. */
-const MAX = 2;
+const MAX = 3;
 
 /**
  * Noticeboard items as a quiet footnote under the home page news cards.
