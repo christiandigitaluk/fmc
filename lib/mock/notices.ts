@@ -22,4 +22,12 @@ export const notices: Notice[] = [
     label: "Now seeking hirers",
     url: "https://wansteadmethodists.org.uk",
   },
+  {
+    slug: "our-fear-our-hope-prof-anthony-reddie",
+    title: "Our Fear, Our Hope",
+    summary:
+      "Professor Anthony Reddie, one of Britain's foremost Black theologians, explores the afterlife through cultural, theological and pastoral perspectives. Saturday 3 October, 10am, at Shern Hall Methodist Church.",
+    deadline: "2026-10-03",
+    url: "https://www.eventbrite.com/e/our-fear-our-hope-with-prof-anthony-reddie-tickets-1995663566449",
+  },
 ];
