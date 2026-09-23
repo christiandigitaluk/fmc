@@ -23,6 +23,18 @@ export const notices: Notice[] = [
     url: "https://wansteadmethodists.org.uk",
   },
   {
+    slug: "fcens-volunteer-support-workers",
+    title: "FCENS Volunteer Support Workers",
+    summary:
+      "Forest Churches Emergency Night Shelter needs volunteers for their Drop-In service, supporting people experiencing homelessness in Waltham Forest. No experience needed, full training and support provided.",
+    // No deadline: this is an ongoing recruitment drive, so the badge
+    // carries the label instead and the notice stays up until it is
+    // removed in Studio.
+    label: "Now recruiting",
+    highlight: "Help make a difference.",
+    url: "https://forestnightshelter.org.uk",
+  },
+  {
     slug: "our-fear-our-hope-prof-anthony-reddie",
     title: "Our Fear, Our Hope",
     summary:
