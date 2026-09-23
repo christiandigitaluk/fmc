@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { noticeBadge, firstSentence } from "@/lib/notice";
 import type { Notice } from "@/lib/types";
@@ -31,12 +32,10 @@ export function NoticeStrip({ notices }: { notices: Notice[] }) {
 
         <ul className="flex min-w-0 flex-col gap-2.5">
           {shown.map((notice) => {
-            const external = Boolean(notice.url);
             return (
               <li key={notice.slug} className="min-w-0">
-                <a
-                  href={notice.url ?? "/news"}
-                  {...(external ? { target: "_blank", rel: "noreferrer" } : {})}
+                <Link
+                  href="/news#noticeboard-heading"
                   className="group inline text-sm text-[var(--text-body)] no-underline"
                 >
                   <span
@@ -50,7 +49,7 @@ export function NoticeStrip({ notices }: { notices: Notice[] }) {
                     {noticeBadge(notice)}
                     <ArrowUpRight size={14} className="ml-0.5 inline align-[-2px]" aria-hidden="true" />
                   </span>
-                </a>
+                </Link>
               </li>
             );
           })}
