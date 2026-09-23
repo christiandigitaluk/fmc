@@ -6,6 +6,7 @@ export const notices: Notice[] = [
     title: "Leadership Year",
     summary:
       "Twelve fully funded places for 18 to 30s, across three residential weekends at Cliff College. Travel and meals covered.",
+    highlight: "Fully funded, apply today.",
     deadline: "2026-09-20",
     // Tracking parameters from the Methodist News email are deliberately
     // stripped: the utm tags would log our visitors as their campaign's
@@ -20,6 +21,7 @@ export const notices: Notice[] = [
     // No deadline: this is an ongoing search, so the badge carries the label
     // instead and the notice stays up until it is removed in Studio.
     label: "Now seeking hirers",
+    highlight: "Room to grow your group.",
     url: "https://wansteadmethodists.org.uk",
   },
   {
