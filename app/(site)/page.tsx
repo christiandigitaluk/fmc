@@ -63,7 +63,12 @@ export default async function HomePage() {
         posts and this bit of scaffolding is no longer earning its keep.
       */}
       <section className="slant-top bg-forest-100">
-        <div className="container-max py-16 md:py-24" aria-labelledby="news-heading">
+        {/* Bottom padding is deliberately smaller than the top: the top
+            needs room for the slant-top clip, but the bottom runs straight
+            into the newsletter band below, and the noticeboard strip that
+            now ends the section is only a few lines of inline text — the
+            full 96px used to read as a lot of bare green underneath it. */}
+        <div className="container-max pt-16 pb-8 md:pt-24 md:pb-12" aria-labelledby="news-heading">
           <div className={cn("mb-10", latestPosts.length >= 3 ? "mx-auto max-w-none" : "mx-auto max-w-3xl")}>
             <div
               className={cn(
