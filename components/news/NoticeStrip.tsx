@@ -35,7 +35,7 @@ export function NoticeStrip({ notices }: { notices: Notice[] }) {
             return (
               <li key={notice.slug} className="min-w-0">
                 <Link
-                  href="/news#noticeboard-heading"
+                  href={`/news#${notice.slug}`}
                   className="group inline text-sm text-[var(--text-body)] no-underline"
                 >
                   <span

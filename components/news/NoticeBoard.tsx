@@ -56,7 +56,7 @@ export function NoticeBoard({ notices }: { notices: Notice[] }) {
 
       <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {notices.map((notice, i) => (
-          <li key={notice.slug} className={i % 2 === 0 ? "-rotate-1" : "rotate-1"}>
+          <li key={notice.slug} id={notice.slug} className={i % 2 === 0 ? "-rotate-1" : "rotate-1"}>
             {notice.url ? (
               <a
                 href={notice.url}

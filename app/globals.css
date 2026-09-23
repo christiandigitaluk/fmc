@@ -178,6 +178,17 @@
     scroll-behavior: smooth;
     overflow-x: hidden;
     overflow-x: clip;
+    /* Keeps an in-page anchor jump (e.g. a noticeboard card) from landing
+       partway under the sticky header. Header is taller on mobile, where the
+       logo drops back to the square icon-only mark; sized generously at each
+       breakpoint rather than measured exactly. */
+    scroll-padding-top: 130px;
+  }
+
+  @media (min-width: 640px) {
+    html {
+      scroll-padding-top: 110px;
+    }
   }
 
   body {
