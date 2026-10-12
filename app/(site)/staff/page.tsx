@@ -68,12 +68,18 @@ function Portrait({ person }: { person: Person }) {
       {/* Empty alt: the name sits right beside it, so a description would
           only make a screen reader say it twice. The paintings leave a wide
           margin of bare paper round each head, so the image is scaled up
-          about a point just above centre, where the faces sit. */}
+          about a point just above centre, where the faces sit.
+
+          `sizes` is deliberately about double what is drawn (80px frame x
+          1.3 scale = 104px). Stating the true size made the browser fetch a
+          256px file, which a 3x phone was already stretching before anyone
+          pinched in. At 208px a retina screen takes the full 640px file, so
+          there is room to zoom to roughly 2-3x before it softens. */}
       <Image
         src={`/images/staff/${person.photo}.webp`}
         alt=""
         fill
-        sizes="80px"
+        sizes="208px"
         draggable={false}
         className="no-long-press origin-[50%_38%] scale-[1.3] object-cover"
       />
