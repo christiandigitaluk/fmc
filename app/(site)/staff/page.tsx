@@ -38,7 +38,7 @@ const LAY_STAFF: Person[] = [
   { name: "David Bishop", role: "Operations Manager", phone: "07458 002275", email: "operations@forestcircuit.org.uk", photo: "david-bishop" },
   { name: "Bradley M", role: "Communications Officer", phone: "07832 335634", email: "communications@forestcircuit.org.uk", photo: "bradley-m" },
   { name: "Zak Njeru", role: "Pastoral Worker", phone: "07458 002244", email: "pastoralmethodist@gmail.com", photo: "zak-njeru" },
-  { name: "Valerie Rogers", role: "Finance Officer", phone: "07832 335641", email: "circuit.finance@forestcircuit.org.uk" },
+  { name: "Valerie Rogers", role: "Finance Officer", phone: "07832 335641", email: "circuit.finance@forestcircuit.org.uk", photo: "valerie-rogers" },
 ];
 
 /** "Revd Mike Long" reads as ML, not RM: the title is not part of the name. */
