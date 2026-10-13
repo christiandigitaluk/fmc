@@ -24,8 +24,6 @@ const LEGAL_LINKS = [
   { href: "/safeguarding/connexion", label: "Connexion safeguarding" },
   { href: "/safeguarding/data-protection", label: "Data protection" },
   { href: "/useful-links", label: "Useful links" },
-  { href: "https://www.forestcircuit.co.uk/safeguarding-officers-forms", label: "Safeguarding officers' forms", external: true },
-  { href: "https://www.forestcircuit.co.uk/volunteer-job-descriptions", label: "Volunteer job descriptions", external: true },
 ];
 
 /**
@@ -156,26 +154,13 @@ export function Footer({ settings }: { settings: SiteSettings }) {
             right-aligned, with copyright alone underneath. */}
         <div className="container-max flex flex-col gap-3 text-xs text-white/60 md:grid md:grid-cols-[1fr_auto] md:items-center md:gap-x-6 md:gap-y-2">
           <ul className="flex flex-wrap items-center gap-x-5 gap-y-2 md:col-start-1 md:row-start-1">
-            {LEGAL_LINKS.map((link) =>
-              link.external ? (
-                <li key={link.href}>
-                  <a
-                    href={link.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-white/60 no-underline hover:text-white hover:underline"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ) : (
-                <li key={link.href}>
-                  <Link href={link.href} className="text-white/60 no-underline hover:text-white hover:underline">
-                    {link.label}
-                  </Link>
-                </li>
-              )
-            )}
+            {LEGAL_LINKS.map((link) => (
+              <li key={link.href}>
+                <Link href={link.href} className="text-white/60 no-underline hover:text-white hover:underline">
+                  {link.label}
+                </Link>
+              </li>
+            ))}
           </ul>
           <p className="md:col-start-1 md:row-start-2 md:col-span-2">
             &copy; {new Date().getFullYear()} Forest Methodist Circuit. A registered charity.
