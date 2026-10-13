@@ -108,4 +108,14 @@ export const events: CircuitEvent[] = [
     description:
       "A time to remember loved ones. You may like to come and remember them quietly, or to light a candle. If you would like your loved one's name read out during the service, please contact the Church Office on 020 8502 3071 or administrator@loughtonmethodist.org.uk by Monday 19 October.",
   },
+  {
+    slug: "christmas-bazaar-winchester-road-2026",
+    title: "Christmas Bazaar",
+    category: "Community",
+    startDateTime: "2026-11-28T10:00:00",
+    endDateTime: "2026-11-28T15:00:00",
+    churchSlug: "winchester-road",
+    description:
+      "Santa's Grotto, homemade cakes, Christmas gifts and crafts, jams and sweets, with tea, coffee and lunches served. Open 10am to 3pm. Entrance £1, children free.",
+  },
 ];
