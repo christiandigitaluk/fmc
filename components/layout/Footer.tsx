@@ -21,7 +21,7 @@ const FOOTER_LINKS = [
 const LEGAL_LINKS = [
   { href: "/privacy", label: "Privacy notice" },
   { href: "/safeguarding", label: "Safeguarding" },
-  { href: "/safeguarding/connection", label: "Connection safeguarding" },
+  { href: "/safeguarding/connexion", label: "Connexion safeguarding" },
   { href: "/safeguarding/data-protection", label: "Data protection" },
   { href: "/useful-links", label: "Useful links" },
   { href: "https://www.forestcircuit.co.uk/safeguarding-officers-forms", label: "Safeguarding officers' forms", external: true },

@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { LinkList } from "@/components/legal/LinkList";
 
 export const metadata: Metadata = {
-  title: "Connection Safeguarding",
+  title: "Connexion Safeguarding",
   description: "Safeguarding policies, guidelines and training resources from the wider Methodist Church.",
-  alternates: { canonical: "/safeguarding/connection" },
+  alternates: { canonical: "/safeguarding/connexion" },
 };
 
 const POLICIES_AND_GUIDELINES = [
@@ -63,12 +63,12 @@ const TRAINING = [
   },
 ];
 
-export default function ConnectionSafeguardingPage() {
+export default function ConnexionSafeguardingPage() {
   return (
     <div className="container-max max-w-3xl py-14 md:py-20">
       <p className="eyebrow mb-3">Wider Methodist Church resources</p>
       <h1 style={{ fontSize: "var(--text-h1)" }} className="mb-4">
-        Connection safeguarding
+        Connexion safeguarding
       </h1>
       <p className="mb-10 text-[var(--text-body)]" style={{ fontSize: "var(--text-lead)" }}>
         Safeguarding policies, guidelines and training materials published by the Methodist Church and partner

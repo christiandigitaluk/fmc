@@ -107,8 +107,8 @@ export default function SafeguardingPage() {
 
       <p className="mt-10 text-sm text-[var(--text-muted)]">
         See also{" "}
-        <Link href="/safeguarding/connection" className="text-forest-600 hover:underline">
-          Connection safeguarding
+        <Link href="/safeguarding/connexion" className="text-forest-600 hover:underline">
+          Connexion safeguarding
         </Link>{" "}
         and{" "}
         <Link href="/safeguarding/data-protection" className="text-forest-600 hover:underline">

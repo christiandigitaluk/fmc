@@ -17,7 +17,7 @@ const STATIC_ROUTES = [
   "/contact",
   "/privacy",
   "/safeguarding",
-  "/safeguarding/connection",
+  "/safeguarding/connexion",
   "/safeguarding/data-protection",
   "/useful-links",
 ];

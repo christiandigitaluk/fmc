@@ -49,6 +49,10 @@ const nextConfig: NextConfig = {
       // already bookmarked or was sent the old /hall-hire link. Query
       // strings (?church=...) carry through automatically.
       { source: "/hall-hire", destination: "/venue-hire", permanent: true },
+      // "Connexion" is the Methodist Church's own name for itself as one
+      // joined-up body, and the page was first published under the everyday
+      // spelling. The old address keeps working for anyone who saved it.
+      { source: "/safeguarding/connection", destination: "/safeguarding/connexion", permanent: true },
     ];
   },
 };
