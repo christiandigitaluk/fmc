@@ -96,4 +96,16 @@ export const events: CircuitEvent[] = [
     description:
       "Energy saving ideas and planet saving thoughts. Drop in any time between 10am and 4pm on either day.",
   },
+  {
+    slug: "annual-bereavement-service-loughton",
+    title: "Annual Bereavement Service",
+    category: "Special Services",
+    startDateTime: "2026-10-24T16:00:00",
+    // The flyer gives a start time only. An hour is an assumption, so the
+    // calendar entry has an end; the page itself shows only the start.
+    endDateTime: "2026-10-24T17:00:00",
+    churchSlug: "loughton",
+    description:
+      "A time to remember loved ones. You may like to come and remember them quietly, or to light a candle. If you would like your loved one's name read out during the service, please contact the Church Office on 020 8502 3071 or administrator@loughtonmethodist.org.uk by Monday 19 October.",
+  },
 ];
