@@ -45,6 +45,10 @@ function dayLabel(startsAt: string, now: Date): string {
 }
 
 export function EventPosterWidget({ id, title, startsAt, endsAt, poster }: EventPosterWidgetProps) {
+  // armed: this visitor is going to be shown the widget, so it is in the
+  // page but hidden, which lets the thumbnail load during the delay.
+  // visible: the delay has passed and it has been revealed.
+  const [armed, setArmed] = useState(false);
   const [visible, setVisible] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const [when, setWhen] = useState("");
@@ -65,6 +69,7 @@ export function EventPosterWidget({ id, title, startsAt, endsAt, poster }: Event
     // Worked out in the browser, not at build time: the page is cached, and
     // "This Saturday" has to turn into "Tomorrow" and "Today" on its own.
     setWhen(dayLabel(startsAt, now));
+    setArmed(true);
     const timer = setTimeout(() => setVisible(true), REVEAL_DELAY_MS);
     return () => clearTimeout(timer);
   }, [startsAt, endsAt, storageKey]);
@@ -88,6 +93,7 @@ export function EventPosterWidget({ id, title, startsAt, endsAt, poster }: Event
 
   const dismiss = () => {
     setVisible(false);
+    setArmed(false);
     markSeen();
   };
 
@@ -96,12 +102,18 @@ export function EventPosterWidget({ id, title, startsAt, endsAt, poster }: Event
     markSeen();
   };
 
-  if (!visible && !expanded) return null;
+  if (!armed && !expanded) return null;
 
   return (
     <>
-      {visible && !expanded && (
-        <div className="fixed bottom-3 right-3 z-40 animate-widget-in sm:bottom-6 sm:right-6">
+      {armed && !expanded && (
+        <div
+          className={`fixed bottom-3 right-3 z-40 sm:bottom-6 sm:right-6 ${
+            // `invisible` also takes it out of the tab order and away from
+            // screen readers until it is actually revealed.
+            visible ? "animate-widget-in" : "pointer-events-none invisible"
+          }`}
+        >
           <div className="sticker relative w-[180px] rounded-[12px] bg-white p-2.5 sm:w-[240px] sm:rounded-[14px] sm:p-3">
             <button
               type="button"
@@ -115,7 +127,7 @@ export function EventPosterWidget({ id, title, startsAt, endsAt, poster }: Event
 
             <button type="button" onClick={open} className="flex w-full items-center gap-2 text-left sm:gap-3">
               <span className="relative h-11 w-11 shrink-0 overflow-hidden rounded-[7px] border-2 border-ink-900 sm:h-14 sm:w-14 sm:rounded-[8px]">
-                <Image src={poster.src} alt="" fill sizes="112px" className="object-cover" />
+                <Image src={poster.src} alt="" fill sizes="112px" loading="eager" className="object-cover" />
               </span>
               <span className="min-w-0">
                 <span className="sticker mb-1 inline-flex items-center rounded-full bg-orange-500 px-2 py-0.5 text-[9px] font-extrabold uppercase tracking-wide text-ink-900 sm:text-[10px]">
