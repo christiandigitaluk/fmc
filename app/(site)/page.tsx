@@ -138,10 +138,11 @@ export default async function HomePage() {
         startsAt="2026-10-17T17:30:00"
         endsAt="2026-10-17T21:00:00"
         poster={{
-          src: "/images/black-history-month-2026-poster.webp",
-          width: 1024,
-          height: 1536,
-          alt: "Poster: Shern Hall Methodist Church presents a Black History Month fundraising event, celebrating 60 years of Notting Hill Carnival and more. An evening of spoken word, music and thanksgiving on 17 October 2026, 5:30pm to 9pm, featuring Shern Hall Methodist Youth Steelband and many more acts. Light refreshments served. Adults £15, ages 12 to 18 £5, under 11s free, donations welcome. Shern Hall Methodist Church, Shernhall Street, London E17 9HX. Enquiries: 0208 503 6750 or 0208 550 2763.",
+          src: "/images/black-history-month-2026-poster-shern-hall.webp",
+          thumbnailSrc: "/images/black-history-month-2026-thumb.webp",
+          width: 1341,
+          height: 757,
+          alt: "Poster: Shern Hall Methodist Church presents a Black History Month fundraising event. Theme: celebrating 60 years of Notting Hill Carnival and more. An evening of spoken word, music and thanksgiving. Adults £15, ages 12 to 18 £5, under 11s free, donations welcome. 17 October 2026, 5:30pm to 9pm. Featuring Shern Hall Methodist Youth Steelband and many more exciting acts. Light refreshments will be served. Venue: Shern Hall Methodist Church, Shernhall Street, London E17 9HX. Telephone 0208 503 6750 or 0208 550 2763.",
         }}
       />
     </>

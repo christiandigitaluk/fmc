@@ -29,7 +29,14 @@ export type EventPosterWidgetProps = {
   /** Local date-times, e.g. "2026-10-17T17:30:00". */
   startsAt: string;
   endsAt: string;
-  poster: { src: string; width: number; height: number; alt: string };
+  poster: {
+    src: string;
+    width: number;
+    height: number;
+    alt: string;
+    /** Square image for the small widget. Defaults to a crop of the poster, which suits portrait posters. */
+    thumbnailSrc?: string;
+  };
 };
 
 /** "Today", "Tomorrow", "This Saturday", or the date once it is a week or more away. */
@@ -45,6 +52,9 @@ function dayLabel(startsAt: string, now: Date): string {
 }
 
 export function EventPosterWidget({ id, title, startsAt, endsAt, poster }: EventPosterWidgetProps) {
+  // A landscape poster at portrait width leaves its small print unreadable,
+  // so it gets a wider pop-up.
+  const landscape = poster.width > poster.height;
   // armed: this visitor is going to be shown the widget, so it is in the
   // page but hidden, which lets the thumbnail load during the delay.
   // visible: the delay has passed and it has been revealed.
@@ -127,7 +137,14 @@ export function EventPosterWidget({ id, title, startsAt, endsAt, poster }: Event
 
             <button type="button" onClick={open} className="flex w-full items-center gap-2 text-left sm:gap-3">
               <span className="relative h-11 w-11 shrink-0 overflow-hidden rounded-[7px] border-2 border-ink-900 sm:h-14 sm:w-14 sm:rounded-[8px]">
-                <Image src={poster.src} alt="" fill sizes="112px" loading="eager" className="object-cover" />
+                <Image
+                  src={poster.thumbnailSrc ?? poster.src}
+                  alt=""
+                  fill
+                  sizes="112px"
+                  loading="eager"
+                  className="object-cover"
+                />
               </span>
               <span className="min-w-0">
                 <span className="sticker mb-1 inline-flex items-center rounded-full bg-orange-500 px-2 py-0.5 text-[9px] font-extrabold uppercase tracking-wide text-ink-900 sm:text-[10px]">
@@ -148,7 +165,9 @@ export function EventPosterWidget({ id, title, startsAt, endsAt, poster }: Event
           onClick={() => setExpanded(false)}
         >
           <div
-            className="relative max-h-[90vh] w-full max-w-sm overflow-auto rounded-[16px] border-2 border-ink-900 bg-white p-2 shadow-[6px_6px_0_var(--ink-900)] sm:max-w-md"
+            className={`relative max-h-[90vh] w-full overflow-auto rounded-[16px] border-2 border-ink-900 bg-white p-2 shadow-[6px_6px_0_var(--ink-900)] ${
+              landscape ? "max-w-4xl" : "max-w-sm sm:max-w-md"
+            }`}
             onClick={(e) => e.stopPropagation()}
           >
             {/* Inside the card, not hanging off its corner: on a narrow
@@ -166,7 +185,7 @@ export function EventPosterWidget({ id, title, startsAt, endsAt, poster }: Event
               alt={poster.alt}
               width={poster.width}
               height={poster.height}
-              sizes="(min-width: 640px) 448px, 90vw"
+              sizes={landscape ? "(min-width: 928px) 880px, 95vw" : "(min-width: 640px) 448px, 90vw"}
               className="h-auto w-full rounded-[10px]"
               priority
             />
