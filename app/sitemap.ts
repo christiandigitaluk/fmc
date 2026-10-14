@@ -7,6 +7,7 @@ const STATIC_ROUTES = [
   "",
   "/about",
   "/staff",
+  "/prayer",
   "/resources",
   "/churches",
   "/preaching-plan",
