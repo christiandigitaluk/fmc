@@ -2,6 +2,10 @@ import { ExternalLink, FileText } from "lucide-react";
 import { noticeBadge } from "@/lib/notice";
 import type { Notice } from "@/lib/types";
 
+function isPdf(url: string): boolean {
+  return new URL(url).pathname.toLowerCase().endsWith(".pdf");
+}
+
 /**
  * Short notices pinned under the news articles, as small tilted cards in the
  * circuit's sticker style.
@@ -13,10 +17,6 @@ import type { Notice } from "@/lib/types";
  * Expired notices are filtered out in getNotices, not here, so no page can
  * render a stale deadline.
  */
-function isPdf(url: string): boolean {
-  return new URL(url).pathname.toLowerCase().endsWith(".pdf");
-}
-
 function NoticeBody({ notice }: { notice: Notice }) {
   const dated = Boolean(notice.deadline);
   return (

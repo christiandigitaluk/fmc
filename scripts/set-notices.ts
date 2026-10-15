@@ -8,7 +8,10 @@
  * Expired notices do not need deleting: getNotices drops anything whose
  * deadline has passed, so a finished item comes off the site by itself.
  *
- * Run with: npx tsx scripts/set-notices.ts
+ * Pushing every notice overwrites anything edited in Studio since, so name
+ * the ones you mean to push:
+ *   npx tsx scripts/set-notices.ts <slug> [<slug> ...]
+ * With no slugs it pushes them all, for a first seed.
  */
 import { createClient } from "@sanity/client";
 import { readFileSync, existsSync } from "fs";
@@ -43,7 +46,12 @@ const client = createClient({
 });
 
 async function main() {
-  for (const notice of notices) {
+  const slugs = process.argv.slice(2);
+  const unknown = slugs.filter((slug) => !notices.some((n) => n.slug === slug));
+  if (unknown.length) throw new Error(`no notice with slug ${unknown.join(", ")} in lib/mock/notices.ts`);
+  const selected = slugs.length ? notices.filter((n) => slugs.includes(n.slug)) : notices;
+
+  for (const notice of selected) {
     if (notice.url && /[?&](utm_|dm_i)/.test(notice.url)) {
       throw new Error(`"${notice.slug}" still carries tracking parameters: ${notice.url}`);
     }
