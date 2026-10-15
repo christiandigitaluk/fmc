@@ -1,4 +1,4 @@
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, FileText } from "lucide-react";
 import { noticeBadge } from "@/lib/notice";
 import type { Notice } from "@/lib/types";
 
@@ -13,6 +13,10 @@ import type { Notice } from "@/lib/types";
  * Expired notices are filtered out in getNotices, not here, so no page can
  * render a stale deadline.
  */
+function isPdf(url: string): boolean {
+  return new URL(url).pathname.toLowerCase().endsWith(".pdf");
+}
+
 function NoticeBody({ notice }: { notice: Notice }) {
   const dated = Boolean(notice.deadline);
   return (
@@ -33,8 +37,19 @@ function NoticeBody({ notice }: { notice: Notice }) {
       <p className="text-sm text-[var(--text-body)]">{notice.summary}</p>
       {notice.url && (
         <span className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-forest-600">
-          {new URL(notice.url).hostname.replace(/^www\./, "")}
-          <ExternalLink size={14} aria-hidden="true" />
+          {/* A flyer we host ourselves would otherwise just read
+              "forestcircuit.co.uk", which says nothing about where it goes. */}
+          {isPdf(notice.url) ? (
+            <>
+              <FileText size={14} aria-hidden="true" />
+              View the flyer (PDF)
+            </>
+          ) : (
+            <>
+              {new URL(notice.url).hostname.replace(/^www\./, "")}
+              <ExternalLink size={14} aria-hidden="true" />
+            </>
+          )}
         </span>
       )}
     </>
