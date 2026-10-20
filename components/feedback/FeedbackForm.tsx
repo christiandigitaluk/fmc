@@ -13,6 +13,7 @@ const initialState: FeedbackFormState = { status: "idle" };
 const RESPONDENT_OPTIONS = [
   { value: "", label: "Choose one" },
   { value: "Member of a Forest Circuit church", label: "Member of a Forest Circuit church" },
+  { value: "Circuit staff", label: "Circuit staff" },
   { value: "Visitor exploring the circuit", label: "Visitor exploring the circuit" },
   { value: "Looking to hire a venue", label: "Looking to hire a venue" },
   { value: "Other", label: "Other" },
