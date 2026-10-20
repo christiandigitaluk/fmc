@@ -118,4 +118,14 @@ export const events: CircuitEvent[] = [
     description:
       "Santa's Grotto, homemade cakes, Christmas gifts and crafts, jams and sweets, with tea, coffee and lunches served. Open 10am to 3pm. Entrance £1, children free.",
   },
+  {
+    slug: "table-top-sale-leytonstone-2026",
+    title: "Christmas Table Top Sale",
+    category: "Community",
+    startDateTime: "2026-11-07T10:00:00",
+    endDateTime: "2026-11-07T15:00:00",
+    churchSlug: "leytonstone",
+    description:
+      "Great items at great prices: toys, baby and adult clothes, books, shoes, plants, household items, plates and cups. Open 10am to 3pm. Admission free. Shop local and support the church.",
+  },
 ];
