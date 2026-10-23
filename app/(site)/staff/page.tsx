@@ -18,12 +18,18 @@ type Person = {
   dayOff?: string;
   /** File in public/images/staff, without the extension. Omit until a portrait exists. */
   photo?: string;
+  /**
+   * Where the crop zooms in, as a percentage down the painting (default 38).
+   * Lower it for someone whose head sits high in the frame, which moves them
+   * down inside the circle.
+   */
+  photoFocus?: number;
 };
 
 const OFFICERS: Person[] = [
   { name: "Florestine Corbett", role: "Circuit Steward", email: "flo_corbett@hotmail.com", photo: "florestine-corbett" },
   { name: "Eric Aidoo", role: "Circuit Steward", email: "aidoobaker@yahoo.com", photo: "eric-aidoo" },
-  { name: "John Marange", role: "Safeguarding Officer", email: "forestsafeguarding@outlook.com", photo: "john-marange" },
+  { name: "John Marange", role: "Safeguarding Officer", email: "forestsafeguarding@outlook.com", photo: "john-marange", photoFocus: 22 },
   { name: "Dallion Roye", role: "Meeting Secretary", email: "d.roye818@btinternet.com", photo: "dallion-roye" },
 ];
 
@@ -81,7 +87,8 @@ function Portrait({ person }: { person: Person }) {
         fill
         sizes="208px"
         draggable={false}
-        className="no-long-press origin-[50%_38%] scale-[1.3] object-cover"
+        className="no-long-press scale-[1.3] object-cover"
+        style={{ transformOrigin: `50% ${person.photoFocus ?? 38}%` }}
       />
     </span>
   );
