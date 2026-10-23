@@ -23,7 +23,7 @@ type Person = {
 const OFFICERS: Person[] = [
   { name: "Florestine Corbett", role: "Circuit Steward", email: "flo_corbett@hotmail.com", photo: "florestine-corbett" },
   { name: "Eric Aidoo", role: "Circuit Steward", email: "aidoobaker@yahoo.com", photo: "eric-aidoo" },
-  { name: "John Marange", role: "Safeguarding Officer", email: "forestsafeguarding@outlook.com" },
+  { name: "John Marange", role: "Safeguarding Officer", email: "forestsafeguarding@outlook.com", photo: "john-marange" },
   { name: "Dallion Roye", role: "Meeting Secretary", email: "d.roye818@btinternet.com", photo: "dallion-roye" },
 ];
 
