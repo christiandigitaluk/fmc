@@ -128,4 +128,14 @@ export const events: CircuitEvent[] = [
     description:
       "Great items at great prices: toys, baby and adult clothes, books, shoes, plants, household items, plates and cups. Open 10am to 3pm. Admission free. Shop local and support the church.",
   },
+  {
+    slug: "world-diabetes-day-shern-hall-2026",
+    title: "World Diabetes Day 2026",
+    category: "Community",
+    startDateTime: "2026-11-14T11:00:00",
+    endDateTime: "2026-11-14T14:00:00",
+    churchSlug: "shern-hall",
+    description:
+      "Early action on diabetes: prevention and ageing well. Community health organisations, lively talks, food demonstrations, refreshments, and testimonials and inspiration for us all. For those with pre-diabetes, Type 2 and gestational diabetes. No need to book; fully accessible venue. Buses W12 and W16 (eastbound) stop outside, and Leabridge Road is a five minute walk. More information: wfdiabetes2uk@gmail.com.",
+  },
 ];
