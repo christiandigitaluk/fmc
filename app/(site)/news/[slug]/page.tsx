@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { PortableText, type PortableTextBlock } from "@portabletext/react";
 import { Badge } from "@/components/ui/Badge";
 import { portableTextComponents } from "@/components/PortableTextComponents";
+import { splitLinks } from "@/lib/inlineLinks";
 import { ShareArticle } from "@/components/news/ShareArticle";
 import { SITE_ORIGIN } from "@/lib/siteOrigin";
 import { getPost, getPosts } from "@/lib/content";
@@ -114,7 +115,19 @@ export default async function NewsArticlePage({ params }: { params: Promise<{ sl
           {isPortableText(post.body) ? (
             <PortableText value={post.body} components={portableTextComponents} />
           ) : (
-            (post.body as string[]).map((paragraph, i) => <p key={i}>{paragraph}</p>)
+            (post.body as string[]).map((paragraph, i) => (
+              <p key={i}>
+                {splitLinks(paragraph).map((part, j) =>
+                  part.href ? (
+                    <a key={j} href={part.href}>
+                      {part.text}
+                    </a>
+                  ) : (
+                    part.text
+                  )
+                )}
+              </p>
+            ))
           )}
         </div>
 

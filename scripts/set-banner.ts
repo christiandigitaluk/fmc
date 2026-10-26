@@ -37,15 +37,16 @@ const client = createClient({
 
 const banner = {
   bannerActive: true,
-  bannerText: "The new Autumn preaching plan (September – November 2026) is now available to",
-  bannerLinkHref: "/documents/preaching-plan-sept-nov-2026.pdf",
-  bannerLinkLabel: "print",
+  bannerText: "Aged 18 to 30? Spend two weeks in Brazil with the Methodist Church next summer. Applications close Friday 27 November.",
+  bannerLinkHref: "/news/encounter-together-in-brazil",
+  bannerLinkLabel: "Find out more",
+  bannerEndsAt: "2026-11-27",
 };
 
 async function main() {
   const before = await client.getDocument("siteSettings");
   await client.patch("siteSettings").set(banner).commit();
-  console.log("was:", JSON.stringify({ t: before?.bannerText, l: before?.bannerLinkLabel, h: before?.bannerLinkHref }, null, 1));
+  console.log("was:", JSON.stringify({ t: before?.bannerText, l: before?.bannerLinkLabel, h: before?.bannerLinkHref, e: before?.bannerEndsAt }, null, 1));
   console.log("now:", JSON.stringify(banner, null, 1));
 }
 

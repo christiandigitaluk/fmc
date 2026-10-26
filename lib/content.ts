@@ -169,7 +169,12 @@ export async function getJobVacancies(): Promise<JobVacancy[]> {
 }
 
 export async function getSiteSettings(): Promise<SiteSettings> {
-  return safeFetch(`*[_type == "siteSettings"][0]`, mockSettings, ["siteSettings"]);
+  const settings = await safeFetch(`*[_type == "siteSettings"][0]`, mockSettings, ["siteSettings"]);
+  // A banner for something with a date otherwise stays up until someone
+  // remembers to untick it. Same date-string comparison as getNotices.
+  const today = new Date().toISOString().slice(0, 10);
+  if (settings.bannerEndsAt && settings.bannerEndsAt < today) return { ...settings, bannerActive: false };
+  return settings;
 }
 
 export async function submitBookingRequest(request: BookingRequest): Promise<{ ok: boolean }> {

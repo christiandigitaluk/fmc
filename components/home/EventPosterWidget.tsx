@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { X } from "lucide-react";
+import { Button } from "@/components/ui/Button";
 
 /**
  * Small promo widget for one upcoming event, floating bottom-right on the
@@ -17,6 +18,10 @@ import { X } from "lucide-react";
  * has to remember to take it down after the event. To promote the next
  * event, change the props where it is mounted (with a new `id`, so people
  * who dismissed the last one still see this one).
+ *
+ * It works for an opportunity with a deadline as well as an event: give a
+ * fixed `lead` and `badge` instead of `startsAt`, an `endsAt` at the
+ * deadline, and a `cta` to put a button under the poster.
  */
 const REVEAL_DELAY_MS = 8000;
 const DAY_MS = 24 * 60 * 60 * 1000;
@@ -26,9 +31,16 @@ export type EventPosterWidgetProps = {
   id: string;
   /** Short name shown after the day, e.g. "Black History Month at Shern Hall". */
   title: string;
-  /** Local date-times, e.g. "2026-10-17T17:30:00". */
-  startsAt: string;
+  /** Local date-time the event starts, e.g. "2026-10-17T17:30:00"; drives "This Saturday" etc. */
+  startsAt?: string;
+  /** When the widget stops appearing: the end of the event, or a deadline. */
   endsAt: string;
+  /** Fixed text before the title, used instead of the day worked out from `startsAt`. */
+  lead?: string;
+  /** Text on the orange pill. Defaults to "Upcoming". */
+  badge?: string;
+  /** Button under the poster in the pop-up. */
+  cta?: { label: string; href: string };
   poster: {
     src: string;
     width: number;
@@ -51,7 +63,16 @@ function dayLabel(startsAt: string, now: Date): string {
   return start.toLocaleDateString("en-GB", { day: "numeric", month: "long" });
 }
 
-export function EventPosterWidget({ id, title, startsAt, endsAt, poster }: EventPosterWidgetProps) {
+export function EventPosterWidget({
+  id,
+  title,
+  startsAt,
+  endsAt,
+  lead,
+  badge = "Upcoming",
+  cta,
+  poster,
+}: EventPosterWidgetProps) {
   // A landscape poster at portrait width leaves its small print unreadable,
   // so it gets a wider pop-up.
   const landscape = poster.width > poster.height;
@@ -78,11 +99,11 @@ export function EventPosterWidget({ id, title, startsAt, endsAt, poster }: Event
 
     // Worked out in the browser, not at build time: the page is cached, and
     // "This Saturday" has to turn into "Tomorrow" and "Today" on its own.
-    setWhen(dayLabel(startsAt, now));
+    setWhen(lead ?? (startsAt ? dayLabel(startsAt, now) : ""));
     setArmed(true);
     const timer = setTimeout(() => setVisible(true), REVEAL_DELAY_MS);
     return () => clearTimeout(timer);
-  }, [startsAt, endsAt, storageKey]);
+  }, [startsAt, endsAt, lead, storageKey]);
 
   useEffect(() => {
     if (!expanded) return;
@@ -148,10 +169,11 @@ export function EventPosterWidget({ id, title, startsAt, endsAt, poster }: Event
               </span>
               <span className="min-w-0">
                 <span className="sticker mb-1 inline-flex items-center rounded-full bg-orange-500 px-2 py-0.5 text-[9px] font-extrabold uppercase tracking-wide text-ink-900 sm:text-[10px]">
-                  Upcoming
+                  {badge}
                 </span>
                 <span className="block text-xs font-bold leading-snug text-ink-900">
-                  {when}: {title}
+                  {when ? `${when}: ` : ""}
+                  {title}
                 </span>
               </span>
             </button>
@@ -189,6 +211,13 @@ export function EventPosterWidget({ id, title, startsAt, endsAt, poster }: Event
               className="h-auto w-full rounded-[10px]"
               priority
             />
+            {cta && (
+              <div className="flex justify-center px-2 pb-2 pt-4">
+                <Button href={cta.href} variant="primary" size="lg">
+                  {cta.label}
+                </Button>
+              </div>
+            )}
           </div>
         </div>
       )}

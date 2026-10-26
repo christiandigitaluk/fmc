@@ -131,18 +131,20 @@ export default async function HomePage() {
       </section>
 
       {/* Retires itself once endsAt has passed, so this can stay in place
-          after the event. Swap the details (and the id) for the next one. */}
+          afterwards. Swap the details (and the id) for the next one. */}
       <EventPosterWidget
-        id="black-history-month-2026"
-        title="Black History Month at Shern Hall"
-        startsAt="2026-10-17T17:30:00"
-        endsAt="2026-10-17T21:00:00"
+        id="encounter-together-brazil-2027"
+        badge="Apply by 27 Nov"
+        lead="Ages 18 to 30"
+        title="two weeks in Brazil next summer"
+        endsAt="2026-11-27T23:59:00"
+        cta={{ label: "Find out more and apply", href: "/news/encounter-together-in-brazil" }}
         poster={{
-          src: "/images/black-history-month-2026-poster-shern-hall.webp",
-          thumbnailSrc: "/images/black-history-month-2026-thumb.webp",
-          width: 1341,
-          height: 757,
-          alt: "Poster: Shern Hall Methodist Church presents a Black History Month fundraising event. Theme: celebrating 60 years of Notting Hill Carnival and more. An evening of spoken word, music and thanksgiving. Adults £15, ages 12 to 18 £5, under 11s free, donations welcome. 17 October 2026, 5:30pm to 9pm. Featuring Shern Hall Methodist Youth Steelband and many more exciting acts. Light refreshments will be served. Venue: Shern Hall Methodist Church, Shernhall Street, London E17 9HX. Telephone 0208 503 6750 or 0208 550 2763.",
+          src: "/images/news-encounter-together-brazil.png",
+          thumbnailSrc: "/images/encounter-together-brazil-thumb.webp",
+          width: 1200,
+          height: 800,
+          alt: "Encounter Together in Brazil: a two-week pilgrimage with the Methodist Church in Brazil for young adults aged 18 to 30, 3 to 18 July 2027, costing £500 with fundraising help. Apply by 27 November.",
         }}
       />
     </>

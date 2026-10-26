@@ -2,6 +2,29 @@ import type { Post } from "@/lib/types";
 
 export const posts: Post[] = [
   {
+    slug: "encounter-together-in-brazil",
+    title: "Aged 18 to 30? Spend two weeks in Brazil next summer",
+    excerpt:
+      "Encounter Together in Brazil is a two-week pilgrimage with the Methodist Church in Brazil, from 3 to 18 July 2027, for young adults aged 18 to 30. Applications close on Friday 27 November.",
+    coverImage: "/images/news-encounter-together-brazil.png",
+    // A text graphic on the brand green: shown whole on a matching band,
+    // never cropped.
+    coverFit: "contain",
+    publishedAt: "2026-10-26",
+    tags: ["Young adults", "World Church"],
+    // [text](url) marks a link; scripts/add-post.ts turns it into a Portable
+    // Text link, and the article page renders it the same way as a fallback.
+    body: [
+      "If you are aged 18 to 30, the Methodist Church in Britain is inviting you on a two-week pilgrimage to Brazil next summer, from Saturday 3 to Sunday 18 July 2027. You would travel with other young adults from across Britain to meet the Methodist Church in Brazil and share in its life and mission.",
+      "Along the way you would join their regional week of evangelism, help at a Vacation Bible School for children, take part in creative street evangelism (drama, dance and perhaps even juggling), get stuck into community outreach, and finish with a reflective retreat. Above all, you would get to know young Christians in Brazil, and pray and worship alongside them.",
+      "The full cost is around £2,800 a person, but the Methodist Church subsidises it down to £500. Everyone taking part gets help to build a fundraising plan, and a bursary is available for anyone who needs more support to reach that.",
+      "Taking part also means an online selection session between 7 and 12 December 2026, an online gathering in January, a training weekend on 16 to 18 April 2027, and debriefs in August and September after you return. You would come home ready to share the story with your church and the circuit.",
+      "Want to know more first? There is an information evening on Wednesday 4 November at 6pm: [register for the information evening](https://forms.cloud.microsoft/e/fCeVAM4nvh).",
+      "Applications close on Friday 27 November. [Apply now](https://forms.cloud.microsoft/e/LURyze98pf), or read [the full details on the Methodist Church website](https://www.methodist.org.uk/for-churches/global-relationships/opportunities-resources-and-twinning/opportunities-to-serve/encounter-together/encounter-together-in-brazil/).",
+      "Know someone aged 18 to 30 who would love this? Please pass it on.",
+    ],
+  },
+  {
     slug: "one-circuit-one-front-door",
     title: "One circuit, one front door",
     excerpt:

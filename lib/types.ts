@@ -147,6 +147,8 @@ export type SiteSettings = {
   bannerText: string;
   bannerLinkHref: string;
   bannerLinkLabel: string;
+  /** ISO date (YYYY-MM-DD): the last day the banner shows. Optional; without it the banner stays until switched off. */
+  bannerEndsAt?: string;
   phone: string;
   email: string;
   facebookUrl: string;
