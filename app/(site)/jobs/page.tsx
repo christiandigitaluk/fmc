@@ -5,7 +5,8 @@ import { getJobVacancies, getSiteSettings } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Jobs",
-  description: "Current job vacancies at Forest Methodist Circuit.",
+  description:
+    "Current job vacancies at Forest Methodist Circuit, a team of Methodist churches across Waltham Forest, Wanstead and Loughton.",
   alternates: { canonical: "/jobs" },
 };
 

@@ -53,6 +53,27 @@ const nextConfig: NextConfig = {
       // joined-up body, and the page was first published under the everyday
       // spelling. The old address keeps working for anyone who saved it.
       { source: "/safeguarding/connection", destination: "/safeguarding/connexion", permanent: true },
+      // Addresses from the circuit's previous website that Google still has
+      // indexed (taken from Search Console and a site: search, October 2026).
+      // Each points at the page that now covers the same ground, so old
+      // search results and bookmarks land somewhere useful and Google moves
+      // their ranking across instead of dropping it with a 404.
+      { source: "/about-us", destination: "/about", permanent: true },
+      { source: "/copy-of-about-us", destination: "/about", permanent: true },
+      { source: "/mission-and-ministry-strategy", destination: "/about", permanent: true },
+      { source: "/copy-of-from-the-superintendent", destination: "/about", permanent: true },
+      { source: "/circuit-ministers", destination: "/staff", permanent: true },
+      { source: "/circuit-churches-details", destination: "/churches", permanent: true },
+      { source: "/circuit-churches-gallery", destination: "/churches", permanent: true },
+      { source: "/special-services-and-meetings", destination: "/events", permanent: true },
+      { source: "/current-news", destination: "/news", permanent: true },
+      { source: "/copy-of-current-news", destination: "/news", permanent: true },
+      { source: "/circuit-preaching-plan", destination: "/preaching-plan", permanent: true },
+      { source: "/volunteer-job-descriptions", destination: "/jobs", permanent: true },
+      { source: "/safeguarding-officers-forms", destination: "/safeguarding", permanent: true },
+      { source: "/connection-safeguarding", destination: "/safeguarding/connexion", permanent: true },
+      { source: "/data-protection", destination: "/safeguarding/data-protection", permanent: true },
+      { source: "/methodist-women-in-britain", destination: "/useful-links", permanent: true },
     ];
   },
 };

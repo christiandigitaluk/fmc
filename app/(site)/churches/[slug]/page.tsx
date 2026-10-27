@@ -8,6 +8,7 @@ import { BreakableText } from "@/components/ui/BreakableText";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { getChurch, getChurches } from "@/lib/content";
+import { BASE_OPEN_GRAPH } from "@/lib/seo";
 
 export async function generateStaticParams() {
   const churches = await getChurches();
@@ -27,11 +28,11 @@ export async function generateMetadata({
     description: church.description,
     alternates: { canonical: `/churches/${church.slug}` },
     openGraph: {
-      type: "website",
+      ...BASE_OPEN_GRAPH,
       title: church.name,
       description: church.description,
       url: `/churches/${church.slug}`,
-      images: church.image ? [{ url: church.image }] : undefined,
+      images: church.image ? [{ url: church.image }] : BASE_OPEN_GRAPH.images,
     },
     twitter: {
       card: "summary_large_image",
@@ -55,7 +56,8 @@ export default async function ChurchDetailPage({ params }: { params: Promise<{ s
 
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "PlaceOfWorship",
+    // Wanstead is kept on for hall hire only, so it isn't described as a church.
+    "@type": church.worshipping === false ? "PlaceOfWorship" : "Church",
     name: church.name,
     description: church.description,
     telephone: church.phone,
@@ -64,6 +66,7 @@ export default async function ChurchDetailPage({ params }: { params: Promise<{ s
     address: {
       "@type": "PostalAddress",
       streetAddress: church.address,
+      addressLocality: church.area,
       postalCode: church.postcode,
       addressCountry: "GB",
     },

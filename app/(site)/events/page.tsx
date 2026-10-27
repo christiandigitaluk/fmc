@@ -4,7 +4,8 @@ import { getEvents, getChurches } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Events",
-  description: "Worship services, youth activities and community gatherings across Forest Circuit.",
+  description:
+    "What's on at Forest Methodist Circuit: special services, youth activities and community events at our churches across Waltham Forest, Wanstead and Loughton.",
   alternates: { canonical: "/events" },
 };
 

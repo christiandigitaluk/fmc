@@ -6,6 +6,10 @@ export const metadata: Metadata = {
   title: "Website feedback",
   description: "Tell us what you think of the new Forest Circuit website.",
   alternates: { canonical: "/feedback" },
+  // A questionnaire for people already on the site, not something anyone
+  // searches for. Kept out of results so it can't take a sitelink from a
+  // page that matters, and left out of the sitemap for the same reason.
+  robots: { index: false, follow: true },
 };
 
 export default function FeedbackPage() {

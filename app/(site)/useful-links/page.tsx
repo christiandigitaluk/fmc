@@ -4,7 +4,8 @@ import { PageAccents } from "@/components/ui/PageAccents";
 
 export const metadata: Metadata = {
   title: "Useful Links",
-  description: "Links to the wider Methodist Church.",
+  description:
+    "Links to the wider Methodist Church, including the Methodist Church in Britain, the London District and Methodist Central Hall.",
   alternates: { canonical: "/useful-links" },
 };
 

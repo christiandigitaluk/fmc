@@ -9,6 +9,27 @@ import { Button } from "@/components/ui/Button";
 import { NoticeStrip } from "@/components/news/NoticeStrip";
 import { getChurches, getPosts, getNotices } from "@/lib/content";
 import { cn } from "@/lib/cn";
+import { BASE_OPEN_GRAPH, HOME_TITLE, SITE_DESCRIPTION } from "@/lib/seo";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+  openGraph: { ...BASE_OPEN_GRAPH, title: HOME_TITLE, description: SITE_DESCRIPTION, url: "/" },
+  twitter: { card: "summary_large_image", title: HOME_TITLE, description: SITE_DESCRIPTION },
+};
+
+/**
+ * Tells Google the site's name, so results show "Forest Methodist Circuit"
+ * above the link rather than the bare domain. Google reads this from the home
+ * page only.
+ */
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Forest Methodist Circuit",
+  alternateName: "Forest Circuit",
+  url: "https://www.forestcircuit.co.uk/",
+};
 
 export default async function HomePage() {
   const [churches, posts, notices] = await Promise.all([getChurches(), getPosts(), getNotices()]);
@@ -30,6 +51,7 @@ export default async function HomePage() {
 
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }} />
       <Hero />
       <FindAChurchBar areas={areas} />
       <QuickActionsGrid />

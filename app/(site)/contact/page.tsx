@@ -6,7 +6,8 @@ import { getSiteSettings } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: "Get in touch with Forest Methodist Circuit.",
+  description:
+    "Contact Forest Methodist Circuit by phone, email or online form about any of our churches across Waltham Forest, Wanstead and Loughton.",
   alternates: { canonical: "/contact" },
 };
 

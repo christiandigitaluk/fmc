@@ -9,6 +9,7 @@ import { splitLinks } from "@/lib/inlineLinks";
 import { ShareArticle } from "@/components/news/ShareArticle";
 import { SITE_ORIGIN } from "@/lib/siteOrigin";
 import { getPost, getPosts } from "@/lib/content";
+import { BASE_OPEN_GRAPH } from "@/lib/seo";
 
 export async function generateStaticParams() {
   const posts = await getPosts();
@@ -28,12 +29,13 @@ export async function generateMetadata({
     description: post.excerpt,
     alternates: { canonical: `/news/${post.slug}` },
     openGraph: {
+      ...BASE_OPEN_GRAPH,
       type: "article",
       title: post.title,
       description: post.excerpt,
       url: `/news/${post.slug}`,
       publishedTime: post.publishedAt,
-      images: post.coverImage ? [{ url: post.coverImage }] : undefined,
+      images: post.coverImage ? [{ url: post.coverImage }] : BASE_OPEN_GRAPH.images,
     },
     twitter: {
       card: "summary_large_image",

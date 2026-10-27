@@ -4,7 +4,8 @@ import { PageAccents } from "@/components/ui/PageAccents";
 
 export const metadata: Metadata = {
   title: "About us",
-  description: "About Forest Methodist Circuit: our mission and our area.",
+  description:
+    "Forest Methodist Circuit is ten churches in the London District of the Methodist Church, from Loughton in Essex to Leytonstone, Leyton, Chingford and Woodford.",
   alternates: { canonical: "/about" },
 };
 
