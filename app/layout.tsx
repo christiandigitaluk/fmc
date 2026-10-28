@@ -50,6 +50,19 @@ const organizationJsonLd = {
   logo: "https://www.forestcircuit.co.uk/images/logo-ink.png",
   description: SITE_DESCRIPTION,
   areaServed: "Waltham Forest, Wanstead and Loughton",
+  // Stated here so search engines and AI summaries have an official source
+  // for contact details: older directory listings still carry a retired
+  // Gmail address. Keep in step with Site settings in Studio.
+  email: "operations@forestcircuit.org.uk",
+  telephone: "+44 7458 002275",
+  contactPoint: {
+    "@type": "ContactPoint",
+    contactType: "customer support",
+    email: "operations@forestcircuit.org.uk",
+    telephone: "+44 7458 002275",
+    areaServed: "GB",
+    availableLanguage: "English",
+  },
 };
 
 export default async function RootLayout({
