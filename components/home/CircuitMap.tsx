@@ -172,14 +172,17 @@ export function CircuitMap() {
         </span>
 
         {/* Stays up for the whole visit: people asked for the nudge to remain
-            after the first hover rather than retire.
+            after the first hover rather than retire. Top right, not bottom
+            left: the map is taller than a laptop screen's remaining height,
+            so a bottom corner was often below the fold when the map scrolled
+            into view, and top right balances the logo badge opposite.
             Desktop only: below lg the pins are inert and the numbered key
             underneath does this job. Hidden from assistive tech, which gets
             each church from the pins' own labels and can't hover anyway. */}
         <span
           aria-hidden="true"
           className={cn(
-            "sticker pointer-events-none absolute bottom-5 left-5 z-10 hidden -rotate-2 items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-bold text-ink-900 pointer-desktop:flex"
+            "sticker pointer-events-none absolute right-5 top-5 z-10 hidden rotate-2 items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-bold text-ink-900 pointer-desktop:flex"
           )}
         >
           <MousePointer2 size={15} aria-hidden="true" />
