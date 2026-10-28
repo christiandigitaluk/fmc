@@ -9,9 +9,14 @@ export const metadata: Metadata = {
   alternates: { canonical: "/preaching-plan" },
 };
 
+// "Today" decides which Sundays are folded away, so the page has to be
+// rebuilt as the days pass rather than only when the plan is edited.
+export const revalidate = 3600;
+
 export default async function PreachingPlanPage() {
   const [entries, allChurches] = await Promise.all([getPreachingPlan(), getChurches()]);
   const churches = allChurches.filter((c) => c.worshipping !== false);
+  const today = new Date().toLocaleDateString("en-CA", { timeZone: "Europe/London" });
 
   return (
     <div className="relative container-max py-14 md:py-20">
@@ -24,7 +29,7 @@ export default async function PreachingPlanPage() {
         See who is preaching, where and when, across all ten churches this quarter. Search by preacher, church or
         date, or print a copy for your noticeboard.
       </p>
-      <PreachingPlanExplorer entries={entries} churches={churches} />
+      <PreachingPlanExplorer entries={entries} churches={churches} today={today} />
     </div>
   );
 }

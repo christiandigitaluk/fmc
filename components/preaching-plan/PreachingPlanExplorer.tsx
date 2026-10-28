@@ -6,9 +6,26 @@ import { Select } from "@/components/ui/Select";
 import { Button } from "@/components/ui/Button";
 import type { Church, PreachingPlanEntry } from "@/lib/types";
 
-export function PreachingPlanExplorer({ entries, churches }: { entries: PreachingPlanEntry[]; churches: Church[] }) {
+/**
+ * `today` (YYYY-MM-DD, London time) comes from the server rather than the
+ * browser's clock, so the server-rendered table and the hydrated one always
+ * agree on which Sundays have passed.
+ */
+export function PreachingPlanExplorer({
+  entries,
+  churches,
+  today,
+}: {
+  entries: PreachingPlanEntry[];
+  churches: Church[];
+  today: string;
+}) {
   const [query, setQuery] = useState("");
   const [churchSlug, setChurchSlug] = useState("All churches");
+  // Past Sundays are folded away by default: visitors almost always want
+  // this week or later, and late in a quarter the old ones filled the top
+  // of the table. Still one click away for "who preached last week?".
+  const [showPast, setShowPast] = useState(false);
 
   const churchBySlug = useMemo(() => new Map(churches.map((c) => [c.slug, c])), [churches]);
   const churchOptions = useMemo(
@@ -35,6 +52,9 @@ export function PreachingPlanExplorer({ entries, churches }: { entries: Preachin
       return matchesChurch && matchesQuery;
     });
   }, [entries, query, churchSlug, churchBySlug]);
+
+  const pastCount = filtered.filter((entry) => entry.date < today).length;
+  const visible = showPast ? filtered : filtered.filter((entry) => entry.date >= today);
 
   return (
     <div>
@@ -68,8 +88,22 @@ export function PreachingPlanExplorer({ entries, churches }: { entries: Preachin
       </div>
 
       <p role="status" className="sr-only">
-        {filtered.length} {filtered.length === 1 ? "entry" : "entries"}
+        {visible.length} {visible.length === 1 ? "entry" : "entries"}
       </p>
+
+      {pastCount > 0 && (
+        <div className="no-print mb-4 flex justify-end">
+          <button
+            type="button"
+            onClick={() => setShowPast((v) => !v)}
+            aria-pressed={showPast}
+            className="text-sm font-semibold text-forest-600 underline-offset-4 hover:underline focus:outline-none focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2"
+            style={{ outlineColor: "var(--focus-ring)" }}
+          >
+            {showPast ? "Hide earlier Sundays" : `Show earlier Sundays (${pastCount})`}
+          </button>
+        </div>
+      )}
 
       <div className="overflow-x-auto rounded-[10px] border border-line-200">
         <table className="w-full border-collapse bg-white text-left">
@@ -94,10 +128,14 @@ export function PreachingPlanExplorer({ entries, churches }: { entries: Preachin
             </tr>
           </thead>
           <tbody>
-            {filtered.map((entry) => {
+            {visible.map((entry) => {
               const church = churchBySlug.get(entry.churchSlug);
+              const past = entry.date < today;
               return (
-                <tr key={entry.id} className="border-b border-line-200 last:border-0 even:bg-cream-50">
+                <tr
+                  key={entry.id}
+                  className={`border-b border-line-200 last:border-0 even:bg-cream-50${past ? " opacity-60" : ""}`}
+                >
                   <td className="px-4 py-3 text-sm text-[var(--text-body)]">
                     {new Date(entry.date).toLocaleDateString("en-GB", {
                       weekday: "short",
@@ -115,8 +153,12 @@ export function PreachingPlanExplorer({ entries, churches }: { entries: Preachin
             })}
           </tbody>
         </table>
-        {filtered.length === 0 && (
-          <p className="p-8 text-center text-[var(--text-body)]">No entries match your search.</p>
+        {visible.length === 0 && (
+          <p className="p-8 text-center text-[var(--text-body)]">
+            {filtered.length === 0
+              ? "No entries match your search."
+              : "No more services in this plan. The next quarter's plan will appear here soon."}
+          </p>
         )}
       </div>
     </div>
