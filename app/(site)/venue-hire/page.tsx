@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { HallHireForm } from "@/components/hall-hire/HallHireForm";
+import { OpenSpotlightFromHash } from "@/components/hall-hire/OpenSpotlightFromHash";
+import { ShernHallSpotlight } from "@/components/hall-hire/ShernHallSpotlight";
 import { WansteadSpotlight } from "@/components/hall-hire/WansteadSpotlight";
 import { PageAccents } from "@/components/ui/PageAccents";
 import { getChurches } from "@/lib/content";
@@ -26,7 +28,11 @@ export default async function HallHirePage() {
         organisations. Tell us what you need and a member of our team will be in touch.
       </p>
 
-      <WansteadSpotlight website={churches.find((c) => c.slug === "wanstead")?.website} />
+      <div className="mb-12 flex flex-col gap-4">
+        <WansteadSpotlight website={churches.find((c) => c.slug === "wanstead")?.website} />
+        <ShernHallSpotlight />
+      </div>
+      <OpenSpotlightFromHash />
 
       <h2 id="enquiry" style={{ fontSize: "var(--text-h3)" }} className="mb-6 scroll-mt-28">
         Make an enquiry

@@ -1,9 +1,20 @@
-import { ExternalLink, FileText } from "lucide-react";
+import { ArrowRight, ExternalLink, FileText } from "lucide-react";
 import { noticeBadge } from "@/lib/notice";
 import type { Notice } from "@/lib/types";
 
 function isPdf(url: string): boolean {
   return new URL(url).pathname.toLowerCase().endsWith(".pdf");
+}
+
+/**
+ * A page on this site, as opposed to a flyer we host or somewhere else
+ * entirely. Opens in the same tab, by path, so it also works on preview
+ * deployments.
+ */
+function sitePath(url: string): string | null {
+  const parsed = new URL(url);
+  if (!parsed.hostname.endsWith("forestcircuit.co.uk") || isPdf(url)) return null;
+  return `${parsed.pathname}${parsed.search}${parsed.hash}`;
 }
 
 /**
@@ -44,6 +55,11 @@ function NoticeBody({ notice }: { notice: Notice }) {
               <FileText size={14} aria-hidden="true" />
               View the flyer (PDF)
             </>
+          ) : sitePath(notice.url) ? (
+            <>
+              See the details
+              <ArrowRight size={14} aria-hidden="true" />
+            </>
           ) : (
             <>
               {new URL(notice.url).hostname.replace(/^www\./, "")}
@@ -72,7 +88,14 @@ export function NoticeBoard({ notices }: { notices: Notice[] }) {
       <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {notices.map((notice, i) => (
           <li key={notice.slug} id={notice.slug} className={i % 2 === 0 ? "-rotate-1" : "rotate-1"}>
-            {notice.url ? (
+            {notice.url && sitePath(notice.url) ? (
+              <a
+                href={sitePath(notice.url)!}
+                className="sticker flex h-full flex-col rounded-[10px] bg-white p-5 no-underline"
+              >
+                <NoticeBody notice={notice} />
+              </a>
+            ) : notice.url ? (
               <a
                 href={notice.url}
                 target="_blank"

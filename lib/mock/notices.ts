@@ -25,6 +25,18 @@ export const notices: Notice[] = [
     url: "https://wansteadmethodists.org.uk",
   },
   {
+    slug: "shern-hall-venue-hire",
+    title: "Shern Hall venue hire",
+    summary:
+      "Caulkwell Hall in Walthamstow is free for regular hire on Mondays and Wednesdays, 8am to 10pm. Ideal for classes, exercise groups and meetings, with free parking for hirers.",
+    // No deadline: an ongoing search, like Wanstead's. Points at the venue
+    // hire page, where the hash opens the Shern Hall card with the office's
+    // contact details.
+    label: "Now seeking hirers",
+    highlight: "Mondays and Wednesdays free.",
+    url: "https://www.forestcircuit.co.uk/venue-hire#shern-hall",
+  },
+  {
     slug: "fcens-volunteer-support-workers",
     title: "FCENS Volunteer Support Workers",
     summary:

@@ -235,8 +235,9 @@ export const churches: Church[] = [
     image: "/images/shern-hall.jpg",
     description: "There is a welcome waiting on Shernhall Street every Sunday morning. Come as you are, and come as you find us.",
     serviceTimes: [{ day: "Sunday", time: "11:00", label: "Morning Worship" }],
-    facilities: [],
-    hallHireInfo: "",
+    facilities: ["Hall hire", "Parking", "Wheelchair access"],
+    hallHireInfo:
+      "Caulkwell Hall (11.7m x 5.8m) is available for regular hire on Mondays and Wednesdays, 8am to 10pm, with free parking for hirers, a kitchen for light refreshments, disabled access and baby changing. An annex is also available at weekends. We take regular bookings only, not parties or one-off events. Call our Office Manager on 07746 540193 or email office.shernhall@forestcircuit.org.uk.",
     lat: 51.5825842,
     lng: -0.0036702,
   },
