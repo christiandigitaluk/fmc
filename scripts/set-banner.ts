@@ -37,10 +37,10 @@ const client = createClient({
 
 const banner = {
   bannerActive: true,
-  bannerText: "Aged 18 to 30? Spend two weeks in Brazil with the Methodist Church next summer. Applications close Friday 27 November.",
-  bannerLinkHref: "/news/encounter-together-in-brazil",
-  bannerLinkLabel: "Find out more",
-  bannerEndsAt: "2026-11-27",
+  bannerText: "Advent Sunday: Watching & Praying, a reflective circuit service. Sunday 29 November, 6pm, at Woodford Methodist Church.",
+  bannerLinkHref: "/events#advent-sunday-circuit-service-2026",
+  bannerLinkLabel: "See the details",
+  bannerEndsAt: "2026-11-29",
 };
 
 async function main() {

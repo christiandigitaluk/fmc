@@ -9,7 +9,11 @@ import type { CircuitEvent, Church } from "@/lib/types";
 
 export function EventCard({ event, church }: { event: CircuitEvent; church?: Church }) {
   return (
-    <li className="flex flex-col gap-3 rounded-[10px] border border-line-200 bg-white p-6 shadow-[var(--shadow-card)] sm:flex-row sm:items-start sm:justify-between">
+    // The id lets the site banner and other links point at one event,
+    // e.g. /events#advent-sunday-circuit-service-2026.
+    <li
+      id={event.slug}
+      className="scroll-mt-28 flex flex-col gap-3 rounded-[10px] border border-line-200 bg-white p-6 shadow-[var(--shadow-card)] sm:flex-row sm:items-start sm:justify-between">
       <div>
         <Badge tone={CATEGORY_TONE[event.category]} className="mb-3">
           {event.category}
