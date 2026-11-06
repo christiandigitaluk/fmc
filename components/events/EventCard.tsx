@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { CalendarDays, MapPin } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
@@ -44,9 +45,15 @@ export function EventCard({ event, church }: { event: CircuitEvent; church?: Chu
       </div>
       <div className="flex shrink-0 flex-col items-start gap-2 sm:items-end">
         <IcsExportButton event={event} location={eventLocation(event, church)} />
-        {event.image && (
-          <EventPoster src={event.image} title={event.title} width={event.imageWidth} height={event.imageHeight} />
-        )}
+        {event.image &&
+          (event.imageDisplay === "logo" ? (
+            // Decorative: the title beside it already names the group.
+            <span className="relative block h-16 w-16 shrink-0">
+              <Image src={event.image} alt="" fill sizes="128px" className="object-contain" />
+            </span>
+          ) : (
+            <EventPoster src={event.image} title={event.title} width={event.imageWidth} height={event.imageHeight} />
+          ))}
         {event.ticketUrl && (
           <a
             href={event.ticketUrl}

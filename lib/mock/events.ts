@@ -42,8 +42,10 @@ export const events: CircuitEvent[] = [
     endDateTime: "2026-08-16T17:30:00",
     churchSlug: "woodford",
     description:
-      "A church for people who find sitting still and being quiet impossible. Themed activities, crafts, singing, dance, drama, a short talk and snacks — for children, young people and their families. Held on the 3rd Sunday of every month, 3:30-5:30pm. Contact office.woodford@forestcircuit.org.uk or 07746 540193.",
+      "A church for people who find sitting still and being quiet impossible. Themed activities, crafts, singing, dance, drama, a short talk and snacks, for children, young people and their families. Held on the 3rd Sunday of every month, 3:30-5:30pm. Contact office.woodford@forestcircuit.org.uk or 07746 540193.",
     recurrence: { nthWeekday: 3, weekday: 0 },
+    image: "/images/messy-church-logo.png",
+    imageDisplay: "logo",
   },
   {
     slug: "praise-150-anniversary-concert",

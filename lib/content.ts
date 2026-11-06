@@ -140,7 +140,7 @@ export async function getEvents(): Promise<CircuitEvent[]> {
     mockEvents,
     ["event"]
   );
-  const cleaned = events.map((e) => cleanStructural(e, ["slug", "churchSlug", "image"]));
+  const cleaned = events.map((e) => cleanStructural(e, ["slug", "churchSlug", "image", "imageDisplay"]));
   const resolved = resolveEventOccurrences(cleaned);
   const now = toLocalIso(new Date());
   return resolved

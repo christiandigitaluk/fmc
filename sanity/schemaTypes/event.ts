@@ -64,10 +64,24 @@ export const event = defineType({
     defineField({ name: "description", title: "Description", type: "text" }),
     defineField({
       name: "image",
-      title: "Poster",
-      description: "Optional. Shown as a small thumbnail on the events page that opens full size when tapped.",
+      title: "Poster or logo",
+      description: "Optional. Shown small on the events page; choose below whether it opens full size.",
       type: "image",
       options: { hotspot: true },
+    }),
+    defineField({
+      name: "imageDisplay",
+      title: "Show it as",
+      type: "string",
+      options: {
+        list: [
+          { title: "Poster (opens full size when tapped)", value: "poster" },
+          { title: "Logo (small, does not open)", value: "logo" },
+        ],
+        layout: "radio",
+      },
+      initialValue: "poster",
+      hidden: ({ parent }) => !parent?.image,
     }),
     defineField({ name: "ticketUrl", title: "Ticket link", type: "url" }),
   ],

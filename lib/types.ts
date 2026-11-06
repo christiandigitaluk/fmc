@@ -124,6 +124,11 @@ export type CircuitEvent = {
   description: string;
   /** The event's poster, shown as a thumbnail that opens full size. */
   image?: string;
+  /**
+   * "logo" shows the image small and static instead, for a recurring group's
+   * logo (Messy Church) where there is no poster worth opening.
+   */
+  imageDisplay?: "poster" | "logo" | null;
   /** Pixel size of the poster, from the Sanity asset's metadata. */
   imageWidth?: number | null;
   imageHeight?: number | null;

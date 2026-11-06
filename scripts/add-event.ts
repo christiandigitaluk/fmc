@@ -75,6 +75,7 @@ async function main() {
     description: event.description,
     ...(event.location ? { location: event.location } : {}),
     ...(image ? { image } : {}),
+    ...(image && event.imageDisplay ? { imageDisplay: event.imageDisplay } : {}),
     ...(event.ticketUrl ? { ticketUrl: event.ticketUrl } : {}),
     ...(event.recurrence ? { recurrence: event.recurrence } : {}),
   });
