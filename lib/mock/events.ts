@@ -147,5 +147,6 @@ export const events: CircuitEvent[] = [
     churchSlug: "woodford",
     description:
       "A reflective, prayerful circuit service for Advent Sunday, watching and praying for the coming of Christ and his kingdom. Everyone from across the circuit is warmly welcome.",
+    image: "/images/advent-sunday-2026-poster.webp",
   },
 ];
