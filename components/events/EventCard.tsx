@@ -48,8 +48,8 @@ export function EventCard({ event, church }: { event: CircuitEvent; church?: Chu
         {event.image &&
           (event.imageDisplay === "logo" ? (
             // Decorative: the title beside it already names the group.
-            <span className="relative block h-16 w-16 shrink-0">
-              <Image src={event.image} alt="" fill sizes="128px" className="object-contain" />
+            <span className="relative block h-20 w-20 shrink-0">
+              <Image src={event.image} alt="" fill sizes="160px" className="object-contain" />
             </span>
           ) : (
             <EventPoster src={event.image} title={event.title} width={event.imageWidth} height={event.imageHeight} />
