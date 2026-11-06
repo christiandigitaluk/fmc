@@ -139,6 +139,7 @@ export const events: CircuitEvent[] = [
     churchSlug: "shern-hall",
     description:
       "Early action on diabetes: prevention and ageing well. Community health organisations, lively talks, food demonstrations, refreshments, and testimonials and inspiration for us all. For those with pre-diabetes, Type 2 and gestational diabetes. No need to book; fully accessible venue. Buses W12 and W16 (eastbound) stop outside, and Leabridge Road is a five minute walk. More information: wfdiabetes2uk@gmail.com.",
+    image: "/images/world-diabetes-day-2026-poster.webp",
   },
   {
     slug: "advent-sunday-circuit-service-2026",
