@@ -133,7 +133,9 @@ export async function getEvents(): Promise<CircuitEvent[]> {
       ...,
       "slug": slug.current,
       "churchSlug": church->slug.current,
-      "image": image.asset->url
+      "image": image.asset->url,
+      "imageWidth": image.asset->metadata.dimensions.width,
+      "imageHeight": image.asset->metadata.dimensions.height
     }`,
     mockEvents,
     ["event"]

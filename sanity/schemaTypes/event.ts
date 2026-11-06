@@ -62,7 +62,13 @@ export const event = defineType({
     }),
     defineField({ name: "location", title: "Location override", type: "string" }),
     defineField({ name: "description", title: "Description", type: "text" }),
-    defineField({ name: "image", title: "Image", type: "image", options: { hotspot: true } }),
+    defineField({
+      name: "image",
+      title: "Poster",
+      description: "Optional. Shown as a small thumbnail on the events page that opens full size when tapped.",
+      type: "image",
+      options: { hotspot: true },
+    }),
     defineField({ name: "ticketUrl", title: "Ticket link", type: "url" }),
   ],
   preview: {

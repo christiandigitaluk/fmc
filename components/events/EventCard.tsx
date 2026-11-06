@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { CalendarDays, MapPin } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
+import { EventPoster } from "@/components/events/EventPoster";
 import { IcsExportButton } from "@/components/events/IcsExportButton";
 import { CATEGORY_TONE } from "@/lib/eventCategoryStyles";
 import { eventLocation } from "@/lib/eventLocation";
@@ -43,6 +44,9 @@ export function EventCard({ event, church }: { event: CircuitEvent; church?: Chu
       </div>
       <div className="flex shrink-0 flex-col items-start gap-2 sm:items-end">
         <IcsExportButton event={event} location={eventLocation(event, church)} />
+        {event.image && (
+          <EventPoster src={event.image} title={event.title} width={event.imageWidth} height={event.imageHeight} />
+        )}
         {event.ticketUrl && (
           <a
             href={event.ticketUrl}

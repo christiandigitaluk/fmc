@@ -122,7 +122,11 @@ export type CircuitEvent = {
   churchSlug: string;
   location?: string;
   description: string;
+  /** The event's poster, shown as a thumbnail that opens full size. */
   image?: string;
+  /** Pixel size of the poster, from the Sanity asset's metadata. */
+  imageWidth?: number | null;
+  imageHeight?: number | null;
   ticketUrl?: string;
   /**
    * For events that repeat monthly on a fixed nth-weekday (e.g. "3rd Sunday").

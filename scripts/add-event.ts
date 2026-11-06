@@ -6,11 +6,15 @@
  * per-event scripts (add-event-emma-nash.ts and similar), so the next event
  * needs a slug rather than a new file.
  *
+ * A poster given as a path under public/ (e.g. "/images/advent-2026-poster.webp")
+ * is uploaded as a Sanity image asset, since the event's image field holds an
+ * asset reference, not a URL.
+ *
  * Run with: npx tsx scripts/add-event.ts <slug>
  */
 import { createClient } from "@sanity/client";
-import { readFileSync, existsSync } from "fs";
-import { join, dirname } from "path";
+import { readFileSync, existsSync, createReadStream } from "fs";
+import { join, dirname, basename } from "path";
 import { fileURLToPath } from "url";
 import { events } from "../lib/mock/events";
 
@@ -51,6 +55,14 @@ async function main() {
   const church = await client.getDocument(churchId);
   if (!church) throw new Error(`church document "${churchId}" not found in Sanity`);
 
+  let image: { _type: "image"; asset: { _type: "reference"; _ref: string } } | undefined;
+  if (event.image) {
+    const file = join(ROOT, "public", event.image);
+    if (!existsSync(file)) throw new Error(`poster not found at public${event.image}`);
+    const asset = await client.assets.upload("image", createReadStream(file), { filename: basename(file) });
+    image = { _type: "image", asset: { _type: "reference", _ref: asset._id } };
+  }
+
   await client.createOrReplace({
     _id: `event-${event.slug}`,
     _type: "event",
@@ -62,13 +74,14 @@ async function main() {
     church: { _type: "reference", _ref: churchId },
     description: event.description,
     ...(event.location ? { location: event.location } : {}),
-    ...(event.image ? { image: event.image } : {}),
+    ...(image ? { image } : {}),
     ...(event.ticketUrl ? { ticketUrl: event.ticketUrl } : {}),
     ...(event.recurrence ? { recurrence: event.recurrence } : {}),
   });
 
   console.log(`✓ ${event.title}`);
   console.log(`  ${event.startDateTime} → ${event.endDateTime} at ${church.name}`);
+  if (image) console.log(`  poster: ${event.image}`);
 }
 
 main().catch((err) => {
