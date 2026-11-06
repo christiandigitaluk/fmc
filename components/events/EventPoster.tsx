@@ -88,7 +88,11 @@ export function EventPoster({
               width={width}
               height={height}
               sizes={landscape ? "(min-width: 920px) 56rem, 100vw" : "(min-width: 480px) 28rem, 100vw"}
-              className="mx-auto h-auto max-h-[calc(100dvh-4rem)] w-auto rounded-[10px]"
+              // Sized by aspect ratio before the file arrives, so the dialog
+              // opens at its final size on a cream placeholder rather than
+              // as a thin strip that jumps open once the poster loads.
+              style={{ aspectRatio: `${width} / ${height}` }}
+              className="block h-auto max-h-[calc(100dvh-4rem)] w-full rounded-[10px] bg-cream-100 object-contain"
             />
           )}
         </div>
