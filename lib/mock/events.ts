@@ -119,6 +119,7 @@ export const events: CircuitEvent[] = [
     churchSlug: "winchester-road",
     description:
       "Santa's Grotto, homemade cakes, Christmas gifts and crafts, jams and sweets, with tea, coffee and lunches served. Open 10am to 3pm. Entrance £1, children free.",
+    image: "/images/christmas-bazaar-winchester-road-2026-poster.webp",
   },
   {
     slug: "table-top-sale-leytonstone-2026",
