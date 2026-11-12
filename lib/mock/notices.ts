@@ -2,6 +2,17 @@ import type { Notice } from "@/lib/types";
 
 export const notices: Notice[] = [
   {
+    slug: "norman-grigg-thanksgiving",
+    title: "Thanksgiving for Norman Grigg",
+    summary:
+      "Tuesday 1 December at 3.30pm, at Walworth Methodist Church in Southwark. Directions and travel from around the circuit are in the full notice.",
+    // Comes down by itself after the service. No highlight line: the orange
+    // callout suits an opportunity, not a funeral.
+    deadline: "2026-12-01",
+    label: "Tue 1 Dec, 3.30pm",
+    url: "https://www.forestcircuit.co.uk/news/norman-grigg-thanksgiving",
+  },
+  {
     slug: "leadership-year-2026-27",
     title: "Leadership Year",
     summary:

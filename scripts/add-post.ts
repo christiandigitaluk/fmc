@@ -5,7 +5,7 @@
  * waiting on a Studio session. The cover file is uploaded as an image asset
  * (Sanity dedupes identical files, so reruns don't pile up copies), and each
  * paragraph becomes a Portable Text block, with [text](url) turned into a
- * link. Keys come from positions, so a rerun replaces rather than duplicates.
+ * link and a paragraph starting "## " turned into a subheading. Keys come from positions, so a rerun replaces rather than duplicates.
  *
  * Run with: npx tsx scripts/add-post.ts <slug>
  */
@@ -36,7 +36,9 @@ const client = createClient({
   useCdn: false,
 });
 
-function toBlock(paragraph: string, i: number) {
+function toBlock(source: string, i: number) {
+  const heading = source.startsWith("## ");
+  const paragraph = heading ? source.slice(3) : source;
   const markDefs: { _key: string; _type: "link"; href: string }[] = [];
   const children = splitLinks(paragraph).map((part, j) => {
     if (part.href === undefined) return { _type: "span", _key: `p${i}s${j}`, text: part.text, marks: [] };
@@ -44,7 +46,7 @@ function toBlock(paragraph: string, i: number) {
     markDefs.push({ _key: key, _type: "link", href: part.href });
     return { _type: "span", _key: `p${i}s${j}`, text: part.text, marks: [key] };
   });
-  return { _type: "block", _key: `p${i}`, style: "normal", markDefs, children };
+  return { _type: "block", _key: `p${i}`, style: heading ? "h2" : "normal", markDefs, children };
 }
 
 async function main() {

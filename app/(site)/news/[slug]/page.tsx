@@ -117,7 +117,12 @@ export default async function NewsArticlePage({ params }: { params: Promise<{ sl
           {isPortableText(post.body) ? (
             <PortableText value={post.body} components={portableTextComponents} />
           ) : (
-            (post.body as string[]).map((paragraph, i) => (
+            (post.body as string[]).map((paragraph, i) =>
+              paragraph.startsWith("## ") ? (
+                <h2 key={i} style={{ fontSize: "var(--text-h3)" }} className="mt-4 -mb-2">
+                  {paragraph.slice(3)}
+                </h2>
+              ) : (
               <p key={i}>
                 {splitLinks(paragraph).map((part, j) =>
                   part.href ? (
@@ -129,7 +134,8 @@ export default async function NewsArticlePage({ params }: { params: Promise<{ sl
                   )
                 )}
               </p>
-            ))
+              )
+            )
           )}
         </div>
 

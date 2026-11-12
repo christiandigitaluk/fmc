@@ -9,6 +9,15 @@ import { urlForImage } from "@/sanity/lib/image";
  * could add a photo in Studio and it would simply never appear on the site.
  */
 export const portableTextComponents: PortableTextComponents = {
+  block: {
+    // Sized as a section heading within the article rather than at the page
+    // h2 size, which would shout over the title in a long piece of prose.
+    h2: ({ children }) => (
+      <h2 style={{ fontSize: "var(--text-h3)" }} className="mt-4 -mb-2">
+        {children}
+      </h2>
+    ),
+  },
   types: {
     image: ({ value }) => {
       if (!value?.asset) return null;

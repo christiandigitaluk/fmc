@@ -2,6 +2,32 @@ import type { Post } from "@/lib/types";
 
 export const posts: Post[] = [
   {
+    slug: "norman-grigg-thanksgiving",
+    title: "A service of thanksgiving for Norman Grigg",
+    excerpt:
+      "We will give thanks for Norman's life at Walworth Methodist Church in Southwark on Tuesday 1 December at 3.30pm. Here is how to get there.",
+    body: [
+      "Norman was much loved and deeply respected across the Forest Circuit, and many of us will want to be there to give thanks for his life.",
+      "The service of thanksgiving will be held on Tuesday 1 December at 3.30pm at Walworth Methodist Church, 54 Camberwell Road, London SE5 0EW. Everyone who knew Norman is welcome. [Open the church in Google Maps](https://www.google.com/maps/search/?api=1&query=Walworth+Methodist+Church%2C+54+Camberwell+Road%2C+London+SE5+0EW).",
+      "## Getting there",
+      "The church is in south London, about an hour from most of our churches by public transport, so please allow plenty of time.",
+      "## By Tube",
+      "The nearest stations are Elephant & Castle (Northern and Bakerloo lines) and Kennington (Northern line). From Elephant & Castle it is a short bus ride, or about 15 to 20 minutes on foot. From Kennington it is about 15 to 20 minutes on foot.",
+      "## By bus",
+      "Buses 12, 35, 40, 68, 148, 171, 176 and 468 all run from Elephant & Castle down Walworth Road to Camberwell Road, in about five minutes. Get off at Westmoreland Road or at Camberwell Road / Albany Road; the church is on Camberwell Road, a few minutes' walk from either stop. Bus 42 also stops at Camberwell Road / Albany Road.",
+      "## From around the circuit",
+      "From Leytonstone, Leyton, Snaresbrook, South Woodford, Woodford or Loughton: take the Central line to Bank, then the Northern line to Elephant & Castle.",
+      "From Walthamstow: take the Victoria line to Oxford Circus, then the Bakerloo line to Elephant & Castle, the end of the line.",
+      "From Chingford or Highams Park: take the Weaver line (London Overground) to Liverpool Street, then bus 35, which runs all the way to Camberwell Road.",
+      "For live times and step-free routes, use the [TfL Journey Planner](https://tfl.gov.uk/plan-a-journey/). If you are driving, please check the parking restrictions on nearby streets before you set off.",
+    ],
+    coverImage: "/images/news-norman-grigg-thanksgiving.png",
+    // A typographic graphic, not a photograph, so it is shown whole.
+    coverFit: "contain",
+    publishedAt: "2026-11-12",
+    tags: ["Circuit news"],
+  },
+  {
     slug: "encounter-together-in-brazil",
     title: "Aged 18 to 30? Spend two weeks in Brazil next summer",
     excerpt:
