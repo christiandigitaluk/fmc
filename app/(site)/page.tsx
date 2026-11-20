@@ -155,18 +155,17 @@ export default async function HomePage() {
       {/* Retires itself once endsAt has passed, so this can stay in place
           afterwards. Swap the details (and the id) for the next one. */}
       <EventPosterWidget
-        id="encounter-together-brazil-2027"
-        badge="Apply by 27 Nov"
-        lead="Ages 18 to 30"
-        title="two weeks in Brazil next summer"
-        endsAt="2026-11-27T23:59:00"
-        cta={{ label: "Find out more and apply", href: "/news/encounter-together-in-brazil" }}
+        id="christmas-bazaar-winchester-road-2026"
+        badge="Christmas Bazaar"
+        title="Winchester Road, 10am to 3pm"
+        startsAt="2026-11-28T10:00:00"
+        endsAt="2026-11-28T15:00:00"
+        cta={{ label: "See it on the events page", href: "/events#christmas-bazaar-winchester-road-2026" }}
         poster={{
-          src: "/images/news-encounter-together-brazil.png",
-          thumbnailSrc: "/images/encounter-together-brazil-thumb.webp",
-          width: 1200,
-          height: 800,
-          alt: "Encounter Together in Brazil: a two-week pilgrimage with the Methodist Church in Brazil for young adults aged 18 to 30, 3 to 18 July 2027, costing £500 with fundraising help. Apply by 27 November.",
+          src: "/images/christmas-bazaar-winchester-road-2026-poster.webp",
+          width: 595,
+          height: 839,
+          alt: "Christmas Bazaar at Winchester Road Methodist Church, Saturday 28 November, 10am to 3pm. Santa's Grotto, homemade cakes, Christmas gifts and crafts, tea, coffee and lunches, jams and sweets. Entrance £1, children free.",
         }}
       />
     </>
