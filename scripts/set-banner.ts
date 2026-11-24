@@ -37,10 +37,10 @@ const client = createClient({
 
 const banner = {
   bannerActive: true,
-  bannerText: "Advent Sunday: Watching & Praying, a reflective circuit service. Sunday 29 November, 6pm, at Woodford Methodist Church.",
-  bannerLinkHref: "/events#advent-sunday-circuit-service-2026",
-  bannerLinkLabel: "See the details",
-  bannerEndsAt: "2026-11-29",
+  bannerText: "The winter preaching plan is here: who's preaching where, December to February, across all ten churches.",
+  bannerLinkHref: "/preaching-plan",
+  bannerLinkLabel: "See the plan",
+  bannerEndsAt: "2026-12-20",
 };
 
 async function main() {
