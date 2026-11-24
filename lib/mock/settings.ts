@@ -4,7 +4,7 @@ export const siteSettings: SiteSettings = {
   bannerActive: true,
   bannerText: "The new Autumn preaching plan (September – November 2026) is now available to",
   // Relative, so it keeps working when the site moves to forestcircuit.co.uk.
-  bannerLinkHref: "/documents/preaching-plan-sept-nov-2026.pdf",
+  bannerLinkHref: "/documents/preaching-plan-dec-2026-feb-2027.pdf",
   bannerLinkLabel: "print",
   phone: "07458 002275",
   // The circuit's mail runs on forestcircuit.org.uk; the website is on

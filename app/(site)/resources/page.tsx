@@ -12,10 +12,10 @@ type Resource = { title: string; description: string; href: string; size: string
 
 const RESOURCES: Resource[] = [
   {
-    title: "Autumn preaching plan",
-    description: "Service times, preachers and communion dates for every church, September to November 2026.",
-    href: "/documents/preaching-plan-sept-nov-2026.pdf",
-    size: "PDF · 91 KB",
+    title: "Winter preaching plan",
+    description: "Service times, preachers and communion dates for every church, December 2026 to February 2027.",
+    href: "/documents/preaching-plan-dec-2026-feb-2027.pdf",
+    size: "PDF · 179 KB",
   },
   {
     title: "Circuit overview map",

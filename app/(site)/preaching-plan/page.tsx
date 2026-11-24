@@ -21,7 +21,7 @@ export default async function PreachingPlanPage() {
   return (
     <div className="relative container-max py-14 md:py-20">
       <PageAccents variant="plus" />
-      <p className="eyebrow mb-3">Autumn quarter 2026</p>
+      <p className="eyebrow mb-3">Winter quarter, December to February</p>
       <h1 style={{ fontSize: "var(--text-h1)" }} className="mb-4 max-w-2xl">
         Circuit preaching plan
       </h1>

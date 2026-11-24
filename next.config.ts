@@ -43,6 +43,14 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      // The autumn plan PDF was retired when the winter plan went up. Printed
+      // notices and saved links still point at it, so send them to the
+      // current plan rather than a 404.
+      {
+        source: "/documents/preaching-plan-sept-nov-2026.pdf",
+        destination: "/documents/preaching-plan-dec-2026-feb-2027.pdf",
+        permanent: false,
+      },
       // The nav link was renamed from "Hall hire" to "Venue hire" and the
       // route with it. Nothing is indexed under the real domain yet, so
       // there's no SEO history to protect, but this catches anyone who

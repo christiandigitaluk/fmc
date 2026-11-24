@@ -78,7 +78,7 @@ export function PreachingPlanExplorer({
         </div>
         <Button
           variant="secondary"
-          href="/documents/preaching-plan-sept-nov-2026.pdf"
+          href="/documents/preaching-plan-dec-2026-feb-2027.pdf"
           target="_blank"
           className="w-full lg:w-auto"
         >
