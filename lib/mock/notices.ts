@@ -2,6 +2,17 @@ import type { Notice } from "@/lib/types";
 
 export const notices: Notice[] = [
   {
+    slug: "norman-grigg-night-of-tributes",
+    title: "Night of Tributes for the Revd Norman Grigg",
+    summary:
+      "Join Walworth Methodist Church online on Friday 27 November at 6.30pm to share memories of Norman. The Zoom link is in the full notice.",
+    // Comes down by itself after Friday. Points at the thanksgiving post,
+    // which carries the Zoom details alongside the service and donations.
+    deadline: "2026-11-27",
+    label: "Fri 27 Nov, 6.30pm",
+    url: "https://www.forestcircuit.co.uk/news/norman-grigg-thanksgiving",
+  },
+  {
     slug: "norman-grigg-thanksgiving",
     title: "Thanksgiving for Norman Grigg",
     summary:
