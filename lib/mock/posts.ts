@@ -9,6 +9,9 @@ export const posts: Post[] = [
     body: [
       "Norman was much loved and deeply respected across the Forest Circuit, and many of us will want to be there to give thanks for his life.",
       "The service of thanksgiving will be held on Tuesday 1 December at 3.30pm at Walworth Methodist Church, 54 Camberwell Road, London SE5 0EW. Everyone who knew Norman is welcome. [Open the church in Google Maps](https://www.google.com/maps/search/?api=1&query=Walworth+Methodist+Church%2C+54+Camberwell+Road%2C+London+SE5+0EW).",
+      "## Donations in Norman's memory",
+      "In loving memory of the Revd Norman Grigg, donations in lieu of flowers are warmly welcomed for All We Can, the Methodist charity working alongside local communities around the world to tackle poverty and injustice. It is a fitting way to honour Norman's lifelong dedication to faith and global service.",
+      "[Give in Norman's memory on JustGiving](https://www.justgiving.com/page/rev-norman-grigg)",
       "## Getting there",
       "The church is in south London, about an hour from most of our churches by public transport, so please allow plenty of time.",
       "## By Tube",

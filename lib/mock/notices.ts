@@ -5,7 +5,7 @@ export const notices: Notice[] = [
     slug: "norman-grigg-thanksgiving",
     title: "Thanksgiving for Norman Grigg",
     summary:
-      "Tuesday 1 December at 3.30pm, at Walworth Methodist Church in Southwark. Directions and travel from around the circuit are in the full notice.",
+      "Tuesday 1 December at 3.30pm, at Walworth Methodist Church in Southwark. The full notice has directions, and how to give to All We Can in Norman's memory.",
     // Comes down by itself after the service. No highlight line: the orange
     // callout suits an opportunity, not a funeral.
     deadline: "2026-12-01",
