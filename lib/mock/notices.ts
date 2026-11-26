@@ -2,6 +2,16 @@ import type { Notice } from "@/lib/types";
 
 export const notices: Notice[] = [
   {
+    slug: "christmas-bazaar-winchester-road-2026",
+    title: "Christmas Bazaar at Winchester Road",
+    summary:
+      "Santa's Grotto, homemade cakes, Christmas gifts and crafts, jams and sweets, with tea, coffee and lunches. Saturday 28 November, 10am to 3pm. Entrance £1, children free.",
+    deadline: "2026-11-28",
+    label: "Sat 28 Nov, 10am",
+    highlight: "A Christmas favourite.",
+    url: "https://www.forestcircuit.co.uk/events#christmas-bazaar-winchester-road-2026",
+  },
+  {
     slug: "norman-grigg-night-of-tributes",
     title: "Night of Tributes for the Revd Norman Grigg",
     summary:

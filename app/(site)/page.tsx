@@ -7,7 +7,8 @@ import { SectionDivider } from "@/components/ui/SectionDivider";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { NoticeStrip } from "@/components/news/NoticeStrip";
-import { getChurches, getPosts, getNotices } from "@/lib/content";
+import { getChurches, getPosts, getNotices, getEvents } from "@/lib/content";
+import { FeaturedEvent } from "@/components/home/FeaturedEvent";
 import { cn } from "@/lib/cn";
 import { BASE_OPEN_GRAPH, HOME_TITLE, SITE_DESCRIPTION } from "@/lib/seo";
 import type { Metadata } from "next";
@@ -32,7 +33,11 @@ const websiteJsonLd = {
 };
 
 export default async function HomePage() {
-  const [churches, posts, notices] = await Promise.all([getChurches(), getPosts(), getNotices()]);
+  const [churches, posts, notices, events] = await Promise.all([getChurches(), getPosts(), getNotices(), getEvents()]);
+  // getEvents drops events once they have ended, so this goes undefined, and
+  // the spotlight disappears, as soon as the bazaar is over. Swap the slug
+  // (and the copy below) for the next major event.
+  const featured = events.find((e) => e.slug === "christmas-bazaar-winchester-road-2026");
   const areas = Array.from(new Set(churches.map((c) => c.area))).sort();
   const latestPosts = posts.slice(0, 3);
   // Matches the grid layout directly below: below three posts the section
@@ -54,6 +59,15 @@ export default async function HomePage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }} />
       <Hero />
       <FindAChurchBar areas={areas} />
+      {featured && (
+        <FeaturedEvent
+          event={featured}
+          church={churches.find((c) => c.slug === featured.churchSlug)}
+          lead="Winchester Road's much-loved Christmas Bazaar is back. Bring the family, find a gift and stay for lunch."
+          highlights={["Santa's Grotto", "Homemade cakes", "Christmas gifts & crafts", "Tea, coffee & lunches", "Jams & sweets"]}
+          admission="Entrance £1, children free"
+        />
+      )}
       <QuickActionsGrid />
       <SectionDivider />
 

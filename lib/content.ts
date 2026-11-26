@@ -170,8 +170,28 @@ export async function getJobVacancies(): Promise<JobVacancy[]> {
   );
 }
 
+/**
+ * A banner that takes over from the Studio one for a set window, then hands
+ * back by itself. For a major event that should not cost the standing banner
+ * (here, the winter preaching plan) its place for good. `until` is an exact
+ * instant, so the Studio banner returns within minutes of the event ending,
+ * as pages revalidate. Leave the list empty when nothing is running.
+ */
+const TIMED_BANNERS: { until: string; text: string; href: string; label: string }[] = [
+  {
+    until: "2026-11-28T15:00:00Z", // 3pm Saturday, London time (GMT)
+    text: "This Saturday, 10am to 3pm: Winchester Road's Christmas Bazaar. Santa's Grotto, homemade cakes, gifts and lunches.",
+    href: "/events#christmas-bazaar-winchester-road-2026",
+    label: "See the details",
+  },
+];
+
 export async function getSiteSettings(): Promise<SiteSettings> {
   const settings = await safeFetch(`*[_type == "siteSettings"][0]`, mockSettings, ["siteSettings"]);
+  const timed = TIMED_BANNERS.find((b) => Date.now() < Date.parse(b.until));
+  if (timed) {
+    return { ...settings, bannerActive: true, bannerText: timed.text, bannerLinkHref: timed.href, bannerLinkLabel: timed.label, bannerEndsAt: undefined };
+  }
   // A banner for something with a date otherwise stays up until someone
   // remembers to untick it. Same date-string comparison as getNotices.
   const today = new Date().toISOString().slice(0, 10);
