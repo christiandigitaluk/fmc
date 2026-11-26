@@ -2,7 +2,6 @@ import { Hero } from "@/components/home/Hero";
 import { FindAChurchBar } from "@/components/home/FindAChurchBar";
 import { QuickActionsGrid } from "@/components/home/QuickActionsGrid";
 import { CircuitMap } from "@/components/home/CircuitMap";
-import { EventPosterWidget } from "@/components/home/EventPosterWidget";
 import { SectionDivider } from "@/components/ui/SectionDivider";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
@@ -165,23 +164,6 @@ export default async function HomePage() {
           <NoticeStrip notices={notices} />
         </div>
       </section>
-
-      {/* Retires itself once endsAt has passed, so this can stay in place
-          afterwards. Swap the details (and the id) for the next one. */}
-      <EventPosterWidget
-        id="christmas-bazaar-winchester-road-2026"
-        badge="Christmas Bazaar"
-        title="Winchester Road, 10am to 3pm"
-        startsAt="2026-11-28T10:00:00"
-        endsAt="2026-11-28T15:00:00"
-        cta={{ label: "See it on the events page", href: "/events#christmas-bazaar-winchester-road-2026" }}
-        poster={{
-          src: "/images/christmas-bazaar-winchester-road-2026-poster.webp",
-          width: 595,
-          height: 839,
-          alt: "Christmas Bazaar at Winchester Road Methodist Church, Saturday 28 November, 10am to 3pm. Santa's Grotto, homemade cakes, Christmas gifts and crafts, tea, coffee and lunches, jams and sweets. Entrance £1, children free.",
-        }}
-      />
     </>
   );
 }
